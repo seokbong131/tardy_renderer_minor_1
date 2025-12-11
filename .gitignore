@@ -1,0 +1,86 @@
+# =========================================
+# Visual Studio (C++)
+# =========================================
+
+# Build directories
+x64/
+Debug/
+Release/
+bin/
+obj/
+out/
+
+# VS intermediate files
+*.idb
+*.pdb
+*.ipch
+*.iobj
+*.ipdb
+*.tlog
+
+# VS user-specific settings
+*.vcxproj.user
+*.suo
+*.user
+*.opensdf
+*.sdf
+*.cache
+*.db
+
+# =========================================
+# Compiled Object files
+# =========================================
+*.o
+*.obj
+*.lo
+*.slo
+
+# Precompiled headers
+*.gch
+*.pch
+
+# Linker outputs
+*.ilk
+*.exp
+
+# Debug information files
+*.pdb
+*.dwo
+
+# Dynamic libraries
+*.dll
+*.so
+*.dylib
+
+# Static libraries
+*.lib
+*.a
+*.la
+*.lai
+
+# Executables
+*.exe
+*.out
+*.app
+
+# =========================================
+# tinyrenderer specific
+# =========================================
+
+# Generated images (framebuffer output)
+*.tga
+
+# =========================================
+# VS cache & backup files
+# =========================================
+*.log
+*.tmp
+*.bak
+*.ipynb_checkpoints/
+.vs/
+
+# =========================================
+# OS-specific
+# =========================================
+.DS_Store
+Thumbs.db
