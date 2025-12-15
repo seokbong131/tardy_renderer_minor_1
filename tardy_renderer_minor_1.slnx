@@ -3,5 +3,5 @@
     <Platform Name="x64" />
     <Platform Name="x86" />
   </Configurations>
-  <Project Path="tardy_renderer_minor_1.vcxproj" />
+  <Project Path="tardy_renderer_minor_1.vcxproj" Id="b55bbb2f-3761-4df4-b0dd-6f229ebc484c" />
 </Solution>

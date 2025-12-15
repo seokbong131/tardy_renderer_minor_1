@@ -1,6 +1,11 @@
+#define _CRT_SECURE_NO_WARNINGS
+
 #include <iostream>
 #include <cstring>
 #include "tgaimage.h"
+
+#define STB_IMAGE_WRITE_IMPLEMENTATION
+#include "stb_image_write.h"
 
 TGAImage::TGAImage(const int w, const int h, const int bpp, TGAColor c) : w(w), h(h), bpp(bpp), data(w* h* bpp, 0) {
     for (int j = 0; j < h; j++)
@@ -138,6 +143,31 @@ bool TGAImage::write_tga_file(const std::string filename, const bool vflip, cons
 err:
     std::cerr << "can't dump the tga file\n";
     return false;
+}
+
+bool TGAImage::write_png_file(const std::string filename, const bool vflip) const {
+    // Deep Copy
+    std::vector<std::uint8_t> buffer = data;
+
+    // TGA (BGRA) -> PNG (RGBA) by swap
+    // bpp := bits per pixel
+    if (bpp >= 3) {
+        for (int i = 0; i < w * h; i++) {
+            // p: pos of each pixel
+            int p = i * bpp;
+            std::swap(buffer[p], buffer[p + 2]);
+        }
+    }
+
+    // TGA (bottom-left origin) -> PNG (top-left origin)
+    stbi_flip_vertically_on_write(vflip ? 1 : 0);
+
+    int result = stbi_write_png(filename.c_str(), w, h, bpp, buffer.data(), w * bpp);
+    if (result == 0) {
+        std::cerr << "Fail to write the PNG file: " << filename << "\n";
+        return false;
+    }
+    return true;
 }
 
 bool TGAImage::unload_rle_data(std::ofstream& out) const {

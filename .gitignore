@@ -69,6 +69,7 @@ out/
 
 # Generated images (framebuffer output)
 *.tga
+*.png
 
 # =========================================
 # VS cache & backup files

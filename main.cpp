@@ -20,5 +20,6 @@ int main(int argc, char** argv) {
     framebuffer.set(cx, cy, white);
 
     framebuffer.write_tga_file("framebuffer.tga");
+    framebuffer.write_png_file("framebuffer.png");
     return 0;
 }
