@@ -16,7 +16,11 @@ static void draw_line(int start_x, int start_y, int end_x, int end_y, TGAImage& 
         framebuffer.set(x, y, color);
     }*/
 
-    // 2nd attempt, round 1
+    // 2nd attempt
+    if (start_x > end_x) { // right -> left
+        std::swap(start_x, end_x);
+        std::swap(start_y, end_y);
+    }
     for (int x = start_x; x <= end_x; x++) {
         float t = (x - start_x) / static_cast<float>(end_x - start_x);
         int y = std::round(start_y + (end_y - start_y) * t);
@@ -33,10 +37,10 @@ int main(int argc, char** argv) {
     int bx = 12, by = 37;
     int cx = 62, cy = 53;
 
-    //draw_line(bx, by, ax, ay, framebuffer, cyan);
+    draw_line(bx, by, ax, ay, framebuffer, cyan);
     draw_line(ax, ay, bx, by, framebuffer, red);
     draw_line(cx, cy, bx, by, framebuffer, magenta);
-    //draw_line(bx, by, cx, cy, framebuffer, green);
+    draw_line(bx, by, cx, cy, framebuffer, green);
     draw_line(cx, cy, ax, ay, framebuffer, yellow);
     draw_line(ax, ay, cx, cy, framebuffer, blue);
 
