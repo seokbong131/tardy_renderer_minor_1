@@ -52,7 +52,7 @@ int main(int argc, char** argv) {
     constexpr int height = 64;
     TGAImage framebuffer(width, height, TGAImage::RGB);
 
-    int ax = 7, ay = 3;
+    /*int ax = 7, ay = 3;
     int bx = 12, by = 37;
     int cx = 62, cy = 53;
 
@@ -65,9 +65,22 @@ int main(int argc, char** argv) {
 
     framebuffer.set(ax, ay, white);
     framebuffer.set(bx, by, white);
-    framebuffer.set(cx, cy, white);
+    framebuffer.set(cx, cy, white);*/
 
-    framebuffer.write_tga_file("framebuffer.tga");
+    // initial test
+    std::srand(std::time({}));
+    for (int i = 0; i < (1 << 24); i++) {
+        int ax = rand() % width, ay = rand() % height;
+        int bx = rand() % width, by = rand() % height;
+        draw_line(ax, ay, bx, by, framebuffer,
+            { static_cast<std::uint8_t>(rand() % 256),
+              static_cast<std::uint8_t>(rand() % 256),
+              static_cast<std::uint8_t>(rand() % 256),
+              static_cast<std::uint8_t>(rand() % 256)
+            });
+    }
+
+    //framebuffer.write_tga_file("framebuffer.tga");
     framebuffer.write_png_file("framebuffer.png");
     return 0;
 }
