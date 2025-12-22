@@ -17,7 +17,7 @@ static void draw_line(int start_x, int start_y, int end_x, int end_y, TGAImage& 
     }*/
 
     // 2nd attempt
-    if (start_x > end_x) { // right -> left
+    /*if (start_x > end_x) { // right -> left
         std::swap(start_x, end_x);
         std::swap(start_y, end_y);
     }
@@ -25,6 +25,25 @@ static void draw_line(int start_x, int start_y, int end_x, int end_y, TGAImage& 
         float t = (x - start_x) / static_cast<float>(end_x - start_x);
         int y = std::round(start_y + (end_y - start_y) * t);
         framebuffer.set(x, y, color);
+    }*/
+
+    // 3rd attempt
+    bool steep = std::abs(start_x - end_x) < std::abs(start_y - end_y);
+    if (steep) { // transpose
+        std::swap(start_x, start_y);
+        std::swap(end_x, end_y);
+    }
+    if (start_x > end_x) { // right -> left
+        std::swap(start_x, end_x);
+        std::swap(start_y, end_y);
+    }
+    for (int x = start_x; x <= end_x; x++) {
+        float t = (x - start_x) / static_cast<float>(end_x - start_x);
+        int y = std::round(start_y + (end_y - start_y) * t);
+        if (steep) // de-transpose
+            framebuffer.set(y, x, color);
+        else
+            framebuffer.set(x, y, color);
     }
 }
 
