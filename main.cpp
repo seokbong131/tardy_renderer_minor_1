@@ -37,13 +37,15 @@ static void draw_line(int start_x, int start_y, int end_x, int end_y, TGAImage& 
         std::swap(start_x, end_x);
         std::swap(start_y, end_y);
     }
+    float y = start_y;
     for (int x = start_x; x <= end_x; x++) {
-        float t = (x - start_x) / static_cast<float>(end_x - start_x);
-        int y = std::round(start_y + (end_y - start_y) * t);
+        /*float t = (x - start_x) / static_cast<float>(end_x - start_x);
+        int y = std::round(start_y + (end_y - start_y) * t);*/
         if (steep) // de-transpose
             framebuffer.set(y, x, color);
         else
             framebuffer.set(x, y, color);
+        y += (end_y - start_y) / static_cast<float>(end_x - start_x);
     }
 }
 
