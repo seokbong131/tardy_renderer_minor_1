@@ -39,7 +39,8 @@ static void draw_line(int start_x, int start_y, int end_x, int end_y, TGAImage& 
     }
     /*float y = start_y;*/
     int y = start_y;
-    float error = 0;
+    /*float error = 0;*/
+    int ierror = 0;
     for (int x = start_x; x <= end_x; x++) {
         /*float t = (x - start_x) / static_cast<float>(end_x - start_x);
         int y = std::round(start_y + (end_y - start_y) * t);*/
@@ -48,10 +49,15 @@ static void draw_line(int start_x, int start_y, int end_x, int end_y, TGAImage& 
         else
             framebuffer.set(x, y, color);
         /*y += (end_y - start_y) / static_cast<float>(end_x - start_x);*/
-        error += std::abs(end_y - start_y) / static_cast<float>(end_x - start_x);
-        if (error > .5) {
+        /*error += std::abs(end_y - start_y) / static_cast<float>(end_x - start_x);*/
+        ierror += 2 * std::abs(end_y - start_y);
+        /*if (error > .5) {
             y += end_y > start_y ? 1 : -1;
             error -= 1.;
+        }*/
+        if (ierror > end_x - start_x) {
+            y += end_y > start_y ? 1 : -1;
+            ierror -= 2 * (end_x - start_x);
         }
     }
 }
