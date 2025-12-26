@@ -9,25 +9,6 @@ constexpr TGAColor magenta  = { 255,   0, 255, 255 };
 constexpr TGAColor yellow   = { 0,   255, 255, 255 };
 
 static void draw_line(int start_x, int start_y, int end_x, int end_y, TGAImage& framebuffer, TGAColor color) {
-    // 1st attempt
-    /*for (float t = 0.; t < 1.; t += .02) {
-        int x = std::round(start_x + (end_x - start_x) * t);
-        int y = std::round(start_y + (end_y - start_y) * t);
-        framebuffer.set(x, y, color);
-    }*/
-
-    // 2nd attempt
-    /*if (start_x > end_x) { // right -> left
-        std::swap(start_x, end_x);
-        std::swap(start_y, end_y);
-    }
-    for (int x = start_x; x <= end_x; x++) {
-        float t = (x - start_x) / static_cast<float>(end_x - start_x);
-        int y = std::round(start_y + (end_y - start_y) * t);
-        framebuffer.set(x, y, color);
-    }*/
-
-    // 3rd attempt
     bool steep = std::abs(start_x - end_x) < std::abs(start_y - end_y);
     if (steep) { // transpose
         std::swap(start_x, start_y);
@@ -37,30 +18,18 @@ static void draw_line(int start_x, int start_y, int end_x, int end_y, TGAImage& 
         std::swap(start_x, end_x);
         std::swap(start_y, end_y);
     }
-    /*float y = start_y;*/
     int y = start_y;
-    /*float error = 0;*/
     int ierror = 0;
     for (int x = start_x; x <= end_x; x++) {
-        /*float t = (x - start_x) / static_cast<float>(end_x - start_x);
-        int y = std::round(start_y + (end_y - start_y) * t);*/
         if (steep) // de-transpose
             framebuffer.set(y, x, color);
         else
             framebuffer.set(x, y, color);
-        /*y += (end_y - start_y) / static_cast<float>(end_x - start_x);*/
-        /*error += std::abs(end_y - start_y) / static_cast<float>(end_x - start_x);*/
         ierror += 2 * std::abs(end_y - start_y);
-        /*if (error > .5) {
-            y += end_y > start_y ? 1 : -1;
-            error -= 1.;
-        }*/
-        /*if (ierror > end_x - start_x) {
+        if (ierror > end_x - start_x) {
             y += end_y > start_y ? 1 : -1;
             ierror -= 2 * (end_x - start_x);
-        }*/
-        y += (end_y > start_y ? 1 : -1) * (ierror > end_x - start_x);
-        ierror -= 2 * (end_x - start_x) * (ierror > end_x - start_x);
+        }
     }
 }
 
@@ -69,7 +38,7 @@ int main(int argc, char** argv) {
     constexpr int height = 64;
     TGAImage framebuffer(width, height, TGAImage::RGB);
 
-    /*int ax = 7, ay = 3;
+    int ax = 7, ay = 3;
     int bx = 12, by = 37;
     int cx = 62, cy = 53;
 
@@ -82,10 +51,10 @@ int main(int argc, char** argv) {
 
     framebuffer.set(ax, ay, white);
     framebuffer.set(bx, by, white);
-    framebuffer.set(cx, cy, white);*/
+    framebuffer.set(cx, cy, white);
 
-    // initial test
-    std::srand(std::time({}));
+    // for performance measurement
+    /*std::srand(std::time({}));
     for (int i = 0; i < (1 << 24); i++) {
         int ax = rand() % width, ay = rand() % height;
         int bx = rand() % width, by = rand() % height;
@@ -95,9 +64,9 @@ int main(int argc, char** argv) {
               static_cast<std::uint8_t>(rand() % 256),
               static_cast<std::uint8_t>(rand() % 256)
             });
-    }
+    }*/
 
-    //framebuffer.write_tga_file("framebuffer.tga");
+    framebuffer.write_tga_file("framebuffer.tga");
     framebuffer.write_png_file("framebuffer.png");
     return 0;
 }
