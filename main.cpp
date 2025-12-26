@@ -55,10 +55,12 @@ static void draw_line(int start_x, int start_y, int end_x, int end_y, TGAImage& 
             y += end_y > start_y ? 1 : -1;
             error -= 1.;
         }*/
-        if (ierror > end_x - start_x) {
+        /*if (ierror > end_x - start_x) {
             y += end_y > start_y ? 1 : -1;
             ierror -= 2 * (end_x - start_x);
-        }
+        }*/
+        y += (end_y > start_y ? 1 : -1) * (ierror > end_x - start_x);
+        ierror -= 2 * (end_x - start_x) * (ierror > end_x - start_x);
     }
 }
 
