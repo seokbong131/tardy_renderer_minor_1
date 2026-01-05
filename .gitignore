@@ -68,6 +68,7 @@ out/
 # =========================================
 
 # Generated images (framebuffer output)
+output/
 *.tga
 *.png
 

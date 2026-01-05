@@ -66,7 +66,7 @@ int main(int argc, char** argv) {
             });
     }*/
 
-    framebuffer.write_tga_file("framebuffer.tga");
-    framebuffer.write_png_file("framebuffer.png");
+    framebuffer.write_tga_file("output/framebuffer.tga");
+    framebuffer.write_png_file("output/framebuffer.png");
     return 0;
 }

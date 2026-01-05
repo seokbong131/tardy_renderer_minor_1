@@ -7,7 +7,7 @@
 #define STB_IMAGE_WRITE_IMPLEMENTATION
 #pragma warning(push)
 #pragma warning(disable : 26819)
-#include "stb_image_write.h"
+#include "stb/stb_image_write.h"
 #pragma warning(pop)
 
 TGAImage::TGAImage(const int w, const int h, const int bpp, TGAColor c) : w(w), h(h), bpp(bpp), data(w* h* bpp, 0) {
