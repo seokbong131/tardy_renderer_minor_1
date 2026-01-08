@@ -1,4 +1,9 @@
+#include "graphics.h"
+#include "obj_loader.h"
 #include "tgaimage.h"
+
+constexpr int width = 1000;
+constexpr int height = 1000;
 
 constexpr TGAColor white    = { 255, 255, 255, 255 }; // attention, BGRA order
 constexpr TGAColor red      = { 0,     0, 255, 255 };
@@ -7,7 +12,9 @@ constexpr TGAColor blue     = { 255,   0,   0, 255 };
 constexpr TGAColor cyan     = { 255, 255,   0, 255 };
 constexpr TGAColor magenta  = { 255,   0, 255, 255 };
 constexpr TGAColor yellow   = { 0,   255, 255, 255 };
+constexpr TGAColor black    = { 0,     0,   0, 255 };
 
+// by Bresenham's line drawing algorithm
 static void draw_line(int start_x, int start_y, int end_x, int end_y, TGAImage& framebuffer, TGAColor color) {
     bool steep = std::abs(start_x - end_x) < std::abs(start_y - end_y);
     if (steep) { // transpose
@@ -33,12 +40,43 @@ static void draw_line(int start_x, int start_y, int end_x, int end_y, TGAImage& 
     }
 }
 
+// assumption: x, y, and z are all in the range [-1, 1]. (WC)
+// elevation: (x, y, z) -> (x, y) = 3D -> 2D
+// viewport transform
+// 1. x and y are all in the range [0, 2].
+// 2. x and y are all in the range [0, 1]. (normalization)
+// 3. x is in the range [0, width - 1] and y is in the range [0, height - 1]. (screen space)
+static std::tuple<int, int> project_orthographic(vec3 v) {
+    // front (Z)
+    int x = static_cast<int>(std::round((v.x + 1.0) * 0.5 * width));
+    int y = static_cast<int>(std::round((v.y + 1.0) * 0.5 * height));
+    
+    /*// left (X)
+    int x = static_cast<int>(std::round((-v.z + 1.0) * 0.5 * width));
+    int y = static_cast<int>(std::round((v.y + 1.0) * 0.5 * height));*/
+    
+    /*// top (Y)
+    int x = static_cast<int>(std::round((v.x + 1.0) * 0.5 * width));
+    int y = static_cast<int>(std::round((-v.z + 1.0) * 0.5 * height));*/
+
+    x = std::clamp(x, 0, width - 1);
+    y = std::clamp(y, 0, height - 1);
+
+    return { x, y };
+}
+
 int main(int argc, char** argv) {
-    constexpr int width = 64;
-    constexpr int height = 64;
+    std::string model_path = "../assets/diablo3_pose.obj";
+
+    if (argc == 2) {
+        model_path = argv[1];
+    }
+
+    Mesh mesh(model_path);
     TGAImage framebuffer(width, height, TGAImage::RGB);
 
-    int ax = 7, ay = 3;
+    // for line drawing
+    /*int ax = 7, ay = 3;
     int bx = 12, by = 37;
     int cx = 62, cy = 53;
 
@@ -51,9 +89,9 @@ int main(int argc, char** argv) {
 
     framebuffer.set(ax, ay, white);
     framebuffer.set(bx, by, white);
-    framebuffer.set(cx, cy, white);
+    framebuffer.set(cx, cy, white);*/
 
-    // for performance measurement
+    // for performance measurement about line drawing
     /*std::srand(std::time({}));
     for (int i = 0; i < (1 << 24); i++) {
         int ax = rand() % width, ay = rand() % height;
@@ -65,6 +103,23 @@ int main(int argc, char** argv) {
               static_cast<std::uint8_t>(rand() % 256)
             });
     }*/
+
+    for (int i = 0; i < mesh.num_triangles(); i++) {
+        auto [ax, ay] = project_orthographic(mesh.get_triangle_vertex(i, 0));
+        auto [bx, by] = project_orthographic(mesh.get_triangle_vertex(i, 1));
+        auto [cx, cy] = project_orthographic(mesh.get_triangle_vertex(i, 2));
+
+        draw_line(ax, ay, bx, by, framebuffer, red);
+        draw_line(bx, by, cx, cy, framebuffer, red);
+        draw_line(cx, cy, ax, ay, framebuffer, red);
+    }
+
+    for (int i = 0; i < mesh.num_vertices(); i++) {
+        vec3 v = mesh.get_vertex(i);
+        auto [x, y] = project_orthographic(v);
+
+        framebuffer.set(x, y, yellow);
+    }
 
     framebuffer.write_tga_file("output/framebuffer.tga");
     framebuffer.write_png_file("output/framebuffer.png");
