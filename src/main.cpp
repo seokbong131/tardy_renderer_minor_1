@@ -67,12 +67,25 @@ static std::tuple<int, int> project_orthographic(vec3 v) {
 
 int main(int argc, char** argv) {
     std::string model_path = "../assets/diablo3_pose.obj";
+    //std::string model_path_1 = "../assets/african_head/african_head.obj";
+    //std::string model_path_2 = "../assets/african_head/african_head_eye_inner.obj";
+    //std::string model_path_3 = "../assets/african_head/african_head_eye_outer.obj";
+    //std::string model_path_1 = "../assets/boggie/body.obj";
+    //std::string model_path_2 = "../assets/boggie/eyes.obj";
+    //std::string model_path_3 = "../assets/boggie/head.obj";
 
     if (argc == 2) {
         model_path = argv[1];
+        //model_path_1 = argv[1];
     }
+    //if (argc == 3) model_path_2 = argv[2];
+    //if (argc == 4) model_path_3 = argv[3];
 
     Mesh mesh(model_path);
+    //Mesh mesh_1(model_path_1);
+    //Mesh mesh_2(model_path_2);
+    //Mesh mesh_3(model_path_3);
+
     TGAImage framebuffer(width, height, TGAImage::RGB);
 
     // for line drawing
@@ -104,6 +117,7 @@ int main(int argc, char** argv) {
             });
     }*/
 
+    // for wireframe rendering
     for (int i = 0; i < mesh.num_triangles(); i++) {
         auto [ax, ay] = project_orthographic(mesh.get_triangle_vertex(i, 0));
         auto [bx, by] = project_orthographic(mesh.get_triangle_vertex(i, 1));
@@ -120,6 +134,57 @@ int main(int argc, char** argv) {
 
         framebuffer.set(x, y, yellow);
     }
+
+    /*for (int i = 0; i < mesh_1.num_triangles(); i++) {
+        auto [ax, ay] = project_orthographic(mesh_1.get_triangle_vertex(i, 0));
+        auto [bx, by] = project_orthographic(mesh_1.get_triangle_vertex(i, 1));
+        auto [cx, cy] = project_orthographic(mesh_1.get_triangle_vertex(i, 2));
+
+        draw_line(ax, ay, bx, by, framebuffer, white);
+        draw_line(bx, by, cx, cy, framebuffer, white);
+        draw_line(cx, cy, ax, ay, framebuffer, white);
+    }
+
+    for (int i = 0; i < mesh_1.num_vertices(); i++) {
+        vec3 v = mesh_1.get_vertex(i);
+        auto [x, y] = project_orthographic(v);
+
+        framebuffer.set(x, y, green);
+    }*/
+
+    /*for (int i = 0; i < mesh_2.num_triangles(); i++) {
+        auto [ax, ay] = project_orthographic(mesh_2.get_triangle_vertex(i, 0));
+        auto [bx, by] = project_orthographic(mesh_2.get_triangle_vertex(i, 1));
+        auto [cx, cy] = project_orthographic(mesh_2.get_triangle_vertex(i, 2));
+
+        draw_line(ax, ay, bx, by, framebuffer, white);
+        draw_line(bx, by, cx, cy, framebuffer, white);
+        draw_line(cx, cy, ax, ay, framebuffer, white);
+    }
+
+    for (int i = 0; i < mesh_2.num_vertices(); i++) {
+        vec3 v = mesh_2.get_vertex(i);
+        auto [x, y] = project_orthographic(v);
+
+        framebuffer.set(x, y, green);
+    }*/
+
+    /*for (int i = 0; i < mesh_3.num_triangles(); i++) {
+        auto [ax, ay] = project_orthographic(mesh_3.get_triangle_vertex(i, 0));
+        auto [bx, by] = project_orthographic(mesh_3.get_triangle_vertex(i, 1));
+        auto [cx, cy] = project_orthographic(mesh_3.get_triangle_vertex(i, 2));
+
+        draw_line(ax, ay, bx, by, framebuffer, white);
+        draw_line(bx, by, cx, cy, framebuffer, white);
+        draw_line(cx, cy, ax, ay, framebuffer, white);
+    }
+
+    for (int i = 0; i < mesh_3.num_vertices(); i++) {
+        vec3 v = mesh_3.get_vertex(i);
+        auto [x, y] = project_orthographic(v);
+
+        framebuffer.set(x, y, green);
+    }*/
 
     framebuffer.write_tga_file("output/framebuffer.tga");
     framebuffer.write_png_file("output/framebuffer.png");
