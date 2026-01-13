@@ -50,3 +50,9 @@ std::tuple<int, int> project_orthographic(vec3 v, int width, int height) {
 
     return { x, y };
 }
+
+void draw_triangle(int ax, int ay, int bx, int by, int cx, int cy, TGAImage& framebuffer, TGAColor color) {
+    draw_line(ax, ay, bx, by, framebuffer, color);
+    draw_line(bx, by, cx, cy, framebuffer, color);
+    draw_line(cx, cy, ax, ay, framebuffer, color);
+}
