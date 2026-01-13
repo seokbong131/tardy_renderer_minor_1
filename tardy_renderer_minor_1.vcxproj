@@ -135,7 +135,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="include\graphics.h" />
+    <ClInclude Include="include\graphics_mathematics.h" />
     <ClInclude Include="include\obj_loader.h" />
     <ClInclude Include="include\tgaimage.h" />
     <ClInclude Include="third_party\stb\stb_image_write.h" />

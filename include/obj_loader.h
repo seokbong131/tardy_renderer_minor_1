@@ -1,6 +1,6 @@
 #pragma once
 #include <vector>
-#include "graphics.h"
+#include "graphics_mathematics.h"
 
 class Mesh {
     std::vector<vec3> vertices = {};

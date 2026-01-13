@@ -21,7 +21,7 @@
     <ClInclude Include="include\tgaimage.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="include\graphics.h">
+    <ClInclude Include="include\graphics_mathematics.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="include\obj_loader.h">

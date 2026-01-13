@@ -1,4 +1,4 @@
-#include "graphics.h"
+#include "graphics_mathematics.h"
 #include "obj_loader.h"
 #include "tgaimage.h"
 
