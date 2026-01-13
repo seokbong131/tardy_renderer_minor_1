@@ -27,6 +27,9 @@
     <ClInclude Include="include\obj_loader.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="include\rasterization.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\tgaimage.cpp">
@@ -36,6 +39,9 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="src\obj_loader.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="src\rasterization.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
