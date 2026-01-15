@@ -3,22 +3,28 @@
 // by Bresenham's line drawing algorithm
 void draw_line(int start_x, int start_y, int end_x, int end_y, TGAImage& framebuffer, TGAColor color) {
     bool steep = std::abs(start_x - end_x) < std::abs(start_y - end_y);
+
     if (steep) { // transpose
         std::swap(start_x, start_y);
         std::swap(end_x, end_y);
     }
+
     if (start_x > end_x) { // right -> left
         std::swap(start_x, end_x);
         std::swap(start_y, end_y);
     }
+
     int y = start_y;
     int ierror = 0;
+
     for (int x = start_x; x <= end_x; x++) {
         if (steep) // de-transpose
             framebuffer.set(y, x, color);
         else
             framebuffer.set(x, y, color);
+
         ierror += 2 * std::abs(end_y - start_y);
+
         if (ierror > end_x - start_x) {
             y += end_y > start_y ? 1 : -1;
             ierror -= 2 * (end_x - start_x);
@@ -37,12 +43,12 @@ std::tuple<int, int> project_orthographic(vec3 v, int width, int height) {
     int x = static_cast<int>(std::round((v.x + 1.0) * 0.5 * width));
     int y = static_cast<int>(std::round((v.y + 1.0) * 0.5 * height));
 
-    /*// left (X)
-    int x = static_cast<int>(std::round((-v.z + 1.0) * 0.5 * width));
+    // left (X)
+    /*int x = static_cast<int>(std::round((-v.z + 1.0) * 0.5 * width));
     int y = static_cast<int>(std::round((v.y + 1.0) * 0.5 * height));*/
 
-    /*// top (Y)
-    int x = static_cast<int>(std::round((v.x + 1.0) * 0.5 * width));
+    // top (Y)
+    /*int x = static_cast<int>(std::round((v.x + 1.0) * 0.5 * width));
     int y = static_cast<int>(std::round((-v.z + 1.0) * 0.5 * height));*/
 
     x = std::clamp(x, 0, width - 1);
@@ -67,7 +73,22 @@ void draw_triangle(int ax, int ay, int bx, int by, int cx, int cy, TGAImage& fra
         }
     }
 
-    draw_line(x_coords[0], y_coords[0], x_coords[1], y_coords[1], framebuffer, blue);
+    int total_height = y_coords[2] - y_coords[0];
+
+    if (y_coords[0] != y_coords[1]) { // lower half
+        int lower_height = y_coords[1] - y_coords[0];
+
+        for (int y = y_coords[0]; y <= y_coords[1]; y++) {
+            // linear interpolation (integer arithmetic)
+            int x_1 = x_coords[0] + ((x_coords[1] - x_coords[0]) * (y - y_coords[0])) / lower_height;
+            int x_2 = x_coords[0] + ((x_coords[2] - x_coords[0]) * (y - y_coords[0])) / total_height;
+
+            framebuffer.set(x_1, y, blue);
+            framebuffer.set(x_2, y, red);
+        }
+    }
+
+    /*draw_line(x_coords[0], y_coords[0], x_coords[1], y_coords[1], framebuffer, blue);
     draw_line(x_coords[1], y_coords[1], x_coords[2], y_coords[2], framebuffer, green);
-    draw_line(x_coords[2], y_coords[2], x_coords[0], y_coords[0], framebuffer, red);
+    draw_line(x_coords[2], y_coords[2], x_coords[0], y_coords[0], framebuffer, red);*/
 }
