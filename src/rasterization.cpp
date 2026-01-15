@@ -51,8 +51,23 @@ std::tuple<int, int> project_orthographic(vec3 v, int width, int height) {
     return { x, y };
 }
 
+constexpr TGAColor red      = { 0,     0, 255, 255 };
+constexpr TGAColor green    = { 0,   255,   0, 255 };
+constexpr TGAColor blue     = { 255,   0,   0, 255 };
+
 void draw_triangle(int ax, int ay, int bx, int by, int cx, int cy, TGAImage& framebuffer, TGAColor color) {
-    draw_line(ax, ay, bx, by, framebuffer, color);
-    draw_line(bx, by, cx, cy, framebuffer, color);
-    draw_line(cx, cy, ax, ay, framebuffer, color);
+    int x_coords[3] = { ax, bx, cx };
+    int y_coords[3] = { ay, by, cy };
+
+    // insertion sort by y-coordinate (ascending order)
+    for (int i = 1; i < 3; ++i) {
+        for (int j = i; j > 0 && y_coords[j] < y_coords[j - 1]; --j) {
+            std::swap(x_coords[j], x_coords[j - 1]);
+            std::swap(y_coords[j], y_coords[j - 1]);
+        }
+    }
+
+    draw_line(x_coords[0], y_coords[0], x_coords[1], y_coords[1], framebuffer, blue);
+    draw_line(x_coords[1], y_coords[1], x_coords[2], y_coords[2], framebuffer, green);
+    draw_line(x_coords[2], y_coords[2], x_coords[0], y_coords[0], framebuffer, red);
 }
