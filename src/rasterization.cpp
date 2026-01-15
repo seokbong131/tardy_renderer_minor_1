@@ -61,6 +61,7 @@ constexpr TGAColor red      = { 0,     0, 255, 255 };
 constexpr TGAColor green    = { 0,   255,   0, 255 };
 constexpr TGAColor blue     = { 255,   0,   0, 255 };
 
+// by scanline rendering algorithm
 void draw_triangle(int ax, int ay, int bx, int by, int cx, int cy, TGAImage& framebuffer, TGAColor color) {
     int x_coords[3] = { ax, bx, cx };
     int y_coords[3] = { ay, by, cy };
@@ -78,13 +79,40 @@ void draw_triangle(int ax, int ay, int bx, int by, int cx, int cy, TGAImage& fra
     if (y_coords[0] != y_coords[1]) { // lower half
         int lower_height = y_coords[1] - y_coords[0];
 
-        for (int y = y_coords[0]; y <= y_coords[1]; y++) {
+        // T := upper half (X) -> include y_coords[1] scanline
+        // F := upper half (O) -> avoid overlap
+        int y_end = (y_coords[1] == y_coords[2]) ? y_coords[1] : y_coords[1] - 1;
+
+        for (int y = y_coords[0]; y <= y_end; y++) {
             // linear interpolation (integer arithmetic)
             int x_1 = x_coords[0] + ((x_coords[1] - x_coords[0]) * (y - y_coords[0])) / lower_height;
             int x_2 = x_coords[0] + ((x_coords[2] - x_coords[0]) * (y - y_coords[0])) / total_height;
 
-            framebuffer.set(x_1, y, blue);
-            framebuffer.set(x_2, y, red);
+            // boundary
+            /*framebuffer.set(x_1, y, blue);
+            framebuffer.set(x_2, y, red);*/
+
+            // top-left rule (X) -> overlap
+            for (int x = std::min(x_1, x_2); x <= std::max(x_1, x_2); x++)
+                framebuffer.set(x, y, color);
+        }
+    }
+
+    if (y_coords[1] != y_coords[2]) { // upper half
+        int upper_height = y_coords[2] - y_coords[1];
+
+        for (int y = y_coords[1]; y <= y_coords[2]; y++) {
+            // linear interpolation (integer arithmetic)
+            int x_1 = x_coords[1] + ((x_coords[2] - x_coords[1]) * (y - y_coords[1])) / upper_height;
+            int x_2 = x_coords[0] + ((x_coords[2] - x_coords[0]) * (y - y_coords[0])) / total_height;
+
+            // boundary
+            /*framebuffer.set(x_1, y, blue);
+            framebuffer.set(x_2, y, red);*/
+
+            // top-left rule (X) -> overlap
+            for (int x = std::min(x_1, x_2); x <= std::max(x_1, x_2); x++)
+                framebuffer.set(x, y, color);
         }
     }
 
