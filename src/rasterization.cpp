@@ -57,6 +57,7 @@ std::tuple<int, int> project_orthographic(vec3 v, int width, int height) {
     return { x, y };
 }
 
+constexpr TGAColor white    = { 255, 255, 255, 255 };
 constexpr TGAColor red      = { 0,     0, 255, 255 };
 constexpr TGAColor green    = { 0,   255,   0, 255 };
 constexpr TGAColor blue     = { 255,   0,   0, 255 };
@@ -94,7 +95,7 @@ void draw_triangle(int ax, int ay, int bx, int by, int cx, int cy, TGAImage& fra
 
             // top-left rule (X) -> overlap
             for (int x = std::min(x_1, x_2); x <= std::max(x_1, x_2); x++)
-                framebuffer.set(x, y, color);
+                framebuffer.set(x, y, (y == y_coords[1]) ? white : color);
         }
     }
 
@@ -107,12 +108,12 @@ void draw_triangle(int ax, int ay, int bx, int by, int cx, int cy, TGAImage& fra
             int x_2 = x_coords[0] + ((x_coords[2] - x_coords[0]) * (y - y_coords[0])) / total_height;
 
             // boundary
-            /*framebuffer.set(x_1, y, blue);
+            /*framebuffer.set(x_1, y, green);
             framebuffer.set(x_2, y, red);*/
 
             // top-left rule (X) -> overlap
             for (int x = std::min(x_1, x_2); x <= std::max(x_1, x_2); x++)
-                framebuffer.set(x, y, color);
+                framebuffer.set(x, y, (y == y_coords[1]) ? white : color);
         }
     }
 
