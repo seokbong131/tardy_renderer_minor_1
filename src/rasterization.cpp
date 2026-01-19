@@ -1,3 +1,4 @@
+#include <omp.h>
 #include "rasterization.h"
 
 // by Bresenham's line drawing algorithm
@@ -63,7 +64,7 @@ constexpr TGAColor green    = { 0,   255,   0, 255 };
 constexpr TGAColor blue     = { 255,   0,   0, 255 };
 
 // by scanline rendering algorithm
-void draw_triangle(int ax, int ay, int bx, int by, int cx, int cy, TGAImage& framebuffer, TGAColor color) {
+void draw_classic_triangle(int ax, int ay, int bx, int by, int cx, int cy, TGAImage& framebuffer, TGAColor color) {
     int x_coords[3] = { ax, bx, cx };
     int y_coords[3] = { ay, by, cy };
 
@@ -89,13 +90,9 @@ void draw_triangle(int ax, int ay, int bx, int by, int cx, int cy, TGAImage& fra
             int x_1 = x_coords[0] + ((x_coords[1] - x_coords[0]) * (y - y_coords[0])) / lower_height;
             int x_2 = x_coords[0] + ((x_coords[2] - x_coords[0]) * (y - y_coords[0])) / total_height;
 
-            // boundary
-            /*framebuffer.set(x_1, y, blue);
-            framebuffer.set(x_2, y, red);*/
-
             // top-left rule (X) -> overlap
             for (int x = std::min(x_1, x_2); x <= std::max(x_1, x_2); x++)
-                framebuffer.set(x, y, (y == y_coords[1]) ? white : color);
+                framebuffer.set(x, y, color);
         }
     }
 
@@ -107,17 +104,26 @@ void draw_triangle(int ax, int ay, int bx, int by, int cx, int cy, TGAImage& fra
             int x_1 = x_coords[1] + ((x_coords[2] - x_coords[1]) * (y - y_coords[1])) / upper_height;
             int x_2 = x_coords[0] + ((x_coords[2] - x_coords[0]) * (y - y_coords[0])) / total_height;
 
-            // boundary
-            /*framebuffer.set(x_1, y, green);
-            framebuffer.set(x_2, y, red);*/
-
             // top-left rule (X) -> overlap
             for (int x = std::min(x_1, x_2); x <= std::max(x_1, x_2); x++)
-                framebuffer.set(x, y, (y == y_coords[1]) ? white : color);
+                framebuffer.set(x, y, color);
         }
     }
-
-    /*draw_line(x_coords[0], y_coords[0], x_coords[1], y_coords[1], framebuffer, blue);
-    draw_line(x_coords[1], y_coords[1], x_coords[2], y_coords[2], framebuffer, green);
-    draw_line(x_coords[2], y_coords[2], x_coords[0], y_coords[0], framebuffer, red);*/
 }
+
+#pragma warning(push)
+#pragma warning(disable: 6993)
+void draw_modern_triangle(int ax, int ay, int bx, int by, int cx, int cy, TGAImage& framebuffer, TGAColor color) {
+    int aabb_min_x = std::min(std::min(ax, bx), cx);
+    int aabb_min_y = std::min(std::min(ay, by), cy);
+    int aabb_max_x = std::max(std::max(ax, bx), cx);
+    int aabb_max_y = std::max(std::max(ay, by), cy);
+
+#pragma omp parallel for
+    for (int x = aabb_min_x; x <= aabb_max_x; x++) {
+        for (int y = aabb_min_y; y <= aabb_max_y; y++) {
+            framebuffer.set(x, y, color);
+        }
+    }
+}
+#pragma warning(pop)
