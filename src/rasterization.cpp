@@ -111,6 +111,11 @@ void draw_classic_triangle(int ax, int ay, int bx, int by, int cx, int cy, TGAIm
     }
 }
 
+// by shoelace formula
+float compute_signed_triangle_area(int ax, int ay, int bx, int by, int cx, int cy) {
+    return 0.5f * ((by - ay) * (bx + ax) + (cy - by) * (cx + bx) + (ay - cy) * (ax + cx));
+}
+
 #pragma warning(push)
 #pragma warning(disable: 6993)
 void draw_modern_triangle(int ax, int ay, int bx, int by, int cx, int cy, TGAImage& framebuffer, TGAColor color) {
@@ -119,9 +124,22 @@ void draw_modern_triangle(int ax, int ay, int bx, int by, int cx, int cy, TGAIma
     int aabb_max_x = std::max(std::max(ax, bx), cx);
     int aabb_max_y = std::max(std::max(ay, by), cy);
 
+    float total_area = compute_signed_triangle_area(ax, ay, bx, by, cx, cy);
+
 #pragma omp parallel for
     for (int x = aabb_min_x; x <= aabb_max_x; x++) {
         for (int y = aabb_min_y; y <= aabb_max_y; y++) {
+            // Area(PBC) := alpha, Area(PCA) := beta, Area(PAB) := gamma
+            float alpha_area = compute_signed_triangle_area(x, y, bx, by, cx, cy) / total_area;
+            float beta_area = compute_signed_triangle_area(ax, ay, x, y, cx, cy) / total_area;
+            float gamma_area = compute_signed_triangle_area(ax, ay, bx, by, x, y) / total_area;
+
+            // Area > 0 => pixel is inside the triangle
+            // Area = 0 => pixel is on the edge of the triangle
+            // Area < 0 => pixel is outside the triangle
+            if (alpha_area < 0 || beta_area < 0 || gamma_area < 0)
+                continue;
+
             framebuffer.set(x, y, color);
         }
     }
