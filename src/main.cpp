@@ -4,8 +4,8 @@
 #include "tgaimage.h"
 #include "utils.h"
 
-constexpr int width = 128;
-constexpr int height = 128;
+constexpr int width = 1000;
+constexpr int height = 1000;
 
 constexpr TGAColor white    = { 255, 255, 255, 255 }; // attention, BGRA order
 constexpr TGAColor red      = { 0,     0, 255, 255 };
@@ -17,15 +17,28 @@ constexpr TGAColor yellow   = { 0,   255, 255, 255 };
 constexpr TGAColor black    = { 0,     0,   0, 255 };
 
 int main(int argc, char** argv) {
+    std::string model_path = "../assets/diablo3_pose.obj";
+
+    if (argc == 2) {
+        model_path = argv[1];
+    }
+
+    Mesh mesh(model_path);
+
     TGAImage framebuffer(width, height, TGAImage::RGB);
 
-    /*draw_classic_triangle(7, 45, 35, 100, 45, 60, framebuffer, red);
-    draw_classic_triangle(120, 35, 90, 5, 45, 110, framebuffer, green);
-    draw_classic_triangle(115, 83, 80, 90, 85, 120, framebuffer, blue);*/
+    // for triangle rasterization
+    for (int i = 0; i < mesh.num_triangles(); i++) {
+        auto [ax, ay] = project_orthographic(mesh.get_triangle_vertex(i, 0), width, height);
+        auto [bx, by] = project_orthographic(mesh.get_triangle_vertex(i, 1), width, height);
+        auto [cx, cy] = project_orthographic(mesh.get_triangle_vertex(i, 2), width, height);
 
-    draw_modern_triangle(7, 45, 35, 100, 45, 60, framebuffer, red);
-    draw_modern_triangle(120, 35, 90, 5, 45, 110, framebuffer, green);
-    draw_modern_triangle(115, 83, 80, 90, 85, 120, framebuffer, blue);
+        TGAColor random_color;
+        for (int elem = 0; elem < 3; elem++)
+            random_color[elem] = static_cast<std::uint8_t>(std::rand() % 256);
+
+        draw_modern_triangle(ax, ay, bx, by, cx, cy, framebuffer, random_color);
+    }
 
     //print_openmp_info();
 

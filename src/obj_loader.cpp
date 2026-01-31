@@ -43,7 +43,7 @@ Mesh::Mesh(const std::string filename) {
     }
 
     std::cerr << "OBJ file loaded successfully." << std::endl;
-    std::cerr << "[Info.] #(vertices): " << num_vertices() << ", #(triangles): " << num_triangles() << std::endl;
+    std::cerr << "[INFO] #(vertices): " << num_vertices() << ", #(triangles): " << num_triangles() << std::endl;
 }
 
 int Mesh::num_vertices() const { return vertices.size(); }
