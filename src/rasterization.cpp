@@ -125,6 +125,10 @@ void draw_modern_triangle(int ax, int ay, int bx, int by, int cx, int cy, TGAIma
     int aabb_max_y = std::max(std::max(ay, by), cy);
 
     float total_area = compute_signed_triangle_area(ax, ay, bx, by, cx, cy);
+    // total area < 0       => backface culling
+    // total area = 0       => avoiding division by zero
+    // 0 < total area < 1   => discarding triangles (< a pixel)
+    if (total_area < 1) return;
 
 #pragma omp parallel for
     for (int x = aabb_min_x; x <= aabb_max_x; x++) {
