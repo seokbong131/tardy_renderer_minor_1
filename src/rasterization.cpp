@@ -149,3 +149,12 @@ void draw_modern_triangle(int ax, int ay, int bx, int by, int cx, int cy, TGAIma
     }
 }
 #pragma warning(pop)
+
+// by digital differential analyzer (DDA) algorithm <= 2nd attempt, round 1
+void draw_temporary_line(int start_x, int start_y, int end_x, int end_y, TGAImage& framebuffer, TGAColor color) {
+    for (int x = start_x; x <= end_x; x++) {
+        float t = (x - start_x) / static_cast<float>(end_x - start_x);
+        int y = std::round(start_y + (end_y - start_y) * t);
+        framebuffer.set(x, y, color);
+    }
+}
