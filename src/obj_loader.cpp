@@ -46,7 +46,7 @@ Mesh::Mesh(const std::string filename) {
     std::cerr << "[INFO] #(vertices): " << num_vertices() << ", #(triangles): " << num_triangles() << std::endl;
 }
 
-int Mesh::num_vertices() const { return vertices.size(); }
+int Mesh::num_vertices() const { return static_cast<int>(vertices.size()); }
 int Mesh::num_triangles() const { return static_cast<int>(indices.size() / 3); }
 
 vec3 Mesh::get_vertex(const int i) const {
