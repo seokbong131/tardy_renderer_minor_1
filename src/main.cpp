@@ -17,13 +17,13 @@ constexpr TGAColor yellow   = { 0,   255, 255, 255 };
 constexpr TGAColor black    = { 0,     0,   0, 255 };
 
 int main(int argc, char** argv) {
-    TGAImage framebuffer(width, height, TGAImage::GRAYSCALE);
+    TGAImage framebuffer(width, height, TGAImage::RGB);
 
-    int ax = 17, ay = 4, color_a = 15;
-    int bx = 55, by = 39, color_b = 128;
-    int cx = 23, cy = 59, color_c = 255;
+    int ax = 17, ay = 4;
+    int bx = 55, by = 39;
+    int cx = 23, cy = 59;
 
-    interpolate_modern_triangle(ax, ay, color_a, bx, by, color_b, cx, cy, color_c, framebuffer);
+    interpolate_modern_triangle(ax, ay, red, bx, by, green, cx, cy, blue, framebuffer);
 
     //framebuffer.write_tga_file("output/framebuffer.tga");
     framebuffer.write_png_file("output/framebuffer.png");

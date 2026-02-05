@@ -161,7 +161,12 @@ void draw_temporary_line(int start_x, int start_y, int end_x, int end_y, TGAImag
 
 #pragma warning(push)
 #pragma warning(disable: 6993)
-void interpolate_modern_triangle(int ax, int ay, int color_a, int bx, int by, int color_b, int cx, int cy, int color_c, TGAImage& framebuffer) {
+void interpolate_modern_triangle(
+    int ax, int ay, TGAColor a_color,
+    int bx, int by, TGAColor b_color,
+    int cx, int cy, TGAColor c_color,
+    TGAImage& framebuffer
+) {
     int aabb_min_x = std::min(std::min(ax, bx), cx);
     int aabb_min_y = std::min(std::min(ay, by), cy);
     int aabb_max_x = std::max(std::max(ax, bx), cx);
@@ -187,8 +192,18 @@ void interpolate_modern_triangle(int ax, int ay, int color_a, int bx, int by, in
             if (alpha_area < 0 || beta_area < 0 || gamma_area < 0)
                 continue;
 
-            unsigned char z = static_cast<unsigned char>(alpha_area * color_a + beta_area * color_b + gamma_area * color_c);
-            framebuffer.set(x, y, { z });
+            TGAColor color{};
+            const int bpp = framebuffer.byte_per_pixel();
+
+            for (int elem = 0; elem < bpp; ++elem) {
+                color[elem] = static_cast<std::uint8_t>(
+                    alpha_area * a_color[elem] +
+                    beta_area * b_color[elem] +
+                    gamma_area * c_color[elem]
+                );
+            }
+
+            framebuffer.set(x, y, color);
         }
     }
 }

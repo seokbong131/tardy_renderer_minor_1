@@ -240,3 +240,7 @@ int TGAImage::width() const {
 int TGAImage::height() const {
     return h;
 }
+
+int TGAImage::byte_per_pixel() const {
+    return bpp;
+}
