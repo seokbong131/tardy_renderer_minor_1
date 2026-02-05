@@ -158,3 +158,38 @@ void draw_temporary_line(int start_x, int start_y, int end_x, int end_y, TGAImag
         framebuffer.set(x, y, color);
     }
 }
+
+#pragma warning(push)
+#pragma warning(disable: 6993)
+void interpolate_modern_triangle(int ax, int ay, int color_a, int bx, int by, int color_b, int cx, int cy, int color_c, TGAImage& framebuffer) {
+    int aabb_min_x = std::min(std::min(ax, bx), cx);
+    int aabb_min_y = std::min(std::min(ay, by), cy);
+    int aabb_max_x = std::max(std::max(ax, bx), cx);
+    int aabb_max_y = std::max(std::max(ay, by), cy);
+
+    float total_area = compute_signed_triangle_area(ax, ay, bx, by, cx, cy);
+    // total area < 0       => backface culling
+    // total area = 0       => avoiding division by zero
+    // 0 < total area < 1   => discarding triangles (< a pixel)
+    if (total_area < 1) return;
+
+#pragma omp parallel for
+    for (int x = aabb_min_x; x <= aabb_max_x; x++) {
+        for (int y = aabb_min_y; y <= aabb_max_y; y++) {
+            // Area(PBC) := alpha, Area(PCA) := beta, Area(PAB) := gamma
+            float alpha_area = compute_signed_triangle_area(x, y, bx, by, cx, cy) / total_area;
+            float beta_area = compute_signed_triangle_area(ax, ay, x, y, cx, cy) / total_area;
+            float gamma_area = compute_signed_triangle_area(ax, ay, bx, by, x, y) / total_area;
+
+            // Area > 0 => pixel is inside the triangle
+            // Area = 0 => pixel is on the edge of the triangle
+            // Area < 0 => pixel is outside the triangle
+            if (alpha_area < 0 || beta_area < 0 || gamma_area < 0)
+                continue;
+
+            unsigned char z = static_cast<unsigned char>(alpha_area * color_a + beta_area * color_b + gamma_area * color_c);
+            framebuffer.set(x, y, { z });
+        }
+    }
+}
+#pragma warning(pop)

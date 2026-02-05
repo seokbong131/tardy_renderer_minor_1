@@ -12,3 +12,4 @@ float compute_signed_triangle_area(int ax, int ay, int bx, int by, int cx, int c
 void draw_modern_triangle(int ax, int ay, int bx, int by, int cx, int cy, TGAImage& framebuffer, TGAColor color);
 
 void draw_temporary_line(int start_x, int start_y, int end_x, int end_y, TGAImage& framebuffer, TGAColor color);
+void interpolate_modern_triangle(int ax, int ay, int color_a, int bx, int by, int color_b, int cx, int cy, int color_c, TGAImage& framebuffer);
