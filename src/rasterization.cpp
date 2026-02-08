@@ -192,6 +192,10 @@ void interpolate_modern_triangle(
             if (alpha_area < 0 || beta_area < 0 || gamma_area < 0)
                 continue;
 
+            // wireframe effect
+            if (alpha_area > 0.1f && beta_area > 0.1f && gamma_area > 0.1f)
+                continue;
+
             TGAColor color{};
             const int bpp = framebuffer.byte_per_pixel();
 
