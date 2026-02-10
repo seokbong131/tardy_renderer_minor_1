@@ -1,6 +1,17 @@
 #include <omp.h>
 #include "rasterization.h"
 
+constexpr TGAColor white    = { 255, 255, 255, 255 }; // attention, BGRA order
+constexpr TGAColor red      = { 0,     0, 255, 255 };
+constexpr TGAColor green    = { 0,   255,   0, 255 };
+constexpr TGAColor blue     = { 255,   0,   0, 255 };
+constexpr TGAColor cyan     = { 255, 255,   0, 255 };
+constexpr TGAColor magenta  = { 255,   0, 255, 255 };
+constexpr TGAColor yellow   = { 0,   255, 255, 255 };
+constexpr TGAColor pink     = { 127, 127, 255, 255 };
+constexpr TGAColor mint     = { 127, 255, 127, 255 };
+constexpr TGAColor sky_blue = { 255, 127, 127, 255 };
+
 // by Bresenham's line drawing algorithm
 void draw_line(int start_x, int start_y, int end_x, int end_y, TGAImage& framebuffer, TGAColor color) {
     bool steep = std::abs(start_x - end_x) < std::abs(start_y - end_y);
@@ -57,11 +68,6 @@ std::tuple<int, int> project_orthographic(vec3 v, int width, int height) {
 
     return { x, y };
 }
-
-constexpr TGAColor white    = { 255, 255, 255, 255 };
-constexpr TGAColor red      = { 0,     0, 255, 255 };
-constexpr TGAColor green    = { 0,   255,   0, 255 };
-constexpr TGAColor blue     = { 255,   0,   0, 255 };
 
 // by scanline rendering algorithm
 void draw_classic_triangle(int ax, int ay, int bx, int by, int cx, int cy, TGAImage& framebuffer, TGAColor color) {
@@ -193,21 +199,47 @@ void interpolate_modern_triangle(
                 continue;
 
             // wireframe effect
-            if (alpha_area > 0.1f && beta_area > 0.1f && gamma_area > 0.1f)
-                continue;
+            /*if (alpha_area > 0.1f && beta_area > 0.1f && gamma_area > 0.1f)
+                continue;*/
 
             TGAColor color{};
             const int bpp = framebuffer.byte_per_pixel();
-
-            for (int elem = 0; elem < bpp; ++elem) {
-                color[elem] = static_cast<std::uint8_t>(
-                    alpha_area * a_color[elem] +
-                    beta_area * b_color[elem] +
-                    gamma_area * c_color[elem]
-                );
+            
+            if (alpha_area > 0.1f) {
+                if (beta_area > 0.1f) {
+                    if (gamma_area > 0.1f)  framebuffer.set(x, y, white);
+                    else                    framebuffer.set(x, y, pink);
+                }
+                else {
+                    if (gamma_area > 0.1f)  framebuffer.set(x, y, sky_blue);
+                    else                    framebuffer.set(x, y, magenta);
+                }
+            }
+            else {
+                if (beta_area > 0.1f) {
+                    if (gamma_area > 0.1f)  framebuffer.set(x, y, mint);
+                    else                    framebuffer.set(x, y, yellow);
+                }
+                else {
+                    if (gamma_area > 0.1f)  framebuffer.set(x, y, cyan);
+                    else                    continue;
+                }
             }
 
-            framebuffer.set(x, y, color);
+            /*if (alpha_area > 0.1f) framebuffer.set(x, y, magenta);
+            //if (beta_area > 0.1f) framebuffer.set(x, y, yellow);
+            //if (gamma_area > 0.1f) framebuffer.set(x, y, cyan);
+            else {
+                for (int elem = 0; elem < bpp; ++elem) {
+                    color[elem] = static_cast<std::uint8_t>(
+                        alpha_area * a_color[elem] +
+                        beta_area * b_color[elem] +
+                        gamma_area * c_color[elem]
+                        );
+                }
+
+                framebuffer.set(x, y, color);
+            }*/
         }
     }
 }
