@@ -1,4 +1,5 @@
 #include <fstream>
+#include <numeric>
 #include <sstream>
 #include "obj_loader.h"
 
@@ -44,6 +45,31 @@ Mesh::Mesh(const std::string filename) {
 
     std::cerr << "OBJ file loaded successfully." << std::endl;
     std::cerr << "[INFO] #(vertices): " << num_vertices() << ", #(triangles): " << num_triangles() << std::endl;
+    
+    // 0, 1, 2, ..., num_triangles() - 1
+    std::vector<int> triangle_indices(num_triangles());
+    std::iota(triangle_indices.begin(), triangle_indices.end(), 0);
+
+    // sort by depth (ascending order = rear-to-front order)
+    std::sort(triangle_indices.begin(), triangle_indices.end(), [&](const int& triangle_a, const int& triangle_b) {
+            double triangle_a_min_z = std::min(get_triangle_vertex(triangle_a, 0).z,
+                                               std::min(get_triangle_vertex(triangle_a, 1).z,
+                                                        get_triangle_vertex(triangle_a, 2).z));
+            double triangle_b_min_z = std::min(get_triangle_vertex(triangle_b, 0).z,
+                                               std::min(get_triangle_vertex(triangle_b, 1).z,
+                                                        get_triangle_vertex(triangle_b, 2).z));
+
+            return triangle_a_min_z < triangle_b_min_z;
+        });
+
+    std::vector<int> sorted_indices(num_triangles() * 3);
+
+    // reorder
+    for (size_t i = 0; i < num_triangles(); i++)
+        for (size_t j = 0; j < 3; j++)
+            sorted_indices[i * 3 + j] = indices[static_cast<size_t>(triangle_indices[i]) * 3 + j];
+
+    indices = sorted_indices;
 }
 
 int Mesh::num_vertices() const { return static_cast<int>(vertices.size()); }
