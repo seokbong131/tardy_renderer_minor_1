@@ -3,65 +3,69 @@
 # =========================================
 
 # Build directories
-x64/
-Debug/
-Release/
 bin/
 obj/
 out/
+x64/
+Debug/
+Release/
 
 # VS intermediate files
 *.idb
-*.pdb
-*.ipch
 *.iobj
+*.ipch
 *.ipdb
 *.tlog
 
 # VS user-specific settings
-*.vcxproj.user
-*.suo
-*.user
-*.opensdf
-*.sdf
 *.cache
 *.db
+*.opensdf
+*.sdf
+*.suo
+*.user
+*.vcxproj.user
 
 # =========================================
 # Compiled Object files
 # =========================================
+*.d
+*.lo
 *.o
 *.obj
-*.lo
 *.slo
+
+# Fortran module files
+*.mod
+*.smod
 
 # Precompiled headers
 *.gch
 *.pch
 
 # Linker outputs
-*.ilk
 *.exp
+*.ilk
 
 # Debug information files
-*.pdb
 *.dwo
+*.pdb
 
 # Dynamic libraries
 *.dll
-*.so
 *.dylib
+*.so
 
 # Static libraries
-*.lib
 *.a
 *.la
 *.lai
+*.lib
 
 # Executables
+*.app
 *.exe
 *.out
-*.app
 
 # =========================================
 # tinyrenderer specific
@@ -69,17 +73,17 @@ out/
 
 # Generated images (framebuffer output)
 output/
-*.tga
 *.png
+*.tga
 
 # =========================================
 # VS cache & backup files
 # =========================================
+.ipynb_checkpoints/
+.vs/
+*.bak
 *.log
 *.tmp
-*.bak
-*.ipynb_checkpoints/
-.vs/
 
 # =========================================
 # OS-specific
