@@ -68,7 +68,7 @@ Release/
 *.out
 
 # =========================================
-# tinyrenderer specific
+# tardy renderer minor 1 specific
 # =========================================
 
 # Generated images (framebuffer output)
