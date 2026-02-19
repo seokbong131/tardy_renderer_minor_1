@@ -1,0 +1,161 @@
+# ------------------------------------------------------------
+# configuration of clang-format (customized Blender)
+# Author: seokbong131
+# Date: 2026-02-19
+# Reference URL:
+#     https://clang.llvm.org/docs/ClangFormatStyleOptions.html
+# ------------------------------------------------------------
+BasedOnStyle: LLVM
+
+# The extra indent or outdent of access modifiers, e.g. public:.
+AccessModifierOffset: -1
+
+# If true, horizontally aligns arguments after an open bracket.
+AlignAfterOpenBracket: true
+
+# Style of aligning consecutive assignments.
+AlignConsecutiveAssignments: Consecutive
+
+# Style of aligning consecutive declarations.
+AlignConsecutiveDeclarations: Consecutive
+
+# Options for aligning backslashes in escaped newlines.
+# ENAS_DontAlign (in configuration: DontAlign) Don’t align escaped newlines.
+AlignEscapedNewlines: DontAlign
+
+# Dependent on the value, while (true) { continue; } can be put on a single line.
+# SBS_Empty (in configuration: Empty) Only merge empty blocks.
+AllowShortBlocksOnASingleLine: Empty
+
+# Dependent on the value, int f() { return 0; } can be put on a single line.
+# SFS_All (in configuration: All) Merge all functions fitting on a single line.
+AllowShortFunctionsOnASingleLine: All
+
+# Dependent on the value, if (a) return; can be put on a single line.
+# SIS_WithoutElse (in configuration: WithoutElse) Put short ifs on the same line only if there is no else statement.
+AllowShortIfStatementsOnASingleLine: WithoutElse
+
+# Dependent on the value, auto lambda []() { return 0; } can be put on a single line.
+# SLS_Inline (in configuration: Inline) Merge lambda into a single line if the lambda is argument of a function.
+AllowShortLambdasOnASingleLine: Inline
+
+# If true, always break before multiline string literals.
+AlwaysBreakBeforeMultilineStrings: true
+
+# If false, a function call’s arguments will either be all on the same line or will have one line each.
+BinPackArguments: false
+
+# The bin pack parameters style to use.
+# BPPS_OnePerLine (in configuration: OnePerLine) Put all parameters on the current line if they fit. Otherwise, put each one on its own line.
+BinPackParameters: OnePerLine
+
+# The brace breaking style to use.
+# BS_Custom (in configuration: Custom) Configure each individual brace in BraceWrapping.
+BreakBeforeBraces: Custom
+BraceWrapping:
+    AfterClass: true
+    AfterControlStatement: MultiLine
+    AfterEnum: false
+    AfterFunction: false
+    AfterNamespace: true
+    AfterObjCDeclaration: true
+    AfterStruct: true
+    AfterUnion: false
+    BeforeCatch: true
+    BeforeElse: true
+    IndentBraces: false
+
+# If true, ternary operators will be placed after line breaks.
+BreakBeforeTernaryOperators: true
+
+# The column limit.
+ColumnLimit: 100
+
+# The number of characters to use for indentation of constructor initializer lists as well as inheritance lists.
+ConstructorInitializerIndentWidth: 4
+
+# Indent width for line continuations.
+ContinuationIndentWidth: 4
+
+# If true, clang-format adds missing namespace end comments for namespaces and fixes invalid existing ones. This doesn’t affect short namespaces, which are controlled by ShortNamespaceLines.
+FixNamespaceComments: false
+
+# Dependent on the value, multiple #include blocks can be sorted as one and divided based on category.
+# IBS_Regroup (in configuration: Regroup) Merge multiple #include blocks together and sort as one. Then split into groups based on category priority. See IncludeCategories.
+IncludeBlocks: Regroup
+
+# Regular expressions denoting the different #include categories used for ordering #includes.
+IncludeCategories:
+    - Regex:           '^<[a-zA-Z0-9_]+>$'
+      Priority:        1
+    - Regex:           '^<[a-zA-Z0-9_]+\.h>$'
+      Priority:        2
+    - Regex:           '^<.*>$'
+      Priority:        3
+    - Regex:           '^".*"'
+      Priority:        4
+
+# Indent case labels one level from the switch statement.
+IndentCaseLabels: true
+
+# The preprocessor directive indenting style to use.
+# PPDIS_AfterHash (in configuration: AfterHash) Indents directives after the hash.
+IndentPPDirectives: AfterHash
+
+# The number of columns to use for indentation.
+IndentWidth: 4
+
+# Insert a newline at end of file if missing.
+InsertNewlineAtEOF: true
+
+# The language that this format style targets.
+# LK_Cpp (in configuration: Cpp) Should be used for C++.
+Language: Cpp
+
+# The pack constructor initializers style to use.
+# PCIS_CurrentLine (in configuration: CurrentLine) Put all constructor initializers on the current line if they fit. Otherwise, put each one on its own line.
+PackConstructorInitializers: CurrentLine
+
+# The penalty for breaking around an assignment operator.
+PenaltyBreakAssignment: 100
+
+# The penalty for each line break introduced inside a string literal.
+PenaltyBreakString: 1000000
+
+# Penalty for putting the return type of a function onto its own line.
+PenaltyReturnTypeOnItsOwnLine: 10000
+
+# Pointer and reference alignment style.
+# PAS_Left (in configuration: Left) Align pointer to the left, e.g. int* a;.
+PointerAlignment: Left
+
+# Comment reformatting style.
+# RCS_IndentOnly (in configuration: IndentOnly) Only apply indentation rules, moving comments left or right, without changing formatting inside the comments.
+ReflowComments: IndentOnly
+
+# Controls if and how clang-format will sort #includes.
+SortIncludes: CaseInsensitive
+#    Enabled: true
+#    IgnoreCase: true
+#    IgnoreExtension: true
+
+# If true, a space will be inserted after the template keyword.
+SpaceAfterTemplateKeyword: false
+
+# Defines in which cases to put a space before opening parentheses.
+# SBPO_ControlStatements (in configuration: ControlStatements) Put a space before opening parentheses only after control statement keywords (for/if/while...).
+SpaceBeforeParens: ControlStatements
+
+# The number of spaces before trailing line comments (// - comments).
+SpacesBeforeTrailingComments: 1
+
+# Parse and format C++ constructs compatible with this standard.
+# LS_Cpp20 (in configuration: c++20) Parse and format as C++20.
+Standard: c++20
+
+# The number of columns used for tab stops.
+TabWidth: 4
+
+# The way to use tab characters in the resulting file.
+# UT_Never (in configuration: Never) Never use tab.
+UseTab: Never
