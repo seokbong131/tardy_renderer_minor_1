@@ -1,15 +1,20 @@
 #pragma once
+
 #include <vector>
+
 #include "graphics_mathematics.h"
 
-class Mesh {
+class Mesh
+{
     std::vector<vec3> vertices = {};
-    std::vector<int> indices = {};
-public:
+    std::vector<int>  indices  = {};
+
+   public:
     Mesh(const std::string filename);
-    int num_vertices() const;
-    int num_triangles() const;
+    int  num_vertices() const;
+    int  num_triangles() const;
     vec3 get_vertex(const int i) const; // 0 <= i < num_vertices()
-    vec3 get_triangle_vertex(const int triangle_index, // 0 <= triangle_index <= num_triangles()
-                             const int vertex_index_of_triangle) const; // 0 <= vertex_index_of_triangle < 3
+    vec3 get_triangle_vertex(
+        const int triangle_index,                  // 0 <= triangle_index <= num_triangles()
+        const int vertex_index_of_triangle) const; // 0 <= vertex_index_of_triangle < 3
 };

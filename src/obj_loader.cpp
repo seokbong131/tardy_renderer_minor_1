@@ -1,7 +1,9 @@
+#include "obj_loader.h"
+
+#include <algorithm>
 #include <fstream>
 #include <numeric>
 #include <sstream>
-#include "obj_loader.h"
 
 Mesh::Mesh(const std::string filename) {
     std::ifstream in;
@@ -11,14 +13,15 @@ Mesh::Mesh(const std::string filename) {
     std::string line;
     while (std::getline(in, line)) {
         std::istringstream iss(line.c_str());
-        char slash;
+        char               slash;
 
         // vertex parsing
         if (!line.compare(0, 2, "v ")) {
             iss >> slash;
             vec3 v;
 
-            for (int i : {0, 1, 2}) iss >> v[i];
+            for (int i : {0, 1, 2})
+                iss >> v[i];
             vertices.push_back(v);
         }
 
@@ -37,21 +40,25 @@ Mesh::Mesh(const std::string filename) {
             }
 
             if (3 != cnt) {
-                std::cerr << "Error: the obj file is supposed to be triangulated" << std::endl;
+                std::cerr << "[ERROR] the obj file is supposed to be triangulated" << std::endl;
                 return;
             }
         }
     }
 
-    std::cerr << "OBJ file loaded successfully." << std::endl;
-    std::cerr << "[INFO] #(vertices): " << num_vertices() << ", #(triangles): " << num_triangles() << std::endl;
-    
+    std::cout << "[DEBUG] OBJ file loaded: " + filename << std::endl;
+    std::cout << "[INFO] #(vertices): " << num_vertices() << ", #(triangles): " << num_triangles()
+              << std::endl;
+
     // 0, 1, 2, ..., num_triangles() - 1
     std::vector<int> triangle_indices(num_triangles());
     std::iota(triangle_indices.begin(), triangle_indices.end(), 0);
 
     // sort by depth (ascending order = rear-to-front order)
-    std::sort(triangle_indices.begin(), triangle_indices.end(), [&](const int& triangle_a, const int& triangle_b) {
+    std::sort(
+        triangle_indices.begin(),
+        triangle_indices.end(),
+        [&](const int& triangle_a, const int& triangle_b) {
             double triangle_a_min_z = std::min(get_triangle_vertex(triangle_a, 0).z,
                                                std::min(get_triangle_vertex(triangle_a, 1).z,
                                                         get_triangle_vertex(triangle_a, 2).z));
@@ -75,9 +82,7 @@ Mesh::Mesh(const std::string filename) {
 int Mesh::num_vertices() const { return static_cast<int>(vertices.size()); }
 int Mesh::num_triangles() const { return static_cast<int>(indices.size() / 3); }
 
-vec3 Mesh::get_vertex(const int i) const {
-    return vertices[i];
-}
+vec3 Mesh::get_vertex(const int i) const { return vertices[i]; }
 
 vec3 Mesh::get_triangle_vertex(const int triangle_index, const int vertex_index_of_triangle) const {
     return vertices[indices[triangle_index * 3 + vertex_index_of_triangle]];
