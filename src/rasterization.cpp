@@ -201,11 +201,13 @@ void interpolate_modern_triangle(
             // wireframe effect
             /*if (alpha_area > 0.1f && beta_area > 0.1f && gamma_area > 0.1f)
                 continue;*/
-
-            TGAColor color{};
-            const int bpp = framebuffer.byte_per_pixel();
             
-            if (alpha_area > 0.1f) {
+            // visualization
+            //if (alpha_area > 0.1f) framebuffer.set(x, y, magenta);
+            //if (beta_area > 0.1f) framebuffer.set(x, y, yellow);
+            //if (gamma_area > 0.1f) framebuffer.set(x, y, cyan);
+
+            /*if (alpha_area > 0.1f) {
                 if (beta_area > 0.1f) {
                     if (gamma_area > 0.1f)  framebuffer.set(x, y, white);
                     else                    framebuffer.set(x, y, pink);
@@ -224,22 +226,20 @@ void interpolate_modern_triangle(
                     if (gamma_area > 0.1f)  framebuffer.set(x, y, cyan);
                     else                    continue;
                 }
+            }*/
+
+            TGAColor color{};
+            const int bpp = framebuffer.byte_per_pixel();
+
+            for (int elem = 0; elem < bpp; ++elem) {
+                color[elem] = static_cast<std::uint8_t>(
+                    alpha_area * a_color[elem] +
+                    beta_area * b_color[elem] +
+                    gamma_area * c_color[elem]
+                    );
             }
 
-            /*if (alpha_area > 0.1f) framebuffer.set(x, y, magenta);
-            //if (beta_area > 0.1f) framebuffer.set(x, y, yellow);
-            //if (gamma_area > 0.1f) framebuffer.set(x, y, cyan);
-            else {
-                for (int elem = 0; elem < bpp; ++elem) {
-                    color[elem] = static_cast<std::uint8_t>(
-                        alpha_area * a_color[elem] +
-                        beta_area * b_color[elem] +
-                        gamma_area * c_color[elem]
-                        );
-                }
-
-                framebuffer.set(x, y, color);
-            }*/
+            framebuffer.set(x, y, color);
         }
     }
 }
