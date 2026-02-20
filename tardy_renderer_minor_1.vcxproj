@@ -143,6 +143,7 @@
     <ClInclude Include="include\graphics_mathematics.h" />
     <ClInclude Include="include\obj_loader.h" />
     <ClInclude Include="include\rasterization.h" />
+    <ClInclude Include="include\shortcut.h" />
     <ClInclude Include="include\tgaimage.h" />
     <ClInclude Include="include\utils.h" />
     <ClInclude Include="third_party\stb\stb_image_write.h" />
@@ -151,6 +152,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="src\obj_loader.cpp" />
     <ClCompile Include="src\rasterization.cpp" />
+    <ClCompile Include="src\shortcut.cpp" />
     <ClCompile Include="src\tgaimage.cpp" />
     <ClCompile Include="src\utils.cpp" />
   </ItemGroup>
