@@ -147,7 +147,7 @@
     <ClInclude Include="third_party\stb\stb_image_write.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="main.cpp" />
     <ClCompile Include="src\obj_loader.cpp" />
     <ClCompile Include="src\rasterization.cpp" />
     <ClCompile Include="src\tgaimage.cpp" />
