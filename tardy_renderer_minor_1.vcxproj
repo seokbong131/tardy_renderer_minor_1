@@ -139,6 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="include\config.h" />
     <ClInclude Include="include\graphics_mathematics.h" />
     <ClInclude Include="include\obj_loader.h" />
     <ClInclude Include="include\rasterization.h" />

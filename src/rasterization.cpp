@@ -2,17 +2,7 @@
 
 #include <algorithm>
 
-// attention, BGRA order
-constexpr TGAColor white    = {255, 255, 255, 255};
-constexpr TGAColor red      = {0, 0, 255, 255};
-constexpr TGAColor green    = {0, 255, 0, 255};
-constexpr TGAColor blue     = {255, 0, 0, 255};
-constexpr TGAColor cyan     = {255, 255, 0, 255};
-constexpr TGAColor magenta  = {255, 0, 255, 255};
-constexpr TGAColor yellow   = {0, 255, 255, 255};
-constexpr TGAColor pink     = {127, 127, 255, 255};
-constexpr TGAColor mint     = {127, 255, 127, 255};
-constexpr TGAColor sky_blue = {255, 127, 127, 255};
+// #include "config.h"
 
 // by Bresenham's line drawing algorithm
 void draw_line(
@@ -215,27 +205,28 @@ void interpolate_modern_triangle(int       ax,
                 continue;*/
 
             // visualization
-            // if (alpha_area > 0.1f) framebuffer.set(x, y, magenta);
-            // if (beta_area > 0.1f) framebuffer.set(x, y, yellow);
-            // if (gamma_area > 0.1f) framebuffer.set(x, y, cyan);
+            // if (alpha_area > 0.1f) framebuffer.set(x, y, MAGENTA);
+            // if (beta_area > 0.1f) framebuffer.set(x, y, YELLOW);
+            // if (gamma_area > 0.1f) framebuffer.set(x, y, CYAN);
 
-            /*if (alpha_area > 0.1f) {
+            /* if (alpha_area > 0.1f)
+            {
                 if (beta_area > 0.1f) {
-                    if (gamma_area > 0.1f)  framebuffer.set(x, y, white);
-                    else                    framebuffer.set(x, y, pink);
+                    if (gamma_area > 0.1f)  framebuffer.set(x, y, WHITE);
+                    else                    framebuffer.set(x, y, PINK);
                 }
                 else {
-                    if (gamma_area > 0.1f)  framebuffer.set(x, y, sky_blue);
-                    else                    framebuffer.set(x, y, magenta);
+                    if (gamma_area > 0.1f)  framebuffer.set(x, y, SKY_BLUE);
+                    else                    framebuffer.set(x, y, MAGENTA);
                 }
             }
             else {
                 if (beta_area > 0.1f) {
-                    if (gamma_area > 0.1f)  framebuffer.set(x, y, mint);
-                    else                    framebuffer.set(x, y, yellow);
+                    if (gamma_area > 0.1f)  framebuffer.set(x, y, MINT);
+                    else                    framebuffer.set(x, y, YELLOW);
                 }
                 else {
-                    if (gamma_area > 0.1f)  framebuffer.set(x, y, cyan);
+                    if (gamma_area > 0.1f)  framebuffer.set(x, y, CYAN);
                     else                    continue;
                 }
             }*/
