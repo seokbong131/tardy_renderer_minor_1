@@ -20,10 +20,12 @@ int main(int argc, char** argv) {
 
     // rendering (rasterization)
     for (const auto& mesh : meshes) {
-        render(mesh, WIDTH, HEIGHT, BLACK, RED, WHITE, framebuffer);
+        // render(mesh, WIDTH, HEIGHT, BLACK, RED, WHITE, framebuffer);
+        volume_rendering_effect::visualize_slices(
+            NUM_SLICES, mesh, WIDTH, HEIGHT, BLACK, RED, WHITE, framebuffer);
     }
 
-    framebuffer.write_png_file("output/framebuffer.png");
+    // framebuffer.write_png_file("output/framebuffer.png");
 
     return 0;
 }

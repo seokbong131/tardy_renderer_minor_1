@@ -1,8 +1,11 @@
 #include "utils.h"
 
+#include <format>
 #include <iostream>
 
 #include <omp.h>
+
+#include "config.h"
 
 #pragma warning(push)
 #pragma warning(disable : 6993)
@@ -24,3 +27,7 @@ void print_openmp_info() {
 #endif
 }
 #pragma warning(pop)
+
+std::string set_filename(int index) {
+    return std::format("{}/{}_{:0{}}.png", OUTPUT_FOLDER, OUTPUT_FILE, index, FIELD_WIDTH);
+}

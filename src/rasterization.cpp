@@ -133,7 +133,7 @@ void draw_modern_triangle(
     // total area < 0       => backface culling
     // total area = 0       => avoiding division by zero
     // 0 < total area < 1   => discarding triangles (< a pixel)
-    if (total_area < 1) return;
+    // if (total_area < 1) return;
 
 #pragma omp parallel for
     for (int x = aabb_min_x; x <= aabb_max_x; x++) {
@@ -185,7 +185,7 @@ void interpolate_modern_triangle(int       ax,
     // total area < 0       => backface culling
     // total area = 0       => avoiding division by zero
     // 0 < total area < 1   => discarding triangles (< a pixel)
-    if (total_area < 1) return;
+    // if (total_area < 1) return;
 
 #pragma omp parallel for
     for (int x = aabb_min_x; x <= aabb_max_x; x++) {

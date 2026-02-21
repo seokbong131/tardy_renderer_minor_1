@@ -29,7 +29,14 @@ const std::vector<std::string> AFRICAN_HEAD_PATHS = {
     "../assets/african_head/african_head_eye_inner.obj",
     "../assets/african_head/african_head_eye_outer.obj"};
 
+// output
+constexpr std::string_view OUTPUT_FOLDER = "output";
+constexpr std::string_view OUTPUT_FILE   = "framebuffer";
+constexpr int              FIELD_WIDTH   = 3;
+
+// resolution
 constexpr int WIDTH  = 1000;
 constexpr int HEIGHT = 1000;
 
-constexpr int NUM_FRAMES = 96;
+// volume rendering effect
+constexpr int NUM_SLICES = 96; // MUST be greater than 0
