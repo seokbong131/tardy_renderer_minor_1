@@ -18,15 +18,15 @@ Input #0, image2, from 'framebuffer_%03d.png':
 Stream mapping:
   Stream #0:0 -> #0:0 (png (native) -> gif (native))
 Press [q] to stop, [?] for help
-[Parsed_palettegen_1 @ 000001d40b592580] 255(+1) colors generated out of 4870 colors; ratio=0.052361
+[Parsed_palettegen_1 @ 000002cf9fed2940] 255(+1) colors generated out of 4870 colors; ratio=0.052361
 Output #0, gif, to 'framebuffer.gif':
   Metadata:
     encoder         : Lavf62.3.100
   Stream #0:0: Video: gif, pal8(pc, gbr/unknown/unknown, progressive), 1000x1000, q=2-31, 200 kb/s, 24 fps, 100 tbn
     Metadata:
       encoder         : Lavc62.11.100 gif
-[out#0/gif @ 000001d40b553340] video:5909KiB audio:0KiB subtitle:0KiB other streams:0KiB global headers:0KiB muxing overhead: 0.000331%
-frame=   96 fps= 17 q=-0.0 Lsize=    5909KiB time=00:00:04.00 bitrate=12101.7kbits/s speed=0.707x elapsed=0:00:05.65
+[out#0/gif @ 000002cf9fe93340] video:5909KiB audio:0KiB subtitle:0KiB other streams:0KiB global headers:0KiB muxing overhead: 0.000331%
+frame=   96 fps= 17 q=-0.0 Lsize=    5909KiB time=00:00:04.00 bitrate=12101.7kbits/s speed=0.695x elapsed=0:00:05.75
 
 ********************************************************************************************************************************************************************************************************
 
@@ -46,15 +46,15 @@ Input #0, image2, from 'framebuffer_%03d.png':
 Stream mapping:
   Stream #0:0 -> #0:0 (png (native) -> gif (native))
 Press [q] to stop, [?] for help
-[Parsed_palettegen_1 @ 0000026e3a4d05c0] 255(+1) colors generated out of 5063 colors; ratio=0.050365
+[Parsed_palettegen_1 @ 000001c24ee4ea00] 255(+1) colors generated out of 3454 colors; ratio=0.073827
 Output #0, gif, to 'framebuffer.gif':
   Metadata:
     encoder         : Lavf62.3.100
   Stream #0:0: Video: gif, pal8(pc, gbr/unknown/unknown, progressive), 1000x1000, q=2-31, 200 kb/s, 24 fps, 100 tbn
     Metadata:
       encoder         : Lavc62.11.100 gif
-[out#0/gif @ 0000026e3a4c1c40] video:4813KiB audio:0KiB subtitle:0KiB other streams:0KiB global headers:0KiB muxing overhead: 0.000406%
-frame=   96 fps= 21 q=-0.0 Lsize=    4813KiB time=00:00:04.00 bitrate=9856.6kbits/s speed=0.871x elapsed=0:00:04.59
+[out#0/gif @ 000001c24ed91c40] video:4362KiB audio:0KiB subtitle:0KiB other streams:0KiB global headers:0KiB muxing overhead: 0.000448%
+frame=   96 fps= 21 q=-0.0 Lsize=    4362KiB time=00:00:04.00 bitrate=8933.7kbits/s speed=0.893x elapsed=0:00:04.47
 
 ********************************************************************************************************************************************************************************************************
 
@@ -74,12 +74,12 @@ Input #0, image2, from 'framebuffer_%03d.png':
 Stream mapping:
   Stream #0:0 -> #0:0 (png (native) -> gif (native))
 Press [q] to stop, [?] for help
-[Parsed_palettegen_1 @ 000001b7ef0e3680] 255(+1) colors generated out of 3705 colors; ratio=0.068826
+[Parsed_palettegen_1 @ 00000228d3920bc0] 255(+1) colors generated out of 2437 colors; ratio=0.104637
 Output #0, gif, to 'framebuffer.gif':
   Metadata:
     encoder         : Lavf62.3.100
   Stream #0:0: Video: gif, pal8(pc, gbr/unknown/unknown, progressive), 1000x1000, q=2-31, 200 kb/s, 24 fps, 100 tbn
     Metadata:
       encoder         : Lavc62.11.100 gif
-[out#0/gif @ 000001b7eec43340] video:6864KiB audio:0KiB subtitle:0KiB other streams:0KiB global headers:0KiB muxing overhead: 0.000285%
-frame=   96 fps= 17 q=-0.0 Lsize=    6864KiB time=00:00:04.00 bitrate=14057.6kbits/s speed=0.723x elapsed=0:00:05.53
+[out#0/gif @ 00000228d3903340] video:6688KiB audio:0KiB subtitle:0KiB other streams:0KiB global headers:0KiB muxing overhead: 0.000292%
+frame=   96 fps= 17 q=-0.0 Lsize=    6688KiB time=00:00:04.00 bitrate=13696.6kbits/s speed=0.702x elapsed=0:00:05.69
