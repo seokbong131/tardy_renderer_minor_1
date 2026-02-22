@@ -98,6 +98,11 @@ Mesh::Mesh(const std::vector<Mesh>& meshes) {
         vertex_offset += mesh.num_vertices();
     }
 
+    std::cout << "------------------------------------------------------------" << std::endl;
+    std::cout << "[DEBUG] multi-mesh merged" << std::endl;
+    std::cout << "[INFO] total #(vertices): " << num_vertices()
+              << ", total #(triangles): " << num_triangles() << std::endl;
+
     // 0, 1, 2, ..., num_triangles() - 1
     std::vector<int> triangle_indices(num_triangles());
     std::iota(triangle_indices.begin(), triangle_indices.end(), 0);
