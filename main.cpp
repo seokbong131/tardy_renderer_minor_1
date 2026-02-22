@@ -1,3 +1,5 @@
+// #include <format>
+
 #include "config.h"
 #include "obj_loader.h"
 #include "shortcut.h"
@@ -23,15 +25,12 @@ int main(int argc, char** argv) {
     // ------------------------------------------------------------
 
     // rendering (rasterization)
-    /*for (const auto& mesh : meshes)
-    {
-        render(mesh, WIDTH, HEIGHT, BLACK, RED, WHITE, framebuffer);
-    }*/
+    // render(model, WIDTH, HEIGHT, BLACK, RED, WHITE, framebuffer);
+
+    // framebuffer.write_png_file(std::format("{}/{}.png", OUTPUT_FOLDER, OUTPUT_FILE));
 
     volume_rendering_effect::visualize_slices(
         NUM_SLICES, model, WIDTH, HEIGHT, BLACK, RED, WHITE, framebuffer);
-
-    // framebuffer.write_png_file("output/framebuffer.png");
 
     return 0;
 }
