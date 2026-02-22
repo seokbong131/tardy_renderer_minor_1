@@ -75,7 +75,55 @@ Mesh::Mesh(const std::string filename) {
         for (size_t j = 0; j < 3; j++)
             sorted_indices[i * 3 + j] = indices[static_cast<size_t>(triangle_indices[i]) * 3 + j];
 
-    indices = sorted_indices;
+    indices = std::move(sorted_indices);
+
+    // for visualization
+    min_depth = std::min(
+        {get_triangle_vertex(0, 0).z, get_triangle_vertex(0, 1).z, get_triangle_vertex(0, 2).z});
+    max_depth = std::max({get_triangle_vertex(num_triangles() - 1, 0).z,
+                          get_triangle_vertex(num_triangles() - 1, 1).z,
+                          get_triangle_vertex(num_triangles() - 1, 2).z});
+}
+
+Mesh::Mesh(const std::vector<Mesh>& meshes) {
+    int vertex_offset = 0;
+
+    for (const auto& mesh : meshes) {
+        vertices.insert(vertices.end(), mesh.vertices.begin(), mesh.vertices.end());
+
+        for (int index : mesh.indices) {
+            indices.push_back(vertex_offset + index);
+        }
+
+        vertex_offset += mesh.num_vertices();
+    }
+
+    // 0, 1, 2, ..., num_triangles() - 1
+    std::vector<int> triangle_indices(num_triangles());
+    std::iota(triangle_indices.begin(), triangle_indices.end(), 0);
+
+    // sort by depth (ascending order = rear-to-front order)
+    std::sort(triangle_indices.begin(),
+              triangle_indices.end(),
+              [&](const int& triangle_a, const int& triangle_b) {
+                  double triangle_a_min_z = std::min({get_triangle_vertex(triangle_a, 0).z,
+                                                      get_triangle_vertex(triangle_a, 1).z,
+                                                      get_triangle_vertex(triangle_a, 2).z});
+                  double triangle_b_min_z = std::min({get_triangle_vertex(triangle_b, 0).z,
+                                                      get_triangle_vertex(triangle_b, 1).z,
+                                                      get_triangle_vertex(triangle_b, 2).z});
+
+                  return triangle_a_min_z < triangle_b_min_z;
+              });
+
+    std::vector<int> sorted_indices(num_triangles() * 3);
+
+    // reorder
+    for (size_t i = 0; i < num_triangles(); i++)
+        for (size_t j = 0; j < 3; j++)
+            sorted_indices[i * 3 + j] = indices[static_cast<size_t>(triangle_indices[i]) * 3 + j];
+
+    indices = std::move(sorted_indices);
 
     // for visualization
     min_depth = std::min(

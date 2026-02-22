@@ -4,26 +4,32 @@
 #include "tgaimage.h"
 
 int main(int argc, char** argv) {
-    // model choice
-    const auto& model_paths = DIABLO_PATH; // R
+    TGAImage framebuffer(WIDTH, HEIGHT, TGAImage::RGB);
+
+    // single-mesh model
+    Mesh model(DIABLO_PATH); // R
+
+    // multi-mesh model
+    // ------------------------------------------------------------
     // const auto& model_paths = BOGGIE_PATHS; // G
     // const auto& model_paths = AFRICAN_HEAD_PATHS; // B
 
-    // mesh initialization by model path
-    std::vector<Mesh> meshes;
+    /*std::vector<Mesh> meshes;
     meshes.reserve(model_paths.size());
     for (const auto& path : model_paths) {
         meshes.emplace_back(path);
     }
-
-    TGAImage framebuffer(WIDTH, HEIGHT, TGAImage::RGB);
+    Mesh model(meshes);*/
+    // ------------------------------------------------------------
 
     // rendering (rasterization)
-    for (const auto& mesh : meshes) {
-        // render(mesh, WIDTH, HEIGHT, BLACK, RED, WHITE, framebuffer);
-        volume_rendering_effect::visualize_slices(
-            NUM_SLICES, mesh, WIDTH, HEIGHT, BLACK, RED, WHITE, framebuffer);
-    }
+    /*for (const auto& mesh : meshes)
+    {
+        render(mesh, WIDTH, HEIGHT, BLACK, RED, WHITE, framebuffer);
+    }*/
+
+    volume_rendering_effect::visualize_slices(
+        NUM_SLICES, model, WIDTH, HEIGHT, BLACK, RED, WHITE, framebuffer);
 
     // framebuffer.write_png_file("output/framebuffer.png");
 

@@ -68,14 +68,14 @@ void visualize_slices(int         num_slices,
         auto [cx, cy] = project_orthographic(mesh.get_triangle_vertex(i, 2), width, height);
 
         // solid (random) color
-        TGAColor random_color;
+        /*TGAColor random_color;
         for (int elem = 0; elem < 3; elem++)
             random_color[elem] = static_cast<std::uint8_t>(std::rand() % 256);
 
-        draw_modern_triangle(ax, ay, bx, by, cx, cy, framebuffer, random_color);
+        draw_modern_triangle(ax, ay, bx, by, cx, cy, framebuffer, random_color);*/
 
         // gradient color
-        // interpolate_modern_triangle(ax, ay, color_a, bx, by, color_b, cx, cy, color_c, framebuffer);
+        interpolate_modern_triangle(ax, ay, color_a, bx, by, color_b, cx, cy, color_c, framebuffer);
     }
 
     take_a_snapshot(slice_begin, num_slices, framebuffer);

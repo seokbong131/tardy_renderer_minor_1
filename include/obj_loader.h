@@ -13,6 +13,7 @@ class Mesh
 
    public:
     Mesh(const std::string filename);
+    Mesh(const std::vector<Mesh>& meshes);
     int          num_vertices() const;
     const double get_min_depth() const;
     const double get_max_depth() const;
