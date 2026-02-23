@@ -29,5 +29,5 @@ void print_openmp_info() {
 #pragma warning(pop)
 
 std::string set_filename(int index) {
-    return std::format("{}/{}_{:0{}}.png", OUTPUT_FOLDER, OUTPUT_FILE, index, FIELD_WIDTH);
+    return std::format("{}/{}_{:0{}}.png", OUTPUT_FOLDER, FRAME_BUFFER, index, FIELD_WIDTH);
 }

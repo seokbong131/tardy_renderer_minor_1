@@ -43,7 +43,7 @@ void draw_line(
 // 1. x and y are all in the range [0, 2].
 // 2. x and y are all in the range [0, 1]. (normalization)
 // 3. x is in the range [0, width - 1] and y is in the range [0, height - 1]. (screen space)
-std::tuple<int, int> project_orthographic(vec3 v, int width, int height) {
+std::tuple<int, int> project_orthographic_2(vec3 v, int width, int height) {
     // front (Z)
     int x = static_cast<int>(std::round((v.x + 1.0) * 0.5 * width));
     int y = static_cast<int>(std::round((v.y + 1.0) * 0.5 * height));
@@ -133,7 +133,7 @@ void draw_modern_triangle(
     // total area < 0       => backface culling
     // total area = 0       => avoiding division by zero
     // 0 < total area < 1   => discarding triangles (< a pixel)
-    // if (total_area < 1) return;
+    if (total_area < 1) return;
 
 #pragma omp parallel for
     for (int x = aabb_min_x; x <= aabb_max_x; x++) {
@@ -185,7 +185,7 @@ void interpolate_modern_triangle(int       ax,
     // total area < 0       => backface culling
     // total area = 0       => avoiding division by zero
     // 0 < total area < 1   => discarding triangles (< a pixel)
-    // if (total_area < 1) return;
+    if (total_area < 1) return;
 
 #pragma omp parallel for
     for (int x = aabb_min_x; x <= aabb_max_x; x++) {
@@ -245,3 +245,82 @@ void interpolate_modern_triangle(int       ax,
     }
 }
 #pragma warning(pop)
+
+#pragma warning(push)
+#pragma warning(disable : 6993)
+void draw_modern_triangle_with_depth(int       ax,
+                                     int       ay,
+                                     int       az,
+                                     int       bx,
+                                     int       by,
+                                     int       bz,
+                                     int       cx,
+                                     int       cy,
+                                     int       cz,
+                                     TGAImage& zbuffer,
+                                     TGAImage& framebuffer,
+                                     TGAColor  color) {
+    int aabb_min_x = std::min(std::min(ax, bx), cx);
+    int aabb_min_y = std::min(std::min(ay, by), cy);
+    int aabb_max_x = std::max(std::max(ax, bx), cx);
+    int aabb_max_y = std::max(std::max(ay, by), cy);
+
+    float total_area = compute_signed_triangle_area(ax, ay, bx, by, cx, cy);
+    // total area < 0       => backface culling
+    // total area = 0       => avoiding division by zero
+    // 0 < total area < 1   => discarding triangles (< a pixel)
+    if (total_area < 1) return;
+
+#pragma omp parallel for
+    for (int x = aabb_min_x; x <= aabb_max_x; x++) {
+        for (int y = aabb_min_y; y <= aabb_max_y; y++) {
+            // Area(PBC) := alpha, Area(PCA) := beta, Area(PAB) := gamma
+            float alpha_area = compute_signed_triangle_area(x, y, bx, by, cx, cy) / total_area;
+            float beta_area  = compute_signed_triangle_area(ax, ay, x, y, cx, cy) / total_area;
+            float gamma_area = compute_signed_triangle_area(ax, ay, bx, by, x, y) / total_area;
+
+            // Area > 0 => pixel is inside the triangle
+            // Area = 0 => pixel is on the edge of the triangle
+            // Area < 0 => pixel is outside the triangle
+            if (alpha_area < 0 || beta_area < 0 || gamma_area < 0) continue;
+
+            // depth interpolation
+            uint8_t depth = static_cast<uint8_t>(alpha_area * az + beta_area * bz +
+                                                 gamma_area * cz);
+
+            zbuffer.set(x, y, {depth});
+            framebuffer.set(x, y, color);
+        }
+    }
+}
+#pragma warning(pop)
+
+// assumption: x, y, and z are all in the range [-1, 1]. (WC)
+// elevation: (x, y, z) -> (x, y) = 3D -> 2D
+// viewport transform
+// 1. x and y are all in the range [0, 2].
+// 2. x and y are all in the range [0, 1]. (normalization)
+// 3. x is in the range [0, width - 1] and y is in the range [0, height - 1]. (screen space)
+// 4. z is in the range [0, 255]. (variable)
+std::tuple<int, int, int> project_orthographic_3(vec3 v, int width, int height) {
+    // front (Z)
+    int x = static_cast<int>(std::round((v.x + 1.0) * 0.5 * width));
+    int y = static_cast<int>(std::round((v.y + 1.0) * 0.5 * height));
+    int z = static_cast<int>(std::round((v.z + 1.0) * 0.5 * 255.0));
+
+    // left (X)
+    /*int x = static_cast<int>(std::round((-v.z + 1.0) * 0.5 * width));
+    int y = static_cast<int>(std::round((v.y + 1.0) * 0.5 * height));
+    int z = static_cast<int>(std::round((v.x + 1.0) * 0.5 * 255.0));*/
+
+    // top (Y)
+    /*int x = static_cast<int>(std::round((v.x + 1.0) * 0.5 * width));
+    int y = static_cast<int>(std::round((-v.z + 1.0) * 0.5 * height));
+    int z = static_cast<int>(std::round((v.y + 1.0) * 0.5 * 255.0));*/
+
+    x = std::clamp(x, 0, width - 1);
+    y = std::clamp(y, 0, height - 1);
+    z = std::clamp(z, 0, 255);
+
+    return {x, y, z};
+}

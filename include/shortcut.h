@@ -3,13 +3,13 @@
 #include "obj_loader.h"
 #include "tgaimage.h"
 
-void render(const Mesh& mesh,
-            int         width,
-            int         height,
-            TGAColor    color_a,
-            TGAColor    color_b,
-            TGAColor    color_c,
-            TGAImage&   framebuffer);
+void render_3(const Mesh& mesh,
+              int         width,
+              int         height,
+              TGAColor    color_a,
+              TGAColor    color_b,
+              TGAColor    color_c,
+              TGAImage&   framebuffer);
 
 namespace volume_rendering_effect
 {
@@ -23,3 +23,5 @@ void        visualize_slices(int         num_slices,
                              TGAColor    color_c,
                              TGAImage&   framebuffer);
 }
+
+void render_4(const Mesh& mesh, int width, int height, TGAImage& zbuffer, TGAImage& framebuffer);

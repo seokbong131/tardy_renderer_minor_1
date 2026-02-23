@@ -29,7 +29,8 @@ const std::vector<std::string> AFRICAN_HEAD_PATHS = {
 
 // output
 constexpr std::string_view OUTPUT_FOLDER = "output";
-constexpr std::string_view OUTPUT_FILE   = "framebuffer";
+constexpr std::string_view Z_BUFFER      = "zbuffer";
+constexpr std::string_view FRAME_BUFFER  = "framebuffer";
 constexpr int              FIELD_WIDTH   = 3;
 
 // resolution

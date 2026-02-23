@@ -50,6 +50,7 @@ Mesh::Mesh(const std::string filename) {
     std::cout << "[INFO] #(vertices): " << num_vertices() << ", #(triangles): " << num_triangles()
               << std::endl;
 
+    /*
     // 0, 1, 2, ..., num_triangles() - 1
     std::vector<int> triangle_indices(num_triangles());
     std::iota(triangle_indices.begin(), triangle_indices.end(), 0);
@@ -83,6 +84,7 @@ Mesh::Mesh(const std::string filename) {
     max_depth = std::max({get_triangle_vertex(num_triangles() - 1, 0).z,
                           get_triangle_vertex(num_triangles() - 1, 1).z,
                           get_triangle_vertex(num_triangles() - 1, 2).z});
+    */
 }
 
 Mesh::Mesh(const std::vector<Mesh>& meshes) {
@@ -103,6 +105,7 @@ Mesh::Mesh(const std::vector<Mesh>& meshes) {
     std::cout << "[INFO] total #(vertices): " << num_vertices()
               << ", total #(triangles): " << num_triangles() << std::endl;
 
+    /*
     // 0, 1, 2, ..., num_triangles() - 1
     std::vector<int> triangle_indices(num_triangles());
     std::iota(triangle_indices.begin(), triangle_indices.end(), 0);
@@ -136,6 +139,7 @@ Mesh::Mesh(const std::vector<Mesh>& meshes) {
     max_depth = std::max({get_triangle_vertex(num_triangles() - 1, 0).z,
                           get_triangle_vertex(num_triangles() - 1, 1).z,
                           get_triangle_vertex(num_triangles() - 1, 2).z});
+    */
 }
 
 int Mesh::num_vertices() const { return static_cast<int>(vertices.size()); }

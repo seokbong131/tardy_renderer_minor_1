@@ -1,4 +1,4 @@
-// #include <format>
+#include <format>
 
 #include "config.h"
 #include "obj_loader.h"
@@ -7,6 +7,7 @@
 
 int main(int argc, char** argv) {
     TGAImage framebuffer(WIDTH, HEIGHT, TGAImage::RGB);
+    TGAImage zbuffer(WIDTH, HEIGHT, TGAImage::GRAYSCALE);
 
     // single-mesh model
     Mesh model(DIABLO_PATH); // R
@@ -25,12 +26,14 @@ int main(int argc, char** argv) {
     // ------------------------------------------------------------
 
     // rendering (rasterization)
-    // render(model, WIDTH, HEIGHT, BLACK, RED, WHITE, framebuffer);
+    // render_3(model, WIDTH, HEIGHT, BLACK, RED, WHITE, framebuffer);
+    render_4(model, WIDTH, HEIGHT, zbuffer, framebuffer);
 
-    // framebuffer.write_png_file(std::format("{}/{}.png", OUTPUT_FOLDER, OUTPUT_FILE));
+    zbuffer.write_png_file(std::format("{}/{}.png", OUTPUT_FOLDER, Z_BUFFER));
+    framebuffer.write_png_file(std::format("{}/{}.png", OUTPUT_FOLDER, FRAME_BUFFER));
 
-    volume_rendering_effect::visualize_slices(
-        NUM_SLICES, model, WIDTH, HEIGHT, BLACK, RED, WHITE, framebuffer);
+    /*volume_rendering_effect::visualize_slices(
+        NUM_SLICES, model, WIDTH, HEIGHT, BLACK, RED, WHITE, framebuffer);*/
 
     return 0;
 }
