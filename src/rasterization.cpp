@@ -288,6 +288,11 @@ void draw_modern_triangle_with_depth(int       ax,
             uint8_t depth = static_cast<uint8_t>(alpha_area * az + beta_area * bz +
                                                  gamma_area * cz);
 
+            // per-pixel painter's algorithm
+            // 0 (far) <-> 255 (near => update)
+            auto z_value = zbuffer.get(x, y)[0];
+            if (depth <= z_value) continue;
+
             zbuffer.set(x, y, {depth});
             framebuffer.set(x, y, color);
         }
