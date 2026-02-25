@@ -38,14 +38,14 @@ static void take_a_snapshot(int& slice_begin, int slice_end, TGAImage& framebuff
 //     for each triangle:
 //         snapshot flush
 //         rasterize triangle
-void visualize_slices(int         num_slices,
-                      const Mesh& mesh,
-                      int         width,
-                      int         height,
-                      TGAColor    color_a,
-                      TGAColor    color_b,
-                      TGAColor    color_c,
-                      TGAImage&   framebuffer) {
+void visualize_triangle_slices(int         num_slices,
+                               const Mesh& mesh,
+                               int         width,
+                               int         height,
+                               TGAColor    color_a,
+                               TGAColor    color_b,
+                               TGAColor    color_c,
+                               TGAImage&   framebuffer) {
     int    slice_begin   = 0;
     double slice_spacing = (mesh.get_max_depth() - mesh.get_min_depth()) / num_slices;
 

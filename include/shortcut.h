@@ -14,14 +14,14 @@ void render_3(const Mesh& mesh,
 namespace volume_rendering_effect
 {
 static void take_a_snapshot(int& slice_index, int target, TGAImage& framebuffer);
-void        visualize_slices(int         num_slices,
-                             const Mesh& mesh,
-                             int         width,
-                             int         height,
-                             TGAColor    color_a,
-                             TGAColor    color_b,
-                             TGAColor    color_c,
-                             TGAImage&   framebuffer);
+void        visualize_triangle_slices(int         num_slices,
+                                      const Mesh& mesh,
+                                      int         width,
+                                      int         height,
+                                      TGAColor    color_a,
+                                      TGAColor    color_b,
+                                      TGAColor    color_c,
+                                      TGAImage&   framebuffer);
 }
 
 void render_4(const Mesh& mesh, int width, int height, TGAImage& zbuffer, TGAImage& framebuffer);

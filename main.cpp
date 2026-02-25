@@ -32,7 +32,7 @@ int main(int argc, char** argv) {
     zbuffer.write_png_file(std::format("{}/{}.png", OUTPUT_FOLDER, Z_BUFFER));
     framebuffer.write_png_file(std::format("{}/{}.png", OUTPUT_FOLDER, FRAME_BUFFER));
 
-    /*volume_rendering_effect::visualize_slices(
+    /*volume_rendering_effect::visualize_triangle_slices(
         NUM_SLICES, model, WIDTH, HEIGHT, BLACK, RED, WHITE, framebuffer);*/
 
     return 0;
