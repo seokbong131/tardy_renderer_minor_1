@@ -306,7 +306,7 @@ void draw_modern_triangle_with_depth(int       ax,
 // 1. x and y are all in the range [0, 2].
 // 2. x and y are all in the range [0, 1]. (normalization)
 // 3. x is in the range [0, width - 1] and y is in the range [0, height - 1]. (screen space)
-// 4. z is in the range [0, 255]. (variable)
+// 4. z is in the range [0, 255]. (screen space, variable)
 std::tuple<int, int, int> project_orthographic_3(vec3 v, int width, int height) {
     // front (Z)
     int x = static_cast<int>(std::round((v.x + 1.0) * 0.5 * width));

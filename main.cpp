@@ -27,13 +27,15 @@ int main(int argc, char** argv) {
 
     // rendering (rasterization)
     // render_3(model, WIDTH, HEIGHT, BLACK, RED, WHITE, framebuffer);
-    render_4(model, WIDTH, HEIGHT, zbuffer, framebuffer);
+    /*render_4(model, WIDTH, HEIGHT, zbuffer, framebuffer);
 
     zbuffer.write_png_file(std::format("{}/{}.png", OUTPUT_FOLDER, Z_BUFFER));
-    framebuffer.write_png_file(std::format("{}/{}.png", OUTPUT_FOLDER, FRAME_BUFFER));
+    framebuffer.write_png_file(std::format("{}/{}.png", OUTPUT_FOLDER, FRAME_BUFFER));*/
 
     /*volume_rendering_effect::visualize_triangle_slices(
         NUM_SLICES, model, WIDTH, HEIGHT, BLACK, RED, WHITE, framebuffer);*/
+    volume_rendering_effect::visualize_slices(
+        NUM_SLICES, model, WIDTH, HEIGHT, BLACK, RED, WHITE, zbuffer, framebuffer);
 
     return 0;
 }
