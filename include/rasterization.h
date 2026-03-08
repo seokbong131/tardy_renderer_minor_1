@@ -41,3 +41,5 @@ void                      draw_modern_triangle_with_depth(int       ax,
                                                           TGAImage& framebuffer,
                                                           TGAColor  color);
 std::tuple<int, int, int> project_orthographic_3(vec3 v, int width, int height);
+
+vec3 rotate_naive(const vec3& v);

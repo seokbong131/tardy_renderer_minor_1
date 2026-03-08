@@ -1,6 +1,7 @@
 #include "rasterization.h"
 
 #include <algorithm>
+#include <numbers>
 
 // #include "config.h"
 
@@ -328,4 +329,12 @@ std::tuple<int, int, int> project_orthographic_3(vec3 v, int width, int height) 
     z = std::clamp(z, 0, 255);
 
     return {x, y, z};
+}
+
+vec3 rotate_naive(const vec3& v) {
+    static constexpr double theta      = std::numbers::pi / 6.0;
+    static const mat<3, 3>  rotation_y = {{{std::cos(theta), 0.0, -std::sin(theta)},
+                                           {0.0, 1.0, 0.0},
+                                           {std::sin(theta), 0.0, std::cos(theta)}}};
+    return rotation_y * v;
 }

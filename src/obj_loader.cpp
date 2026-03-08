@@ -1,8 +1,8 @@
 #include "obj_loader.h"
 
-#include <algorithm>
+// #include <algorithm>
 #include <fstream>
-#include <numeric>
+// #include <numeric>
 #include <sstream>
 
 Mesh::Mesh(const std::string filename) {
