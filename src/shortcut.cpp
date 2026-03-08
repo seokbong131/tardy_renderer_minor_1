@@ -177,11 +177,11 @@ void render_4(const Mesh& mesh, int width, int height, TGAImage& zbuffer, TGAIma
 void render_5(const Mesh& mesh, int width, int height, TGAImage& zbuffer, TGAImage& framebuffer) {
     for (int i = 0; i < mesh.num_triangles(); i++) {
         auto [ax, ay, az] = project_orthographic_3(
-            rotate_naive(mesh.get_triangle_vertex(i, 0)), width, height);
+            project_perspective_naive(rotate_naive(mesh.get_triangle_vertex(i, 0))), width, height);
         auto [bx, by, bz] = project_orthographic_3(
-            rotate_naive(mesh.get_triangle_vertex(i, 1)), width, height);
+            project_perspective_naive(rotate_naive(mesh.get_triangle_vertex(i, 1))), width, height);
         auto [cx, cy, cz] = project_orthographic_3(
-            rotate_naive(mesh.get_triangle_vertex(i, 2)), width, height);
+            project_perspective_naive(rotate_naive(mesh.get_triangle_vertex(i, 2))), width, height);
 
         // solid (random) color
         TGAColor random_color;

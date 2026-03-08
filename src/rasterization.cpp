@@ -338,3 +338,9 @@ vec3 rotate_naive(const vec3& v) {
                                            {std::sin(theta), 0.0, std::cos(theta)}}};
     return rotation_y * v;
 }
+
+// assumption: camera position is (0, 0, c).
+vec3 project_perspective_naive(const vec3& v) {
+    static constexpr double c = 3.0;
+    return v / (1.0 - v.z / c);
+}
