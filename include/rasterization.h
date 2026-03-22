@@ -28,19 +28,32 @@ void interpolate_modern_triangle(int       ax,
                                  TGAColor  c_color,
                                  TGAImage& framebuffer);
 
-void                      draw_modern_triangle_with_depth(int       ax,
-                                                          int       ay,
-                                                          int       az,
-                                                          int       bx,
-                                                          int       by,
-                                                          int       bz,
-                                                          int       cx,
-                                                          int       cy,
-                                                          int       cz,
-                                                          TGAImage& zbuffer,
-                                                          TGAImage& framebuffer,
-                                                          TGAColor  color);
+void                      draw_modern_triangle_with_i_depth(int       ax,
+                                                            int       ay,
+                                                            int       az,
+                                                            int       bx,
+                                                            int       by,
+                                                            int       bz,
+                                                            int       cx,
+                                                            int       cy,
+                                                            int       cz,
+                                                            TGAImage& zbuffer,
+                                                            TGAImage& framebuffer,
+                                                            TGAColor  color);
 std::tuple<int, int, int> project_orthographic_3(vec3 v, int width, int height);
 
 vec3 rotate_naive(const vec3& v);
 vec3 project_perspective_naive(const vec3& v);
+void draw_modern_triangle_with_f_depth(int                 ax,
+                                       int                 ay,
+                                       int                 az,
+                                       int                 bx,
+                                       int                 by,
+                                       int                 bz,
+                                       int                 cx,
+                                       int                 cy,
+                                       int                 cz,
+                                       int                 width,
+                                       std::vector<float>& depthbuffer,
+                                       TGAImage&           framebuffer,
+                                       TGAColor            color);

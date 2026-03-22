@@ -4,10 +4,12 @@
 #include "obj_loader.h"
 #include "shortcut.h"
 #include "tgaimage.h"
+#include "utils.h"
 
 int main(int argc, char** argv) {
     TGAImage framebuffer(WIDTH, HEIGHT, TGAImage::RGB);
-    TGAImage zbuffer(WIDTH, HEIGHT, TGAImage::GRAYSCALE);
+    // the smaller, the farther (background)
+    std::vector<float> depthbuffer(WIDTH * HEIGHT, std::numeric_limits<float>::lowest());
 
     // single-mesh model
     Mesh model(DIABLO_PATH); // R
@@ -26,9 +28,10 @@ int main(int argc, char** argv) {
     // ------------------------------------------------------------
 
     // rendering (rasterization)
-    render_5(model, WIDTH, HEIGHT, zbuffer, framebuffer);
+    render_5(model, WIDTH, HEIGHT, depthbuffer, framebuffer);
 
-    zbuffer.write_png_file(std::format("{}/{}.png", OUTPUT_FOLDER, Z_BUFFER));
+    zbuffer_write_png_file(
+        std::format("{}/{}.png", OUTPUT_FOLDER, Z_BUFFER), depthbuffer, WIDTH, HEIGHT);
     framebuffer.write_png_file(std::format("{}/{}.png", OUTPUT_FOLDER, FRAME_BUFFER));
 
     return 0;

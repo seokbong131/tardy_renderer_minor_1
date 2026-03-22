@@ -2,10 +2,12 @@
 
 #include <format>
 #include <iostream>
+#include <limits>
 
 #include <omp.h>
 
 #include "config.h"
+#include "tgaimage.h"
 
 #pragma warning(push)
 #pragma warning(disable : 6993)
@@ -30,4 +32,49 @@ void print_openmp_info() {
 
 std::string set_filename(int index) {
     return std::format("{}/{}_{:0{}}.png", OUTPUT_FOLDER, FRAME_BUFFER, index, FIELD_WIDTH);
+}
+
+bool zbuffer_write_png_file(const std::string&        filename,
+                            const std::vector<float>& depthbuffer,
+                            int                       width,
+                            int                       height) {
+    static constexpr float BACKGROUND = std::numeric_limits<float>::lowest();
+
+    // for depth range
+    float min_z = std::numeric_limits<float>::max();
+    float max_z = std::numeric_limits<float>::lowest();
+
+    for (float z : depthbuffer) {
+        if (z > BACKGROUND) {
+            min_z = std::min(min_z, z);
+            max_z = std::max(max_z, z);
+        }
+    }
+
+    // guard
+    if (min_z >= max_z) {
+        min_z = 0.0f;
+        max_z = 1.0f;
+    }
+
+    TGAImage zbuffer(width, height, TGAImage::GRAYSCALE);
+
+    // normalization: depth -> [0, 255] (grayscale)
+    for (int y = 0; y < height; ++y) {
+        for (int x = 0; x < width; ++x) {
+            float z = depthbuffer[static_cast<std::size_t>(width) * y + x];
+
+            std::uint8_t depth = 0;
+
+            if (z > BACKGROUND) {
+                float normalized_z = (z - min_z) / (max_z - min_z);
+                depth              = static_cast<std::uint8_t>(normalized_z * 255.0f);
+            }
+
+            zbuffer.set(x, y, {depth});
+        }
+    }
+
+    // delegate PNG to TGAImage
+    return zbuffer.write_png_file(filename);
 }

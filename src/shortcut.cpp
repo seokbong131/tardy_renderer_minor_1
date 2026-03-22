@@ -147,7 +147,7 @@ void visualize_slices(int         num_slices,
         for (int elem = 0; elem < 3; elem++)
             random_color[elem] = static_cast<std::uint8_t>(std::rand() % 256);
 
-        draw_modern_triangle_with_depth(
+        draw_modern_triangle_with_i_depth(
             ax, ay, az, bx, by, bz, cx, cy, cz, zbuffer, framebuffer, random_color);
 
         // gradient color
@@ -169,12 +169,16 @@ void render_4(const Mesh& mesh, int width, int height, TGAImage& zbuffer, TGAIma
         for (int elem = 0; elem < 3; elem++)
             random_color[elem] = static_cast<std::uint8_t>(std::rand() % 256);
 
-        draw_modern_triangle_with_depth(
+        draw_modern_triangle_with_i_depth(
             ax, ay, az, bx, by, bz, cx, cy, cz, zbuffer, framebuffer, random_color);
     }
 }
 
-void render_5(const Mesh& mesh, int width, int height, TGAImage& zbuffer, TGAImage& framebuffer) {
+void render_5(const Mesh&         mesh,
+              int                 width,
+              int                 height,
+              std::vector<float>& depthbuffer,
+              TGAImage&           framebuffer) {
     for (int i = 0; i < mesh.num_triangles(); i++) {
         auto [ax, ay, az] = project_orthographic_3(
             project_perspective_naive(rotate_naive(mesh.get_triangle_vertex(i, 0))), width, height);
@@ -188,7 +192,7 @@ void render_5(const Mesh& mesh, int width, int height, TGAImage& zbuffer, TGAIma
         for (int elem = 0; elem < 3; elem++)
             random_color[elem] = static_cast<std::uint8_t>(std::rand() % 256);
 
-        draw_modern_triangle_with_depth(
-            ax, ay, az, bx, by, bz, cx, cy, cz, zbuffer, framebuffer, random_color);
+        draw_modern_triangle_with_f_depth(
+            ax, ay, az, bx, by, bz, cx, cy, cz, width, depthbuffer, framebuffer, random_color);
     }
 }
