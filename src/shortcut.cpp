@@ -177,6 +177,9 @@ void render_4(const Mesh& mesh, int width, int height, TGAImage& zbuffer, TGAIma
 void render_5(const Mesh&         mesh,
               int                 width,
               int                 height,
+              TGAColor            color_a,
+              TGAColor            color_b,
+              TGAColor            color_c,
               std::vector<float>& depthbuffer,
               TGAImage&           framebuffer) {
     for (int i = 0; i < mesh.num_triangles(); i++) {
@@ -187,6 +190,11 @@ void render_5(const Mesh&         mesh,
         auto [cx, cy, cz] = project_orthographic_3(
             project_perspective_naive(rotate_naive(mesh.get_triangle_vertex(i, 2))), width, height);
 
+        // wireframe
+        /*draw_line(ax, ay, bx, by, framebuffer, color_b);
+        draw_line(bx, by, cx, cy, framebuffer, color_b);
+        draw_line(cx, cy, ax, ay, framebuffer, color_b);*/
+
         // solid (random) color
         TGAColor random_color;
         for (int elem = 0; elem < 3; elem++)
@@ -194,5 +202,22 @@ void render_5(const Mesh&         mesh,
 
         draw_modern_triangle_with_f_depth(
             ax, ay, az, bx, by, bz, cx, cy, cz, width, depthbuffer, framebuffer, random_color);
+
+        // gradient color
+        /*interpolate_modern_triangle_with_f_depth(ax,
+                                                 ay,
+                                                 az,
+                                                 color_a,
+                                                 bx,
+                                                 by,
+                                                 bz,
+                                                 color_b,
+                                                 cx,
+                                                 cy,
+                                                 cz,
+                                                 color_c,
+                                                 width,
+                                                 depthbuffer,
+                                                 framebuffer);*/
     }
 }

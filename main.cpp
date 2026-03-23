@@ -28,7 +28,7 @@ int main(int argc, char** argv) {
     // ------------------------------------------------------------
 
     // rendering (rasterization)
-    render_5(model, WIDTH, HEIGHT, depthbuffer, framebuffer);
+    render_5(model, WIDTH, HEIGHT, BLACK, RED, WHITE, depthbuffer, framebuffer);
 
     zbuffer_write_png_file(
         std::format("{}/{}.png", OUTPUT_FOLDER, Z_BUFFER), depthbuffer, WIDTH, HEIGHT);

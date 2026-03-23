@@ -41,5 +41,8 @@ void render_4(const Mesh& mesh, int width, int height, TGAImage& zbuffer, TGAIma
 void render_5(const Mesh&         mesh,
               int                 width,
               int                 height,
+              TGAColor            color_a,
+              TGAColor            color_b,
+              TGAColor            color_c,
               std::vector<float>& depthbuffer,
               TGAImage&           framebuffer);
