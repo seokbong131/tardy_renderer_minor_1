@@ -464,3 +464,85 @@ void interpolate_modern_triangle_with_f_depth(int                 ax,
     }
 }
 #pragma warning(pop)
+
+// after this transformation,
+//     camera position: the origin
+//     camera direction: the negative Z-axis
+// viewing transformation (M_v: WC -> EC)
+// 1. translate: eye -> the origin
+// 2. rotate: the camera frame -> eye space
+// Ref. https://wikis.khronos.org/opengl/Viewing_and_Transformations
+[[nodiscard]] mat4 look_at(const vec3& eye, const vec3& center, const vec3& rough_up) {
+    // the camera frame (WC)
+    vec3 backward = normalized(eye - center);              // the positive Z-axis
+    vec3 right    = normalized(cross(rough_up, backward)); // the positive X-axis
+    vec3 up       = cross(backward, right);                // the positive Y-axis
+
+    //   C[0]       C[1]       C[2]       C[3]
+    // | R.x        R.y        R.z        0    |
+    // | U.x        U.y        U.z        0    |
+    // | B.x        B.y        B.z        0    |
+    // | 0          0          0          1    |
+    mat4 rotation = {{{right.x, up.x, backward.x, 0.0},
+                      {right.y, up.y, backward.y, 0.0},
+                      {right.z, up.z, backward.z, 0.0},
+                      {0.0, 0.0, 0.0, 1.0}}};
+
+    //   C[0]   C[1]   C[2]   C[3]
+    // | 1      0      0      -E.x |
+    // | 0      1      0      -E.y |
+    // | 0      0      1      -E.z |
+    // | 0      0      0      1    |
+    mat4 translation = {{{1.0, 0.0, 0.0, 0.0},
+                         {0.0, 1.0, 0.0, 0.0},
+                         {0.0, 0.0, 1.0, 0.0},
+                         {-eye.x, -eye.y, -eye.z, 1.0}}};
+
+    return rotation * translation;
+}
+
+// perspective projection (M_p: EC -> CC)
+// Ref. https://www.scratchapixel.com/lessons/3d-basic-rendering/perspective-and-orthographic-projection-matrix/opengl-perspective-projection-matrix.html
+[[nodiscard]] mat4 project_perspective(double fov_radian, double aspect, double near, double far) {
+    // focal length
+    double f = 1.0 / std::tan(fov_radian / 2.0);
+
+    //   C[0]             C[1]             C[2]             C[3]
+    // | f/a              0                0                0         |
+    // | 0                f                0                0         |
+    // | 0                0                (F+N)/(N-F)      2FN/(N-F) |
+    // | 0                0                -1               0         | (*)
+    mat4 projection = {{{f / aspect, 0.0, 0.0, 0.0},
+                        {0.0, f, 0.0, 0.0},
+                        {0.0, 0.0, (far + near) / (near - far), -1.0},
+                        {0.0, 0.0, 2.0 * far * near / (near - far), 0.0}}};
+
+    return projection;
+}
+
+// assumption: x and y specify the lower left corner.
+// viewport transform (M_vp: NDC -> screen space)
+// x: [-1, 1] -> [x, x + width - 1]
+// y: [-1, 1] -> [y, y + height - 1]
+// z: [-1, 1] -> [0, 1] (for depth buffer)
+// Ref. https://registry.khronos.org/OpenGL-Refpages/gl4/html/glViewport.xhtml
+[[nodiscard]] mat4 transform_viewport(int lower_left_corner_x,
+                                      int lower_left_corner_y,
+                                      int width,
+                                      int height) {
+    double half_width  = width * 0.5;
+    double half_height = height * 0.5;
+
+    //   C[0]       C[1]       C[2]       C[3]
+    // | w/2        0          0          x + w/2 |
+    // | 0          h/2        0          y + h/2 |
+    // | 0          0          0.5        0.5     |
+    // | 0          0          0          1       |
+    mat4 viewport = {
+        {{half_width, 0.0, 0.0, 0.0},
+         {0.0, half_height, 0.0, 0.0},
+         {0.0, 0.0, 0.5, 0.0},
+         {lower_left_corner_x + half_width, lower_left_corner_y + half_height, 0.5, 1.0}}};
+
+    return viewport;
+}

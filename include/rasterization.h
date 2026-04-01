@@ -72,3 +72,10 @@ void interpolate_modern_triangle_with_f_depth(int                 ax,
                                               int                 width,
                                               std::vector<float>& depthbuffer,
                                               TGAImage&           framebuffer);
+
+[[nodiscard]] mat4 look_at(const vec3& eye, const vec3& center, const vec3& rough_up);
+[[nodiscard]] mat4 project_perspective(double fov_radian, double aspect, double near, double far);
+[[nodiscard]] mat4 transform_viewport(int lower_left_corner_x,
+                                      int lower_left_corner_y,
+                                      int width,
+                                      int height);

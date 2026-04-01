@@ -174,7 +174,7 @@ void render_4(const Mesh& mesh, int width, int height, TGAImage& zbuffer, TGAIma
     }
 }
 
-void render_5(const Mesh&         mesh,
+void render_6(const Mesh&         mesh,
               int                 width,
               int                 height,
               TGAColor            color_a,
