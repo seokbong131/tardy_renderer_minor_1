@@ -277,3 +277,7 @@ template<> struct recursive_det<1>
 {
     static double expand(const mat<1, 1>& m) { return m[0][0]; }
 };
+
+// type alias
+using mat3 = mat<3, 3>;
+using mat4 = mat<4, 4>;
