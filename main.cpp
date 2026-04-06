@@ -8,8 +8,8 @@
 
 int main(int argc, char** argv) {
     TGAImage framebuffer(WIDTH, HEIGHT, TGAImage::RGB);
-    // the smaller, the farther (background)
-    std::vector<float> depthbuffer(WIDTH * HEIGHT, std::numeric_limits<float>::lowest());
+    // the bigger, the farther (background)
+    std::vector<float> depthbuffer(WIDTH * HEIGHT, std::numeric_limits<float>::max());
 
     // single-mesh model
     Mesh model(DIABLO_PATH); // R

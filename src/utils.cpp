@@ -38,14 +38,14 @@ bool zbuffer_write_png_file(const std::string&        filename,
                             const std::vector<float>& depthbuffer,
                             int                       width,
                             int                       height) {
-    static constexpr float BACKGROUND = std::numeric_limits<float>::lowest();
+    static constexpr float BACKGROUND = std::numeric_limits<float>::max();
 
     // for depth range
     float min_z = std::numeric_limits<float>::max();
     float max_z = std::numeric_limits<float>::lowest();
 
     for (float z : depthbuffer) {
-        if (z > BACKGROUND) {
+        if (z < BACKGROUND) {
             min_z = std::min(min_z, z);
             max_z = std::max(max_z, z);
         }
@@ -66,9 +66,9 @@ bool zbuffer_write_png_file(const std::string&        filename,
 
             std::uint8_t depth = 0;
 
-            if (z > BACKGROUND) {
+            if (z < BACKGROUND) {
                 float normalized_z = (z - min_z) / (max_z - min_z);
-                depth              = static_cast<std::uint8_t>(normalized_z * 255.0f);
+                depth              = static_cast<std::uint8_t>((1.0f - normalized_z) * 255.0f);
             }
 
             zbuffer.set(x, y, {depth});
