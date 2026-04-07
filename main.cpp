@@ -38,7 +38,7 @@ int main(int argc, char** argv) {
     // matrix
     mat4 model_view = look_at(eye, center, up);
     mat4 projection = project_perspective(
-        2.0 * std::atan(1.0 / camera_distance), static_cast<double>(WIDTH) / HEIGHT, 1.0, 4.0);
+        2.0 * std::atan(1.0 / camera_distance), static_cast<double>(WIDTH) / HEIGHT, 0.5, 4.0);
     mat4 viewport = transform_viewport(WIDTH / 16, HEIGHT / 16, WIDTH * 7 / 8, HEIGHT * 7 / 8);
 
     // rendering (rasterization)

@@ -46,7 +46,10 @@ vec3 rotate_naive(const vec3& v);
 vec3 project_perspective_naive(const vec3& v);
 
 [[nodiscard]] mat4 look_at(const vec3& eye, const vec3& center, const vec3& rough_up);
-[[nodiscard]] mat4 project_perspective(double fov_radian, double aspect, double near, double far);
+[[nodiscard]] mat4 project_perspective(double fov_radian,
+                                       double aspect_ratio,
+                                       double near,
+                                       double far);
 [[nodiscard]] mat4 transform_viewport(int lower_left_corner_x,
                                       int lower_left_corner_y,
                                       int width,

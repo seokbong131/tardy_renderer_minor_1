@@ -383,7 +383,10 @@ vec3 project_perspective_naive(const vec3& v) {
 
 // perspective projection (M_p: EC -> CC)
 // Ref. https://www.scratchapixel.com/lessons/3d-basic-rendering/perspective-and-orthographic-projection-matrix/opengl-perspective-projection-matrix.html
-[[nodiscard]] mat4 project_perspective(double fov_radian, double aspect, double near, double far) {
+[[nodiscard]] mat4 project_perspective(double fov_radian,
+                                       double aspect_ratio,
+                                       double near,
+                                       double far) {
     // focal length
     double f = 1.0 / std::tan(fov_radian / 2.0);
 
@@ -392,7 +395,7 @@ vec3 project_perspective_naive(const vec3& v) {
     // | 0                f                0                0         |
     // | 0                0                (F+N)/(N-F)      2FN/(N-F) |
     // | 0                0                -1               0         | (*)
-    mat4 projection = {{{f / aspect, 0.0, 0.0, 0.0},
+    mat4 projection = {{{f / aspect_ratio, 0.0, 0.0, 0.0},
                         {0.0, f, 0.0, 0.0},
                         {0.0, 0.0, (far + near) / (near - far), -1.0},
                         {0.0, 0.0, 2.0 * far * near / (near - far), 0.0}}};
