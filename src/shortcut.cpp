@@ -175,47 +175,88 @@ void render_4(const Mesh& mesh, int width, int height, TGAImage& zbuffer, TGAIma
 }
 
 void render_6(const Mesh&         mesh,
+              const mat4&         model_view,
+              const mat4&         projection,
+              const mat4&         viewport,
               int                 width,
-              int                 height,
               TGAColor            color_a,
               TGAColor            color_b,
               TGAColor            color_c,
               std::vector<float>& depthbuffer,
               TGAImage&           framebuffer) {
-    for (int i = 0; i < mesh.num_triangles(); i++) {
-        auto [ax, ay, az] = project_orthographic_3(
-            project_perspective_naive(rotate_naive(mesh.get_triangle_vertex(i, 0))), width, height);
-        auto [bx, by, bz] = project_orthographic_3(
-            project_perspective_naive(rotate_naive(mesh.get_triangle_vertex(i, 1))), width, height);
-        auto [cx, cy, cz] = project_orthographic_3(
-            project_perspective_naive(rotate_naive(mesh.get_triangle_vertex(i, 2))), width, height);
+    mat4 model_view_projection = projection * model_view;
 
-        // wireframe
-        /*draw_line(ax, ay, bx, by, framebuffer, color_b);
-        draw_line(bx, by, cx, cy, framebuffer, color_b);
-        draw_line(cx, cy, ax, ay, framebuffer, color_b);*/
+    for (int tri_idx = 0; tri_idx < mesh.num_triangles(); ++tri_idx) {
+        // ------------------------------------------------------------
+        // programmable vertex processing
+        // ------------------------------------------------------------
+        vec4 clip_coords[3]; // gl_Position
+
+        for (int i = 0; i < 3; ++i) {
+            vec3 triangle_vertex = mesh.get_triangle_vertex(tri_idx, i);
+
+            // output of vertex shader
+            clip_coords[i] = model_view_projection *
+                             vec4{triangle_vertex.x, triangle_vertex.y, triangle_vertex.z, 1.0};
+        }
+
+        // ------------------------------------------------------------
+        // fixed-function vertex post-processing
+        // ------------------------------------------------------------
+        int   window_x[3]{}, window_y[3]{}; // for pixel
+        float window_z[3]{};                // for depth
+
+        for (int i = 0; i < 3; ++i) {
+            double w = clip_coords[i].w; // -eye_coords[i].z
+
+            // perspective division
+            vec4 normalized_device_coords = {
+                clip_coords[i].x / w, clip_coords[i].y / w, clip_coords[i].z / w, 1.0};
+
+            // viewport transform
+            vec4 window_coords = viewport * normalized_device_coords;
+
+            window_x[i] = static_cast<int>(std::round(window_coords.x));
+            window_y[i] = static_cast<int>(std::round(window_coords.y));
+            window_z[i] = static_cast<float>(window_coords.z);
+        }
 
         // solid (random) color
         TGAColor random_color;
-        for (int elem = 0; elem < 3; elem++)
-            random_color[elem] = static_cast<std::uint8_t>(std::rand() % 256);
+        for (int i = 0; i < 3; ++i)
+            random_color[i] = static_cast<std::uint8_t>(std::rand() % 256);
 
-        draw_modern_triangle_with_f_depth(
-            ax, ay, az, bx, by, bz, cx, cy, cz, width, depthbuffer, framebuffer, random_color);
+        // ------------------------------------------------------------
+        // fixed-function primitive assembly and rasterization
+        // ------------------------------------------------------------
+        draw_modern_triangle_with_f_depth(window_x[0],
+                                          window_y[0],
+                                          window_z[0],
+                                          window_x[1],
+                                          window_y[1],
+                                          window_z[1],
+                                          window_x[2],
+                                          window_y[2],
+                                          window_z[2],
+                                          width,
+                                          depthbuffer,
+                                          framebuffer,
+                                          random_color);
 
         // gradient color
-        /*interpolate_modern_triangle_with_f_depth(ax,
-                                                 ay,
-                                                 az,
+        /*interpolate_modern_triangle_with_f_depth(window_x[0],
+                                                 window_y[0],
+                                                 window_z[0],
                                                  color_a,
-                                                 bx,
-                                                 by,
-                                                 bz,
+                                                 window_x[1],
+                                                 window_y[1],
+                                                 window_z[1],
                                                  color_b,
-                                                 cx,
-                                                 cy,
-                                                 cz,
+                                                 window_x[2],
+                                                 window_y[2],
+                                                 window_z[2],
                                                  color_c,
+
                                                  width,
                                                  depthbuffer,
                                                  framebuffer);*/

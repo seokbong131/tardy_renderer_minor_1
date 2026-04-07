@@ -39,8 +39,10 @@ void visualize_slices(int         num_slices,
 void render_4(const Mesh& mesh, int width, int height, TGAImage& zbuffer, TGAImage& framebuffer);
 
 void render_6(const Mesh&         mesh,
+              const mat4&         model_view,
+              const mat4&         projection,
+              const mat4&         viewport,
               int                 width,
-              int                 height,
               TGAColor            color_a,
               TGAColor            color_b,
               TGAColor            color_c,
