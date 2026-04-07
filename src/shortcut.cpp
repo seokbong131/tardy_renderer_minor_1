@@ -256,7 +256,6 @@ void render_6(const Mesh&         mesh,
                                                  window_y[2],
                                                  window_z[2],
                                                  color_c,
-
                                                  width,
                                                  depthbuffer,
                                                  framebuffer);*/
