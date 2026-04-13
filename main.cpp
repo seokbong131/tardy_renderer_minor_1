@@ -47,6 +47,7 @@ int main(int argc, char** argv) {
              projection,
              viewport,
              WIDTH,
+             HEIGHT,
              BLACK,
              RED,
              WHITE,

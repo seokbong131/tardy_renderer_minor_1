@@ -64,6 +64,7 @@ void               draw_modern_triangle_with_f_depth(int                 ax,
                                                      int                 cy,
                                                      float               cz,
                                                      int                 width,
+                                                     int                 height,
                                                      std::vector<float>& depthbuffer,
                                                      TGAImage&           framebuffer,
                                                      TGAColor            color);
@@ -80,5 +81,6 @@ void               interpolate_modern_triangle_with_f_depth(int                 
                                                             float               cz,
                                                             TGAColor            c_color,
                                                             int                 width,
+                                                            int                 height,
                                                             std::vector<float>& depthbuffer,
                                                             TGAImage&           framebuffer);

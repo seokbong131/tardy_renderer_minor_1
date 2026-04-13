@@ -179,6 +179,7 @@ void render_6(const Mesh&         mesh,
               const mat4&         projection,
               const mat4&         viewport,
               int                 width,
+              int                 height,
               TGAColor            color_a,
               TGAColor            color_b,
               TGAColor            color_c,
@@ -229,7 +230,7 @@ void render_6(const Mesh&         mesh,
         // ------------------------------------------------------------
         // fixed-function primitive assembly and rasterization
         // ------------------------------------------------------------
-        draw_modern_triangle_with_f_depth(window_x[0],
+        /*draw_modern_triangle_with_f_depth(window_x[0],
                                           window_y[0],
                                           window_z[0],
                                           window_x[1],
@@ -239,12 +240,13 @@ void render_6(const Mesh&         mesh,
                                           window_y[2],
                                           window_z[2],
                                           width,
+                                          height,
                                           depthbuffer,
                                           framebuffer,
-                                          random_color);
+                                          random_color);*/
 
         // gradient color
-        /*interpolate_modern_triangle_with_f_depth(window_x[0],
+        interpolate_modern_triangle_with_f_depth(window_x[0],
                                                  window_y[0],
                                                  window_z[0],
                                                  color_a,
@@ -257,7 +259,8 @@ void render_6(const Mesh&         mesh,
                                                  window_z[2],
                                                  color_c,
                                                  width,
+                                                 height,
                                                  depthbuffer,
-                                                 framebuffer);*/
+                                                 framebuffer);
     }
 }

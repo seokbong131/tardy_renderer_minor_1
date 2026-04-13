@@ -442,13 +442,15 @@ void draw_modern_triangle_with_f_depth(int                 ax,
                                        int                 cy,
                                        float               cz,
                                        int                 width,
+                                       int                 height,
                                        std::vector<float>& depthbuffer,
                                        TGAImage&           framebuffer,
                                        TGAColor            color) {
-    int aabb_min_x = std::min(std::min(ax, bx), cx);
-    int aabb_min_y = std::min(std::min(ay, by), cy);
-    int aabb_max_x = std::max(std::max(ax, bx), cx);
-    int aabb_max_y = std::max(std::max(ay, by), cy);
+    // screen-space AABB -> viewport clamping
+    int aabb_min_x = std::max(std::min({ax, bx, cx}), 0);
+    int aabb_min_y = std::max(std::min({ay, by, cy}), 0);
+    int aabb_max_x = std::min(std::max({ax, bx, cx}), width - 1);
+    int aabb_max_y = std::min(std::max({ay, by, cy}), height - 1);
 
     float total_area = compute_signed_triangle_area(ax, ay, bx, by, cx, cy);
     // total area < 0       => backface culling
@@ -499,12 +501,14 @@ void interpolate_modern_triangle_with_f_depth(int                 ax,
                                               float               cz,
                                               TGAColor            c_color,
                                               int                 width,
+                                              int                 height,
                                               std::vector<float>& depthbuffer,
                                               TGAImage&           framebuffer) {
-    int aabb_min_x = std::min(std::min(ax, bx), cx);
-    int aabb_min_y = std::min(std::min(ay, by), cy);
-    int aabb_max_x = std::max(std::max(ax, bx), cx);
-    int aabb_max_y = std::max(std::max(ay, by), cy);
+    // screen-space AABB -> viewport clamping
+    int aabb_min_x = std::max(std::min({ax, bx, cx}), 0);
+    int aabb_min_y = std::max(std::min({ay, by, cy}), 0);
+    int aabb_max_x = std::min(std::max({ax, bx, cx}), width - 1);
+    int aabb_max_y = std::min(std::max({ay, by, cy}), height - 1);
 
     float total_area = compute_signed_triangle_area(ax, ay, bx, by, cx, cy);
     // total area < 0       => backface culling
