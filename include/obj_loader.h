@@ -2,7 +2,7 @@
 
 #include <vector>
 
-#include "graphics_mathematics.h"
+#include "graphics_mathematics/vector.hpp"
 
 class Mesh
 {
