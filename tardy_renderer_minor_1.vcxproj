@@ -140,7 +140,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="include\config.h" />
-    <ClInclude Include="include\graphics_mathematics.h" />
+    <ClInclude Include="include\graphics_mathematics\matrix.hpp" />
+    <ClInclude Include="include\graphics_mathematics\matrix_clip_space.hpp" />
+    <ClInclude Include="include\graphics_mathematics\matrix_transform.hpp" />
+    <ClInclude Include="include\graphics_mathematics\vector.hpp" />
     <ClInclude Include="include\obj_loader.h" />
     <ClInclude Include="include\postprocessing.h" />
     <ClInclude Include="include\rasterization.h" />

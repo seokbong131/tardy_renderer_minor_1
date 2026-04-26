@@ -21,9 +21,6 @@
     <ClInclude Include="include\tgaimage.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="include\graphics_mathematics.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="include\obj_loader.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
@@ -37,6 +34,18 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="include\postprocessing.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="include\graphics_mathematics\matrix.hpp">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="include\graphics_mathematics\matrix_clip_space.hpp">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="include\graphics_mathematics\matrix_transform.hpp">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="include\graphics_mathematics\vector.hpp">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
