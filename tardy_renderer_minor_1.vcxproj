@@ -140,6 +140,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="include\config.h" />
+    <ClInclude Include="include\graphics_mathematics\constants.hpp" />
     <ClInclude Include="include\graphics_mathematics\matrix.hpp" />
     <ClInclude Include="include\graphics_mathematics\matrix_clip_space.hpp" />
     <ClInclude Include="include\graphics_mathematics\matrix_transform.hpp" />
@@ -147,6 +148,11 @@
     <ClInclude Include="include\obj_loader.h" />
     <ClInclude Include="include\postprocessing.h" />
     <ClInclude Include="include\rasterization.h" />
+    <ClInclude Include="include\scene\camera.hpp" />
+    <ClInclude Include="include\scene\camera_presets.hpp" />
+    <ClInclude Include="include\scene\light.hpp" />
+    <ClInclude Include="include\scene\material.hpp" />
+    <ClInclude Include="include\scene\scene.hpp" />
     <ClInclude Include="include\tgaimage.h" />
     <ClInclude Include="include\utils.h" />
     <ClInclude Include="third_party\stb\stb_image_write.h" />

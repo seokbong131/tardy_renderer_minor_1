@@ -13,6 +13,12 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="헤더 파일\scene">
+      <UniqueIdentifier>{9b227db6-af22-4717-b89b-e64cdeedda8c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\graphics_mathematics">
+      <UniqueIdentifier>{edade313-6f06-49ed-a13c-650582eb800c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="third_party\stb\stb_image_write.h">
@@ -36,17 +42,35 @@
     <ClInclude Include="include\postprocessing.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="include\scene\camera.hpp">
+      <Filter>헤더 파일\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="include\scene\camera_presets.hpp">
+      <Filter>헤더 파일\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="include\scene\light.hpp">
+      <Filter>헤더 파일\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="include\scene\material.hpp">
+      <Filter>헤더 파일\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="include\scene\scene.hpp">
+      <Filter>헤더 파일\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="include\graphics_mathematics\constants.hpp">
+      <Filter>헤더 파일\graphics_mathematics</Filter>
+    </ClInclude>
     <ClInclude Include="include\graphics_mathematics\matrix.hpp">
-      <Filter>헤더 파일</Filter>
+      <Filter>헤더 파일\graphics_mathematics</Filter>
     </ClInclude>
     <ClInclude Include="include\graphics_mathematics\matrix_clip_space.hpp">
-      <Filter>헤더 파일</Filter>
+      <Filter>헤더 파일\graphics_mathematics</Filter>
     </ClInclude>
     <ClInclude Include="include\graphics_mathematics\matrix_transform.hpp">
-      <Filter>헤더 파일</Filter>
+      <Filter>헤더 파일\graphics_mathematics</Filter>
     </ClInclude>
     <ClInclude Include="include\graphics_mathematics\vector.hpp">
-      <Filter>헤더 파일</Filter>
+      <Filter>헤더 파일\graphics_mathematics</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
