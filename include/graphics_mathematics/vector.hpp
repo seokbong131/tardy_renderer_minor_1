@@ -1,6 +1,7 @@
 #pragma once
 
 #include <cassert>
+#include <format>
 #include <iostream>
 
 // ------------------------------------------------------------
@@ -63,7 +64,7 @@ template<int N> constexpr float operator*(const vec<N>& a, const vec<N>& b) {
 // stream output
 template<int N> std::ostream& operator<<(std::ostream& out, const vec<N>& v) {
     for (int i = 0; i < N; ++i)
-        out << v[i] << " ";
+        out << std::format("{:12.6f} ", v[i]);
     return out;
 }
 
