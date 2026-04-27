@@ -150,6 +150,13 @@ template<> struct recursive_det<1>
     static float expand(const mat<1, 1>& m) { return m[0][0]; }
 };
 
+template<int N> [[nodiscard]] constexpr mat<N, N> identity() {
+    mat<N, N> id_mat{};
+    for (int i = 0; i < N; ++i)
+        id_mat[i][i] = 1.0f;
+    return id_mat;
+}
+
 // type alias
 using mat3 = mat<3, 3>;
 using mat4 = mat<4, 4>;
