@@ -16,6 +16,9 @@
     <Filter Include="third_party\stb">
       <UniqueIdentifier>{e1dc13a3-78bd-42e8-a1b4-b1ebb0fcb8bb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\framebuffer">
+      <UniqueIdentifier>{f2f62368-381b-463b-b871-bd28490c032b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
@@ -33,6 +36,12 @@
     </ClCompile>
     <ClCompile Include="src\utils.cpp">
       <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\framebuffer\framebuffer.cpp">
+      <Filter>src\framebuffer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\framebuffer\framebuffer_io.cpp">
+      <Filter>src\framebuffer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -86,6 +95,12 @@
     </ClInclude>
     <ClInclude Include="src\utils.h">
       <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\framebuffer\framebuffer.h">
+      <Filter>src\framebuffer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\framebuffer\framebuffer_io.h">
+      <Filter>src\framebuffer</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

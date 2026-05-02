@@ -20,6 +20,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="src\framebuffer\framebuffer.cpp" />
+    <ClCompile Include="src\framebuffer\framebuffer_io.cpp" />
     <ClCompile Include="src\obj_loader.cpp" />
     <ClCompile Include="src\postprocessing.cpp" />
     <ClCompile Include="src\rasterization.cpp" />
@@ -28,6 +30,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\config.h" />
+    <ClInclude Include="src\framebuffer\framebuffer.h" />
+    <ClInclude Include="src\framebuffer\framebuffer_io.h" />
     <ClInclude Include="src\graphics_mathematics\constants.hpp" />
     <ClInclude Include="src\graphics_mathematics\matrix.hpp" />
     <ClInclude Include="src\graphics_mathematics\matrix_clip_space.hpp" />
