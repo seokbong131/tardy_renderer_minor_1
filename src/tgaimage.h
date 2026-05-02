@@ -35,11 +35,11 @@ struct TGAImage
     enum Format { GRAYSCALE = 1, RGB = 3, RGBA = 4 };
     TGAImage() = default;
     TGAImage(const int w, const int h, const int bpp, TGAColor c = {});
-    bool     read_tga_file(const std::string filename);
-    bool     write_tga_file(const std::string filename,
-                            const bool        vflip = true,
-                            const bool        rle   = true) const;
-    bool     write_png_file(const std::string filename, const bool vflip = true) const;
+    bool     read_tga_file(const std::string& filename);
+    bool     write_tga_file(const std::string& filename,
+                            const bool         vflip = true,
+                            const bool         rle   = true) const;
+    bool     write_png_file(const std::string& filename, const bool vflip = true) const;
     void     flip_horizontally();
     void     flip_vertically();
     TGAColor get(const int x, const int y) const;
