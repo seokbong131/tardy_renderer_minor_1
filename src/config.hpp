@@ -19,10 +19,10 @@ constexpr TGAColor WHITE    = { 255, 255, 255, 255 };
 // clang-format on
 
 // model path
-const std::string              DIABLO_PATH  = "../assets/diablo3_pose.obj";
-const std::vector<std::string> BOGGIE_PATHS = {
+inline const std::string              DIABLO_PATH  = "../assets/diablo3_pose.obj";
+inline const std::vector<std::string> BOGGIE_PATHS = {
     "../assets/boggie/body.obj", "../assets/boggie/eyes.obj", "../assets/boggie/head.obj"};
-const std::vector<std::string> AFRICAN_HEAD_PATHS = {
+inline const std::vector<std::string> AFRICAN_HEAD_PATHS = {
     "../assets/african_head/african_head.obj",
     "../assets/african_head/african_head_eye_inner.obj",
     "../assets/african_head/african_head_eye_outer.obj"};

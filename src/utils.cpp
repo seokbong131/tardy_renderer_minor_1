@@ -5,7 +5,7 @@
 
 #include <omp.h>
 
-#include "config.h"
+#include "config.hpp"
 
 #pragma warning(push)
 #pragma warning(disable : 6993)

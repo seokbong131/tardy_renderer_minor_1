@@ -78,7 +78,7 @@
     <ClInclude Include="src\scene\scene.hpp">
       <Filter>src\scene</Filter>
     </ClInclude>
-    <ClInclude Include="src\config.h">
+    <ClInclude Include="src\config.hpp">
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="src\obj_loader.h">

@@ -1,6 +1,6 @@
 #include <format>
 
-#include "config.h"
+#include "config.hpp"
 #include "framebuffer/framebuffer.h"
 #include "framebuffer/framebuffer_io.h"
 #include "obj_loader.h"

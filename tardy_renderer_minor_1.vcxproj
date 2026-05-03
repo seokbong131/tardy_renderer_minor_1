@@ -29,7 +29,7 @@
     <ClCompile Include="src\utils.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\config.h" />
+    <ClInclude Include="src\config.hpp" />
     <ClInclude Include="src\framebuffer\framebuffer.h" />
     <ClInclude Include="src\framebuffer\framebuffer_io.h" />
     <ClInclude Include="src\graphics_mathematics\constants.hpp" />
