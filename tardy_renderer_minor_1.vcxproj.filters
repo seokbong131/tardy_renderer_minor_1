@@ -19,6 +19,9 @@
     <Filter Include="src\framebuffer">
       <UniqueIdentifier>{f2f62368-381b-463b-b871-bd28490c032b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\shader">
+      <UniqueIdentifier>{0bff103e-1f67-4d79-8280-bb23ecd16025}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
@@ -101,6 +104,9 @@
     </ClInclude>
     <ClInclude Include="src\framebuffer\framebuffer_io.h">
       <Filter>src\framebuffer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\shader\shader.hpp">
+      <Filter>src\shader</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
