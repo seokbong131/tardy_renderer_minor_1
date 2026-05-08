@@ -45,6 +45,7 @@
     <ClInclude Include="src\scene\light.hpp" />
     <ClInclude Include="src\scene\material.hpp" />
     <ClInclude Include="src\scene\scene.hpp" />
+    <ClInclude Include="src\shader\random_solid_shader.hpp" />
     <ClInclude Include="src\shader\shader.hpp" />
     <ClInclude Include="src\tgaimage.h" />
     <ClInclude Include="src\utils.h" />

@@ -108,5 +108,8 @@
     <ClInclude Include="src\shader\shader.hpp">
       <Filter>src\shader</Filter>
     </ClInclude>
+    <ClInclude Include="src\shader\random_solid_shader.hpp">
+      <Filter>src\shader</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
