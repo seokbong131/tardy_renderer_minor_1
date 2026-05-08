@@ -7,16 +7,16 @@
 #include "obj_loader.h"
 #include "shader.hpp"
 
+// [ NOTE ]
+// now  : TGAColor (uint8_t BGRA)
+// later: vec3 or vec4 (float) -> TGAColor conversion (clamp + 255 multiplication)
+//
 // random solid color per triangle
 struct RandomSolidShader : Shader
 {
     // v_out
     // vertex(...) write -> fragment(...) read
-    //
-    // [ NOTE ]
-    // now  : TGAColor (uint8_t BGRA)
-    // later: vec3 or vec4 (float) -> TGAColor conversion (clamp + 255 multiplication)
-    TGAColor v_out;
+    TGAColor v_out; // per-triangle
 
     // uniform
     // set by renderer, before each draw call
