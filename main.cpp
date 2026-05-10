@@ -3,7 +3,10 @@
 #include "config.hpp"
 #include "framebuffer/framebuffer.h"
 #include "framebuffer/framebuffer_io.h"
+#include "graphics_mathematics/matrix_clip_space.hpp"
 #include "obj_loader.h"
+#include "renderer/viewport_presets.hpp"
+#include "renderer/wireframe.h"
 #include "scene/camera.hpp"
 #include "scene/camera_presets.hpp"
 #include "scene/scene.hpp"
@@ -33,12 +36,16 @@ int main() {
     // camera
     Camera camera       = setup_default_camera(); // or set_custom_camera()
     camera.aspect_ratio = static_cast<float>(WIDTH) / static_cast<float>(HEIGHT);
-    set_orbit(
-        camera, /*center=*/{0.0f, 0.0f, 0.0f}, /*distance=*/3.0f, /*height=*/1.0f, /*theta=*/0.0f);
 
     // framebuffer
     Framebuffer framebuffer = allocate(WIDTH, HEIGHT);
     clear(framebuffer, BLACK);
+
+    // viewport matrix
+    mat4 viewport_mat = setup_default_viewport(
+        framebuffer.width, framebuffer.height); // or setup_fullscreen_viewport(...)
+
+    render_wireframe(scene, camera, viewport_mat, framebuffer, RED);
 
     save_color_png(framebuffer, std::format("{}/{}.png", OUTPUT_FOLDER, COLOR_BUFFER));
     save_depth_png(framebuffer, std::format("{}/{}.png", OUTPUT_FOLDER, DEPTH_BUFFER));

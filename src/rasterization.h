@@ -2,9 +2,6 @@
 
 #include "tgaimage.h"
 
-void draw_line(
-    int start_x, int start_y, int end_x, int end_y, TGAImage& framebuffer, TGAColor color);
-
 float compute_signed_triangle_area(int ax, int ay, int bx, int by, int cx, int cy);
 
 void draw_modern_triangle_with_f_depth(int                 ax,
