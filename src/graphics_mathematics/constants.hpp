@@ -1,6 +1,9 @@
 #pragma once
 
+#include <limits>
 #include <numbers>
+
+inline constexpr float EPSILON = std::numeric_limits<float>::epsilon();
 
 inline constexpr float PI        = std::numbers::pi_v<float>;
 inline constexpr float TWO_PI    = 2.0f * PI;

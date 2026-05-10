@@ -22,6 +22,9 @@
     <Filter Include="src\shader">
       <UniqueIdentifier>{0bff103e-1f67-4d79-8280-bb23ecd16025}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\renderer">
+      <UniqueIdentifier>{c9978177-e100-46ef-b343-7d55eb7f1ed6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
@@ -114,5 +117,6 @@
     <ClInclude Include="src\shader\gradient_shader.hpp">
       <Filter>src\shader</Filter>
     </ClInclude>
+    <ClInclude Include="src\renderer\vertex_postprocessor.hpp" />
   </ItemGroup>
 </Project>

@@ -2,7 +2,7 @@
 
 #include "matrix.hpp"
 
-// perspective projection (M_p: EC -> CC)
+// for perspective projection (M_p: EC -> CC)
 // Ref. https://www.scratchapixel.com/lessons/3d-basic-rendering/perspective-and-orthographic-projection-matrix/opengl-perspective-projection-matrix.html
 [[nodiscard]] inline mat4 project_perspective(float fov_radian,
                                               float aspect_ratio,
@@ -25,7 +25,7 @@
 }
 
 // assumption: x and y specify the lower left corner.
-// viewport transform (M_vp: NDC -> screen space)
+// for viewport transform (M_vp: NDC -> screen space)
 // x: [-1, 1] -> [x, x + width - 1]
 // y: [-1, 1] -> [y, y + height - 1]
 // z: [-1, 1] -> [0, 1] (for depth buffer)

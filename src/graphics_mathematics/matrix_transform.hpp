@@ -5,7 +5,7 @@
 // after this transformation,
 //     camera position: the origin
 //     camera direction: the negative Z-axis
-// viewing transformation (M_v: WC -> EC)
+// for viewing transformation (M_v: WC -> EC)
 // 1. translate: eye -> the origin
 // 2. rotate: the camera frame -> eye space
 // Ref. https://wikis.khronos.org/opengl/Viewing_and_Transformations
