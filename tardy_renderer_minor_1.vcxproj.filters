@@ -49,6 +49,7 @@
     <ClCompile Include="src\framebuffer\framebuffer_io.cpp">
       <Filter>src\framebuffer</Filter>
     </ClCompile>
+    <ClCompile Include="src\renderer\line.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="third_party\stb\stb_image_write.h">
@@ -118,5 +119,6 @@
       <Filter>src\shader</Filter>
     </ClInclude>
     <ClInclude Include="src\renderer\vertex_postprocessor.hpp" />
+    <ClInclude Include="src\renderer\line.h" />
   </ItemGroup>
 </Project>
