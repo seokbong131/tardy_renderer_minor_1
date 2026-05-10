@@ -2,20 +2,20 @@
 
 #include <cmath>
 
-#include "graphics_mathematics/constants.hpp"
 #include "graphics_mathematics/matrix_clip_space.hpp"
 #include "graphics_mathematics/matrix_transform.hpp"
+#include "graphics_mathematics/vector.hpp"
 
 // ONLY data (default)
 struct Camera
 {
     // for viewing transformation (dynamic)
-    vec3 eye    = {0.0f, 0.0f, 3.0f};
+    vec3 eye    = {-1.0f, 0.0f, 2.0f};
     vec3 center = {0.0f, 0.0f, 0.0f};
     vec3 up     = {0.0f, 1.0f, 0.0f};
 
     // for projection transformation (static)
-    float fov_radian   = 60.0f * TO_RADIAN;
+    float fov_radian   = 2.0f * std::atan(1.0f / norm(eye - center));
     float aspect_ratio = 1.0f;
     float near         = 0.1f;
     float far          = 100.0f;
