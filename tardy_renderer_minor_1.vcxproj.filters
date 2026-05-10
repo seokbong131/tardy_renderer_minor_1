@@ -49,6 +49,7 @@
     <ClCompile Include="src\framebuffer\framebuffer_io.cpp">
       <Filter>src\framebuffer</Filter>
     </ClCompile>
+    <ClCompile Include="src\renderer\wireframe.cpp" />
     <ClCompile Include="src\renderer\line.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -118,6 +119,7 @@
     <ClInclude Include="src\shader\gradient_shader.hpp">
       <Filter>src\shader</Filter>
     </ClInclude>
+    <ClInclude Include="src\renderer\wireframe.h" />
     <ClInclude Include="src\renderer\vertex_postprocessor.hpp" />
     <ClInclude Include="src\renderer\line.h" />
   </ItemGroup>
