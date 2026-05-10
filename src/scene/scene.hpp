@@ -13,7 +13,7 @@ struct SceneObject
     Mesh* mesh = nullptr;
 
     // by value
-    mat4     model = identity<4>();
+    mat4     model_mat = identity<4>();
     Material material;
 };
 
