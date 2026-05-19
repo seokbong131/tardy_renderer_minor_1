@@ -9,7 +9,7 @@
 #include "scene/camera_presets.hpp"
 #include "scene/obj_loader.h"
 #include "scene/scene.hpp"
-#include "util/config.hpp"
+#include "util/configuration.hpp"
 
 int main() {
     // assets

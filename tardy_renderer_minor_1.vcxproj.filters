@@ -135,7 +135,7 @@
     <ClInclude Include="src\scene\obj_loader.h">
       <Filter>src\scene</Filter>
     </ClInclude>
-    <ClInclude Include="src\util\config.hpp">
+    <ClInclude Include="src\util\configuration.hpp">
       <Filter>src\util</Filter>
     </ClInclude>
     <ClInclude Include="src\util\system.h">
