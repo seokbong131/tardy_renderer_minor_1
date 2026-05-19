@@ -1,7 +1,7 @@
 #pragma once
 
-#include "obj_loader.h"
-#include "tgaimage.h"
+#include "framebuffer/tgaimage.h"
+#include "scene/obj_loader.h"
 
 namespace volume_rendering_effect
 {

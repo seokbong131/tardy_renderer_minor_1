@@ -1,10 +1,10 @@
 #pragma once
 
 #include "framebuffer/framebuffer.h"
+#include "framebuffer/tgaimage.h"
 #include "graphics_mathematics/matrix.hpp"
 #include "scene/camera.hpp"
 #include "scene/scene.hpp"
-#include "tgaimage.h"
 
 void render_wireframe(const Scene&  scene,
                       const Camera& camera,

@@ -1,9 +1,9 @@
-#include "postprocessing.h"
+#include "volume_rendering_effect.h"
 
 #include <algorithm>
 
 #include "rasterization.h"
-#include "utils.h"
+#include "util/system.h"
 
 namespace
 {

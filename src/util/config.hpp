@@ -1,6 +1,6 @@
 #pragma once
 
-#include "tgaimage.h"
+#include "framebuffer/tgaimage.h"
 
 // color (attention, BGRA order)
 // clang-format off

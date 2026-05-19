@@ -1,7 +1,7 @@
 #pragma once
 
+#include "framebuffer/tgaimage.h"
 #include "graphics_mathematics/vector.hpp"
-#include "tgaimage.h"
 
 // ----------------------------------------------------------------------------------------------------
 // [ shader interface ]

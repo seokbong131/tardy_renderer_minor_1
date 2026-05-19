@@ -1,9 +1,8 @@
 #include "wireframe.h"
 
-#include "graphics_mathematics/matrix.hpp"
 #include "graphics_mathematics/vector.hpp"
 #include "line.h"
-#include "obj_loader.h"
+#include "scene/obj_loader.h"
 #include "vertex_postprocessor.hpp"
 
 void render_wireframe(const Scene&  scene,

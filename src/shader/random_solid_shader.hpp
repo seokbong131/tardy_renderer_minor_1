@@ -4,7 +4,7 @@
 #include <cstdlib>
 
 #include "graphics_mathematics/matrix.hpp"
-#include "obj_loader.h"
+#include "scene/obj_loader.h"
 #include "shader.hpp"
 
 // [ NOTE ]

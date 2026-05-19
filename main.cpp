@@ -1,15 +1,15 @@
 #include <format>
 
-#include "config.hpp"
 #include "framebuffer/framebuffer.h"
 #include "framebuffer/framebuffer_io.h"
 #include "graphics_mathematics/matrix_clip_space.hpp"
-#include "obj_loader.h"
 #include "renderer/viewport_presets.hpp"
 #include "renderer/wireframe.h"
 #include "scene/camera.hpp"
 #include "scene/camera_presets.hpp"
+#include "scene/obj_loader.h"
 #include "scene/scene.hpp"
+#include "util/config.hpp"
 
 int main() {
     // assets

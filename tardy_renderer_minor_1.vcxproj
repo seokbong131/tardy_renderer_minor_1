@@ -22,16 +22,16 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="src\framebuffer\framebuffer.cpp" />
     <ClCompile Include="src\framebuffer\framebuffer_io.cpp" />
-    <ClCompile Include="src\obj_loader.cpp" />
-    <ClCompile Include="src\postprocessing.cpp" />
+    <ClCompile Include="src\scene\obj_loader.cpp" />
+    <ClCompile Include="src\postprocessor\volume_rendering_effect.cpp" />
     <ClCompile Include="src\rasterization.cpp" />
     <ClCompile Include="src\renderer\line.cpp" />
     <ClCompile Include="src\renderer\wireframe.cpp" />
-    <ClCompile Include="src\tgaimage.cpp" />
-    <ClCompile Include="src\utils.cpp" />
+    <ClCompile Include="src\framebuffer\tgaimage.cpp" />
+    <ClCompile Include="src\util\system.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\config.hpp" />
+    <ClInclude Include="src\util\config.hpp" />
     <ClInclude Include="src\framebuffer\framebuffer.h" />
     <ClInclude Include="src\framebuffer\framebuffer_io.h" />
     <ClInclude Include="src\graphics_mathematics\constants.hpp" />
@@ -39,11 +39,12 @@
     <ClInclude Include="src\graphics_mathematics\matrix_clip_space.hpp" />
     <ClInclude Include="src\graphics_mathematics\matrix_transform.hpp" />
     <ClInclude Include="src\graphics_mathematics\vector.hpp" />
-    <ClInclude Include="src\obj_loader.h" />
-    <ClInclude Include="src\postprocessing.h" />
+    <ClInclude Include="src\scene\obj_loader.h" />
+    <ClInclude Include="src\postprocessor\volume_rendering_effect.h" />
     <ClInclude Include="src\rasterization.h" />
     <ClInclude Include="src\renderer\line.h" />
     <ClInclude Include="src\renderer\vertex_postprocessor.hpp" />
+    <ClInclude Include="src\renderer\viewport_presets.hpp" />
     <ClInclude Include="src\renderer\wireframe.h" />
     <ClInclude Include="src\scene\camera.hpp" />
     <ClInclude Include="src\scene\camera_presets.hpp" />
@@ -53,8 +54,8 @@
     <ClInclude Include="src\shader\random_solid_shader.hpp" />
     <ClInclude Include="src\shader\gradient_shader.hpp" />
     <ClInclude Include="src\shader\shader.hpp" />
-    <ClInclude Include="src\tgaimage.h" />
-    <ClInclude Include="src\utils.h" />
+    <ClInclude Include="src\framebuffer\tgaimage.h" />
+    <ClInclude Include="src\util\system.h" />
     <ClInclude Include="third_party\stb\stb_image_write.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

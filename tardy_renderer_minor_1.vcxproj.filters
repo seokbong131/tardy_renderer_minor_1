@@ -23,24 +23,18 @@
       <UniqueIdentifier>{0bff103e-1f67-4d79-8280-bb23ecd16025}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\renderer">
-      <UniqueIdentifier>{c9978177-e100-46ef-b343-7d55eb7f1ed6}</UniqueIdentifier>
+      <UniqueIdentifier>{2d4955e0-53a5-4fcc-a646-57993f81c26f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\postprocessor">
+      <UniqueIdentifier>{643c79fc-d151-41fa-8474-f9fa1534c20f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\util">
+      <UniqueIdentifier>{7fb46674-90dd-4be7-aa37-005107fbea57}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="src\obj_loader.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="src\postprocessing.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
     <ClCompile Include="src\rasterization.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="src\tgaimage.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="src\utils.cpp">
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="src\framebuffer\framebuffer.cpp">
@@ -49,8 +43,24 @@
     <ClCompile Include="src\framebuffer\framebuffer_io.cpp">
       <Filter>src\framebuffer</Filter>
     </ClCompile>
-    <ClCompile Include="src\renderer\wireframe.cpp" />
-    <ClCompile Include="src\renderer\line.cpp" />
+    <ClCompile Include="src\renderer\line.cpp">
+      <Filter>src\renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\renderer\wireframe.cpp">
+      <Filter>src\renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\framebuffer\tgaimage.cpp">
+      <Filter>src\framebuffer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\postprocessor\volume_rendering_effect.cpp">
+      <Filter>src\postprocessor</Filter>
+    </ClCompile>
+    <ClCompile Include="src\scene\obj_loader.cpp">
+      <Filter>src\scene</Filter>
+    </ClCompile>
+    <ClCompile Include="src\util\system.cpp">
+      <Filter>src\util</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="third_party\stb\stb_image_write.h">
@@ -86,22 +96,7 @@
     <ClInclude Include="src\scene\scene.hpp">
       <Filter>src\scene</Filter>
     </ClInclude>
-    <ClInclude Include="src\config.hpp">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="src\obj_loader.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="src\postprocessing.h">
-      <Filter>src</Filter>
-    </ClInclude>
     <ClInclude Include="src\rasterization.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="src\tgaimage.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="src\utils.h">
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="src\framebuffer\framebuffer.h">
@@ -119,8 +114,32 @@
     <ClInclude Include="src\shader\gradient_shader.hpp">
       <Filter>src\shader</Filter>
     </ClInclude>
-    <ClInclude Include="src\renderer\wireframe.h" />
-    <ClInclude Include="src\renderer\vertex_postprocessor.hpp" />
-    <ClInclude Include="src\renderer\line.h" />
+    <ClInclude Include="src\renderer\line.h">
+      <Filter>src\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\renderer\vertex_postprocessor.hpp">
+      <Filter>src\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\renderer\viewport_presets.hpp">
+      <Filter>src\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\renderer\wireframe.h">
+      <Filter>src\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\framebuffer\tgaimage.h">
+      <Filter>src\framebuffer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\postprocessor\volume_rendering_effect.h">
+      <Filter>src\postprocessor</Filter>
+    </ClInclude>
+    <ClInclude Include="src\scene\obj_loader.h">
+      <Filter>src\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="src\util\config.hpp">
+      <Filter>src\util</Filter>
+    </ClInclude>
+    <ClInclude Include="src\util\system.h">
+      <Filter>src\util</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
