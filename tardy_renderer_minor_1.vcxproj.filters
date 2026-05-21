@@ -117,9 +117,6 @@
     <ClInclude Include="src\renderer\line.h">
       <Filter>src\renderer</Filter>
     </ClInclude>
-    <ClInclude Include="src\renderer\vertex_postprocessor.hpp">
-      <Filter>src\renderer</Filter>
-    </ClInclude>
     <ClInclude Include="src\renderer\viewport_presets.hpp">
       <Filter>src\renderer</Filter>
     </ClInclude>
@@ -140,6 +137,9 @@
     </ClInclude>
     <ClInclude Include="src\util\system.h">
       <Filter>src\util</Filter>
+    </ClInclude>
+    <ClInclude Include="src\renderer\vertex_postprocessor.hpp">
+      <Filter>src\renderer</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

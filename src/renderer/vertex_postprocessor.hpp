@@ -8,9 +8,10 @@
 
 struct WindowCoord
 {
-    int  x     = -1;
-    int  y     = -1;
-    bool valid = false;
+    int   x     = -1;
+    int   y     = -1;
+    float z     = 0.0f;
+    bool  valid = false;
 };
 
 // clip-space -> window-space
@@ -30,5 +31,6 @@ struct WindowCoord
 
     return WindowCoord{.x     = static_cast<int>(std::floor(window_coord.x)),
                        .y     = static_cast<int>(std::floor(window_coord.y)),
+                       .z     = window_coord.z,
                        .valid = true};
 }
