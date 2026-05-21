@@ -2,7 +2,7 @@
 
 #include <algorithm>
 
-#include "rasterization.h"
+#include "renderer/triangle.h"
 #include "util/system.h"
 
 namespace

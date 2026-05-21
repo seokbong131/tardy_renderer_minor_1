@@ -61,6 +61,9 @@
     <ClCompile Include="src\util\system.cpp">
       <Filter>src\util</Filter>
     </ClCompile>
+    <ClCompile Include="src\renderer\triangle.cpp">
+      <Filter>src\renderer</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="third_party\stb\stb_image_write.h">
@@ -137,6 +140,9 @@
     </ClInclude>
     <ClInclude Include="src\util\system.h">
       <Filter>src\util</Filter>
+    </ClInclude>
+    <ClInclude Include="src\renderer\triangle.h">
+      <Filter>src\renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\renderer\vertex_postprocessor.hpp">
       <Filter>src\renderer</Filter>

@@ -26,11 +26,13 @@
     <ClCompile Include="src\postprocessor\volume_rendering_effect.cpp" />
     <ClCompile Include="src\rasterization.cpp" />
     <ClCompile Include="src\renderer\line.cpp" />
+    <ClCompile Include="src\renderer\triangle.cpp" />
     <ClCompile Include="src\renderer\wireframe.cpp" />
     <ClCompile Include="src\framebuffer\tgaimage.cpp" />
     <ClCompile Include="src\util\system.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\renderer\triangle.h" />
     <ClInclude Include="src\renderer\vertex_postprocessor.hpp" />
     <ClInclude Include="src\util\configuration.hpp" />
     <ClInclude Include="src\framebuffer\framebuffer.h" />
