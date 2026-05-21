@@ -3,8 +3,6 @@
 #include <cstdint>
 #include <cstdlib>
 
-#include "graphics_mathematics/matrix.hpp"
-#include "scene/obj_loader.h"
 #include "shader.hpp"
 
 // [ NOTE ]
@@ -17,11 +15,6 @@ struct RandomSolidShader : Shader
     // v_out
     // vertex(...) write -> fragment(...) read
     TGAColor v_out; // per-triangle
-
-    // uniform
-    // set by renderer, before each draw call
-    const Mesh* mesh    = nullptr;
-    mat4        mvp_mat = identity<4>();
 
     vec4 vertex(int triangle_index, int vertex_index_of_triangle) override {
         // new random solid color once per triangle (first vertex)

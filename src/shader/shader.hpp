@@ -1,7 +1,9 @@
 #pragma once
 
 #include "framebuffer/tgaimage.h"
+#include "graphics_mathematics/matrix.hpp"
 #include "graphics_mathematics/vector.hpp"
+#include "scene/obj_loader.h"
 
 // ----------------------------------------------------------------------------------------------------
 // [ shader interface ]
@@ -21,6 +23,10 @@
 // ----------------------------------------------------------------------------------------------------
 struct Shader
 {
+    // built-in uniform
+    const Mesh* mesh    = nullptr;
+    mat4        mvp_mat = identity<4>();
+
     virtual ~Shader() = default;
 
     // vertex -> CC (vec4, since homogeneous)

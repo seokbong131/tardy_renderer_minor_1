@@ -2,8 +2,6 @@
 
 #include <cstdint>
 
-#include "graphics_mathematics/matrix.hpp"
-#include "scene/obj_loader.h"
 #include "shader.hpp"
 
 // [ NOTE ]
@@ -18,7 +16,7 @@ struct GradientShader : Shader
     TGAColor v_out[3]; // per-vertex
 
     // uniform
-    // set by renderer, before each draw call
+    // set by caller
     TGAColor vertex_colors[3] = {
         // default color (attention, BGRA order)
         // override per-instance if desired
@@ -26,8 +24,6 @@ struct GradientShader : Shader
         {0, 0, 255, 255},     // RED
         {255, 255, 255, 255}, // WHITE
     };
-    const Mesh* mesh    = nullptr;
-    mat4        mvp_mat = identity<4>();
 
     vec4 vertex(int triangle_index, int vertex_index_of_triangle) override {
         v_out[vertex_index_of_triangle] = vertex_colors[vertex_index_of_triangle];
