@@ -22,18 +22,22 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="src\framebuffer\framebuffer.cpp" />
     <ClCompile Include="src\framebuffer\framebuffer_io.cpp" />
-    <ClCompile Include="src\scene\obj_loader.cpp" />
-    <ClCompile Include="src\postprocessor\volume_rendering_effect.cpp" />
-    <ClCompile Include="src\rasterization.cpp" />
     <ClCompile Include="src\renderer\line.cpp" />
+    <ClCompile Include="src\renderer\rasterization.cpp" />
     <ClCompile Include="src\renderer\triangle.cpp" />
     <ClCompile Include="src\renderer\wireframe.cpp" />
+    <ClCompile Include="src\scene\obj_loader.cpp" />
+    <ClCompile Include="src\postprocessor\volume_rendering_effect.cpp" />
     <ClCompile Include="src\framebuffer\tgaimage.cpp" />
     <ClCompile Include="src\util\system.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\renderer\line.h" />
+    <ClInclude Include="src\renderer\rasterization.h" />
     <ClInclude Include="src\renderer\triangle.h" />
     <ClInclude Include="src\renderer\vertex_postprocessor.hpp" />
+    <ClInclude Include="src\renderer\viewport_presets.hpp" />
+    <ClInclude Include="src\renderer\wireframe.h" />
     <ClInclude Include="src\util\configuration.hpp" />
     <ClInclude Include="src\framebuffer\framebuffer.h" />
     <ClInclude Include="src\framebuffer\framebuffer_io.h" />
@@ -44,10 +48,6 @@
     <ClInclude Include="src\graphics_mathematics\vector.hpp" />
     <ClInclude Include="src\scene\obj_loader.h" />
     <ClInclude Include="src\postprocessor\volume_rendering_effect.h" />
-    <ClInclude Include="src\rasterization.h" />
-    <ClInclude Include="src\renderer\line.h" />
-    <ClInclude Include="src\renderer\viewport_presets.hpp" />
-    <ClInclude Include="src\renderer\wireframe.h" />
     <ClInclude Include="src\scene\camera.hpp" />
     <ClInclude Include="src\scene\camera_presets.hpp" />
     <ClInclude Include="src\scene\light.hpp" />

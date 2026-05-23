@@ -22,32 +22,23 @@
     <Filter Include="src\shader">
       <UniqueIdentifier>{0bff103e-1f67-4d79-8280-bb23ecd16025}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\renderer">
-      <UniqueIdentifier>{2d4955e0-53a5-4fcc-a646-57993f81c26f}</UniqueIdentifier>
-    </Filter>
     <Filter Include="src\postprocessor">
       <UniqueIdentifier>{643c79fc-d151-41fa-8474-f9fa1534c20f}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\util">
       <UniqueIdentifier>{7fb46674-90dd-4be7-aa37-005107fbea57}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\renderer">
+      <UniqueIdentifier>{9a8fba5e-ea0f-434a-9261-bba2b25f7393}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="src\rasterization.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
     <ClCompile Include="src\framebuffer\framebuffer.cpp">
       <Filter>src\framebuffer</Filter>
     </ClCompile>
     <ClCompile Include="src\framebuffer\framebuffer_io.cpp">
       <Filter>src\framebuffer</Filter>
-    </ClCompile>
-    <ClCompile Include="src\renderer\line.cpp">
-      <Filter>src\renderer</Filter>
-    </ClCompile>
-    <ClCompile Include="src\renderer\wireframe.cpp">
-      <Filter>src\renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\framebuffer\tgaimage.cpp">
       <Filter>src\framebuffer</Filter>
@@ -62,6 +53,15 @@
       <Filter>src\util</Filter>
     </ClCompile>
     <ClCompile Include="src\renderer\triangle.cpp">
+      <Filter>src\renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\renderer\line.cpp">
+      <Filter>src\renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\renderer\rasterization.cpp">
+      <Filter>src\renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\renderer\wireframe.cpp">
       <Filter>src\renderer</Filter>
     </ClCompile>
   </ItemGroup>
@@ -99,9 +99,6 @@
     <ClInclude Include="src\scene\scene.hpp">
       <Filter>src\scene</Filter>
     </ClInclude>
-    <ClInclude Include="src\rasterization.h">
-      <Filter>src</Filter>
-    </ClInclude>
     <ClInclude Include="src\framebuffer\framebuffer.h">
       <Filter>src\framebuffer</Filter>
     </ClInclude>
@@ -116,15 +113,6 @@
     </ClInclude>
     <ClInclude Include="src\shader\gradient_shader.hpp">
       <Filter>src\shader</Filter>
-    </ClInclude>
-    <ClInclude Include="src\renderer\line.h">
-      <Filter>src\renderer</Filter>
-    </ClInclude>
-    <ClInclude Include="src\renderer\viewport_presets.hpp">
-      <Filter>src\renderer</Filter>
-    </ClInclude>
-    <ClInclude Include="src\renderer\wireframe.h">
-      <Filter>src\renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\framebuffer\tgaimage.h">
       <Filter>src\framebuffer</Filter>
@@ -144,7 +132,19 @@
     <ClInclude Include="src\renderer\triangle.h">
       <Filter>src\renderer</Filter>
     </ClInclude>
+    <ClInclude Include="src\renderer\line.h">
+      <Filter>src\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\renderer\rasterization.h">
+      <Filter>src\renderer</Filter>
+    </ClInclude>
     <ClInclude Include="src\renderer\vertex_postprocessor.hpp">
+      <Filter>src\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\renderer\viewport_presets.hpp">
+      <Filter>src\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\renderer\wireframe.h">
       <Filter>src\renderer</Filter>
     </ClInclude>
   </ItemGroup>
