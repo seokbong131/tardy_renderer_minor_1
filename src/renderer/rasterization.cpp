@@ -1,5 +1,6 @@
 #include "rasterization.h"
 
+#include "graphics_mathematics/vector.hpp"
 #include "triangle.h"
 #include "vertex_postprocessor.hpp"
 
