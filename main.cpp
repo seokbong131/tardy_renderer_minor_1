@@ -3,12 +3,15 @@
 #include "framebuffer/framebuffer.h"
 #include "framebuffer/framebuffer_io.h"
 #include "graphics_mathematics/matrix_clip_space.hpp"
+#include "renderer/rasterization.h"
 #include "renderer/viewport_presets.hpp"
 #include "renderer/wireframe.h"
 #include "scene/camera.hpp"
 #include "scene/camera_presets.hpp"
 #include "scene/obj_loader.h"
 #include "scene/scene.hpp"
+#include "shader/gradient_shader.hpp"
+#include "shader/random_solid_shader.hpp"
 #include "util/configuration.hpp"
 
 int main() {
@@ -45,8 +48,22 @@ int main() {
     mat4 viewport_mat = setup_default_viewport(
         framebuffer.width, framebuffer.height); // or setup_fullscreen_viewport(...)
 
-    render_wireframe(scene, camera, viewport_mat, framebuffer, RED);
+    // rendering
+    // ------------------------------------------------------------
+    // option 1
+    // render_wireframe(scene, camera, viewport_mat, framebuffer, RED);
 
+    // option 2
+    // RandomSolidShader random_solid_shader;
+    // render(scene, camera, viewport_mat, random_solid_shader, framebuffer);
+
+    // option 3
+    GradientShader gradient_shader;
+    gradient_shader.vertex_colors[1] = RED;
+    render(scene, camera, viewport_mat, gradient_shader, framebuffer);
+    // ------------------------------------------------------------
+
+    // output
     save_color_png(framebuffer, std::format("{}/{}.png", OUTPUT_FOLDER, COLOR_BUFFER));
     save_depth_png(framebuffer, std::format("{}/{}.png", OUTPUT_FOLDER, DEPTH_BUFFER));
 
