@@ -3,7 +3,6 @@
 #include <algorithm>
 
 #include "renderer/triangle.h"
-#include "util/system.h"
 
 namespace
 {
@@ -100,7 +99,7 @@ static void take_snapshot(
     double slice_spacing = 255.0 / num_slices;
 
     TGAImage snapshot(width, height, TGAImage::RGB);
-    snapshot.write_png_file(set_filename(slice_index)); // to ensure the first framebuffer
+    // snapshot.write_png_file(set_filename(slice_index)); // to ensure the first framebuffer
 
     uint8_t depth_far = 0;
 
@@ -128,7 +127,7 @@ static void take_snapshot(
             }
         }
 
-        snapshot.write_png_file(set_filename(slice_index));
+        // snapshot.write_png_file(set_filename(slice_index));
 
         depth_far = depth_near;
     }

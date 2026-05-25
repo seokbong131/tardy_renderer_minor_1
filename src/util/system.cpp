@@ -1,11 +1,8 @@
 #include "system.h"
 
-#include <format>
 #include <iostream>
 
 #include <omp.h>
-
-#include "configuration.hpp"
 
 #pragma warning(push)
 #pragma warning(disable : 6993)
@@ -27,7 +24,3 @@ void print_openmp_info() {
 #endif
 }
 #pragma warning(pop)
-
-std::string set_filename(int index) {
-    return std::format("{}/{}_{:0{}}.png", OUTPUT_FOLDER, COLOR_BUFFER, index, FIELD_WIDTH);
-}
