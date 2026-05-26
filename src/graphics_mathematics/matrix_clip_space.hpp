@@ -1,6 +1,28 @@
 #pragma once
 
+#include <cmath>
+
 #include "matrix.hpp"
+
+// for orthographic projection (M_p: EC -> CC)
+// Ref. https://www.scratchapixel.com/lessons/3d-basic-rendering/perspective-and-orthographic-projection-matrix/orthographic-projection-matrix.html
+[[nodiscard]] inline mat4 project_orthographic(
+    float left, float right, float bottom, float top, float near, float far) {
+    //   C[0]             C[1]             C[2]             C[3]
+    // | 2/(R-L)          0                0                (L+R)/(L-R) |
+    // | 0                2/(T-B)          0                (B+T)/(B-T) |
+    // | 0                0                2/(N-F)          (N+F)/(N-F) |
+    // | 0                0                0                1           |
+    mat4 projection = {{{2.0f / (right - left), 0.0f, 0.0f, 0.0f},
+                        {0.0f, 2.0f / (top - bottom), 0.0f, 0.0f},
+                        {0.0f, 0.0f, 2.0f / (near - far), 0.0f},
+                        {(left + right) / (left - right),
+                         (bottom + top) / (bottom - top),
+                         (near + far) / (near - far),
+                         1.0f}}};
+
+    return projection;
+}
 
 // for perspective projection (M_p: EC -> CC)
 // Ref. https://www.scratchapixel.com/lessons/3d-basic-rendering/perspective-and-orthographic-projection-matrix/opengl-perspective-projection-matrix.html
