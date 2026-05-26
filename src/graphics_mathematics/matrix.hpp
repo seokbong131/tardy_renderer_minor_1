@@ -52,7 +52,7 @@ template<int R, int C> struct mat
     // transpose of the inverse matrix
     // (1) inverse matrix := 1 / det(M) * C^T (C: cofactor matrix)
     // (2) 1 / det(M) * C
-    // Note. Laplace expansion
+    // NOTE: Laplace expansion
     // det(M) := sum of products of the entries in that row and their respective cofactors
     [[nodiscard]] mat inverse_transpose() const {
         mat cof_mat;

@@ -37,7 +37,7 @@ int main() {
     scene.objects.push_back(SceneObject{&model});
 
     // camera
-    Camera camera       = setup_default_camera(); // or set_custom_camera()
+    Camera camera       = setup_default_camera(); // or set_{orthographic or perspective}_camera()
     camera.aspect_ratio = static_cast<float>(WIDTH) / static_cast<float>(HEIGHT);
 
     // framebuffer
