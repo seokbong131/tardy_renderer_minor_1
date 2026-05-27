@@ -1,8 +1,6 @@
 #include "framebuffer_io.h"
 
-#include <algorithm>
 #include <cstdint>
-#include <limits>
 
 bool save_color_png(const Framebuffer& framebuffer, const std::string& filename) {
     // delegate PNG to TGAImage
@@ -10,16 +8,7 @@ bool save_color_png(const Framebuffer& framebuffer, const std::string& filename)
 }
 
 bool save_depth_png(const Framebuffer& framebuffer, const std::string& filename) {
-    // for depth range
-    float min_z = std::numeric_limits<float>::max();
-    float max_z = std::numeric_limits<float>::lowest();
-
-    for (float z : framebuffer.depth) {
-        if (z < BACKGROUND) {
-            min_z = std::min(min_z, z);
-            max_z = std::max(max_z, z);
-        }
-    }
+    auto [min_z, max_z] = compute_depth_range(framebuffer);
 
     // guard
     if (min_z >= max_z) {

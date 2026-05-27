@@ -1,6 +1,7 @@
 #include "framebuffer.h"
 
 #include <algorithm>
+#include <limits>
 
 Framebuffer allocate(int width, int height) {
     return Framebuffer{
@@ -19,4 +20,18 @@ void clear(Framebuffer& framebuffer, TGAColor solid_color) {
 
     // framebuffer.depth
     std::fill(framebuffer.depth.begin(), framebuffer.depth.end(), BACKGROUND);
+}
+
+std::pair<float, float> compute_depth_range(const Framebuffer& framebuffer) {
+    float min_z = std::numeric_limits<float>::max();
+    float max_z = std::numeric_limits<float>::lowest();
+
+    for (float z : framebuffer.depth) {
+        if (z < BACKGROUND) {
+            min_z = std::min(min_z, z);
+            max_z = std::max(max_z, z);
+        }
+    }
+
+    return {min_z, max_z};
 }

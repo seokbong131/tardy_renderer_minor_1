@@ -1,6 +1,7 @@
 #pragma once
 
 #include <limits>
+#include <utility>
 #include <vector>
 
 #include "tgaimage.h"
@@ -18,3 +19,5 @@ struct Framebuffer
 
 [[nodiscard]] Framebuffer allocate(int width, int height);
 void                      clear(Framebuffer& framebuffer, TGAColor solid_color = {});
+
+[[nodiscard]] std::pair<float, float> compute_depth_range(const Framebuffer& framebuffer);
