@@ -3,7 +3,7 @@
 #include "scene/camera.hpp"
 
 // lecture reference
-[[nodiscard]] inline Camera setup_default_camera() { return Camera{}; }
+[[nodiscard]] inline Camera set_default_camera() { return Camera{}; }
 
 // only non-default override
 [[nodiscard]] inline Camera set_orthographic_camera() {

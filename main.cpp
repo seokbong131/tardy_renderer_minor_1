@@ -37,16 +37,16 @@ int main() {
     scene.objects.push_back(SceneObject{&model});
 
     // camera
-    Camera camera       = setup_default_camera(); // or set_{orthographic or perspective}_camera()
-    camera.aspect_ratio = static_cast<float>(WIDTH) / static_cast<float>(HEIGHT);
+    Camera camera       = set_default_camera(); // or set_{orthographic or perspective}_camera()
+    camera.aspect_ratio = static_cast<float>(WIDTH) / HEIGHT;
 
     // framebuffer
     Framebuffer framebuffer = allocate(WIDTH, HEIGHT);
     clear(framebuffer, BLACK);
 
     // viewport matrix
-    mat4 viewport_mat = setup_default_viewport(
-        framebuffer.width, framebuffer.height); // or setup_fullscreen_viewport(...)
+    mat4 viewport_mat = set_default_viewport(framebuffer.width,
+                                             framebuffer.height); // or set_fullscreen_viewport(...)
 
     // rendering
     // ------------------------------------------------------------
