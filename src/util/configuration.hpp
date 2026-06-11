@@ -1,5 +1,9 @@
 #pragma once
 
+#include <string>
+#include <string_view>
+#include <vector>
+
 #include "framebuffer/tgaimage.h"
 
 // color (attention, BGRA order)
@@ -27,15 +31,16 @@ inline const std::vector<std::string> AFRICAN_HEAD_PATHS = {
     "../assets/african_head/african_head_eye_inner.obj",
     "../assets/african_head/african_head_eye_outer.obj"};
 
-// output
-constexpr std::string_view OUTPUT_FOLDER = "output";
-constexpr std::string_view COLOR_BUFFER  = "color";
-constexpr std::string_view DEPTH_BUFFER  = "depth";
-constexpr int              FIELD_WIDTH   = 3;
-
 // resolution
 constexpr int WIDTH  = 1000;
 constexpr int HEIGHT = 1000;
 
+// output folder & file name
+constexpr std::string_view OUTPUT_FOLDER = "output";
+constexpr std::string_view COLOR_BUFFER  = "color";
+constexpr std::string_view DEPTH_BUFFER  = "depth";
+constexpr std::string_view SLICE_BUFFER  = "slice";
+
 // volume rendering effect
-constexpr int NUM_SLICES = 96; // MUST be greater than 0
+constexpr int NUM_SLICES  = 96;
+constexpr int FIELD_WIDTH = 3;
