@@ -12,9 +12,12 @@ Framebuffer allocate(int width, int height) {
 }
 
 void clear(Framebuffer& framebuffer, TGAColor solid_color) {
+    const int width  = framebuffer.width;
+    const int height = framebuffer.height;
+
     // framebuffer.color
-    for (int y = 0; y < framebuffer.height; ++y) {
-        for (int x = 0; x < framebuffer.width; ++x)
+    for (int y = 0; y < height; ++y) {
+        for (int x = 0; x < width; ++x)
             framebuffer.color.set(x, y, solid_color);
     }
 

@@ -17,11 +17,14 @@ bool save_depth_png(const Framebuffer& framebuffer, const std::string& filename)
     }
 
     // normalization: depth -> [0, 255] (grayscale)
-    TGAImage zbuffer(framebuffer.width, framebuffer.height, TGAImage::GRAYSCALE);
+    const int width  = framebuffer.width;
+    const int height = framebuffer.height;
+    TGAImage  zbuffer(width, height, TGAImage::GRAYSCALE);
 
-    for (int y = 0; y < framebuffer.height; ++y) {
-        for (int x = 0; x < framebuffer.width; ++x) {
-            float z = framebuffer.depth[static_cast<std::size_t>(framebuffer.width) * y + x];
+    for (int y = 0; y < height; ++y) {
+        for (int x = 0; x < width; ++x) {
+            const std::size_t idx = static_cast<std::size_t>(framebuffer.width) * y + x;
+            float             z   = framebuffer.depth[idx];
 
             std::uint8_t depth_value = 0;
 
