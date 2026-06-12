@@ -1,5 +1,3 @@
-#include <format>
-
 #include "framebuffer/framebuffer.h"
 #include "framebuffer/framebuffer_io.h"
 #include "graphics_mathematics/matrix_clip_space.hpp"
@@ -64,8 +62,8 @@ int main() {
     // ------------------------------------------------------------
 
     // output
-    save_color_png(framebuffer, std::format("{}/{}.png", OUTPUT_FOLDER, COLOR_BUFFER));
-    save_depth_png(framebuffer, std::format("{}/{}.png", OUTPUT_FOLDER, DEPTH_BUFFER));
+    save_color_png(framebuffer, OUTPUT_FOLDER, COLOR_BUFFER);
+    save_depth_png(framebuffer, OUTPUT_FOLDER, DEPTH_BUFFER);
 
     return 0;
 }

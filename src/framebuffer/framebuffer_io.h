@@ -1,8 +1,12 @@
 #pragma once
 
-#include <string>
+#include <string_view>
 
 #include "framebuffer.h"
 
-bool save_color_png(const Framebuffer& framebuffer, const std::string& filename);
-bool save_depth_png(const Framebuffer& framebuffer, const std::string& filename);
+bool save_color_png(const Framebuffer& framebuffer,
+                    std::string_view   output_folder,
+                    std::string_view   color_buffer);
+bool save_depth_png(const Framebuffer& framebuffer,
+                    std::string_view   output_folder,
+                    std::string_view   depth_buffer);

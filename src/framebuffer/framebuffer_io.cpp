@@ -1,13 +1,21 @@
 #include "framebuffer_io.h"
 
 #include <cstdint>
+#include <format>
+#include <string>
 
-bool save_color_png(const Framebuffer& framebuffer, const std::string& filename) {
+bool save_color_png(const Framebuffer& framebuffer,
+                    std::string_view   output_folder,
+                    std::string_view   color_buffer) {
+    const std::string filename = std::format("{}/{}.png", output_folder, color_buffer);
+
     // delegate PNG to TGAImage
     return framebuffer.color.write_png_file(filename);
 }
 
-bool save_depth_png(const Framebuffer& framebuffer, const std::string& filename) {
+bool save_depth_png(const Framebuffer& framebuffer,
+                    std::string_view   output_folder,
+                    std::string_view   depth_buffer) {
     auto [min_z, max_z] = compute_depth_range(framebuffer);
 
     // guard
@@ -36,6 +44,8 @@ bool save_depth_png(const Framebuffer& framebuffer, const std::string& filename)
             zbuffer.set(x, y, {depth_value});
         }
     }
+
+    const std::string filename = std::format("{}/{}.png", output_folder, depth_buffer);
 
     // delegate PNG to TGAImage
     return zbuffer.write_png_file(filename);
