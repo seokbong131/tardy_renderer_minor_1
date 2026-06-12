@@ -1,6 +1,7 @@
 #include "framebuffer/framebuffer.h"
 #include "framebuffer/framebuffer_io.h"
 #include "graphics_mathematics/matrix_clip_space.hpp"
+#include "postprocessor/volume_rendering_effect.h"
 #include "renderer/rasterization.h"
 #include "renderer/viewport_presets.hpp"
 #include "renderer/wireframe.h"
@@ -64,6 +65,9 @@ int main() {
     // output
     save_color_png(framebuffer, OUTPUT_FOLDER, COLOR_BUFFER);
     save_depth_png(framebuffer, OUTPUT_FOLDER, DEPTH_BUFFER);
+
+    // post-process
+    // visualize_slices(framebuffer, NUM_SLICES, FIELD_WIDTH, OUTPUT_FOLDER, SLICE_BUFFER);
 
     return 0;
 }
