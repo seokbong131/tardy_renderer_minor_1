@@ -1,0 +1,85 @@
+> ffmpeg -framerate 24 -i "slice_%03d.png" -vf "split[s0][s1];[s0]palettegen[p];[s1][p]paletteuse" color.gif
+
+********************************************************************************************************************************************************************************************************
+
+ffmpeg version 8.0.1-essentials_build-www.gyan.dev Copyright (c) 2000-2025 the FFmpeg developers
+  built with gcc 15.2.0 (Rev8, Built by MSYS2 project)
+  configuration: --enable-gpl --enable-version3 --enable-static --disable-w32threads --disable-autodetect --enable-fontconfig --enable-iconv --enable-gnutls --enable-libxml2 --enable-gmp --enable-bzlib --enable-lzma --enable-zlib --enable-libsrt --enable-libssh --enable-libzmq --enable-avisynth --enable-sdl2 --enable-libwebp --enable-libx264 --enable-libx265 --enable-libxvid --enable-libaom --enable-libopenjpeg --enable-libvpx --enable-mediafoundation --enable-libass --enable-libfreetype --enable-libfribidi --enable-libharfbuzz --enable-libvidstab --enable-libvmaf --enable-libzimg --enable-amf --enable-cuda-llvm --enable-cuvid --enable-dxva2 --enable-d3d11va --enable-d3d12va --enable-ffnvcodec --enable-libvpl --enable-nvdec --enable-nvenc --enable-vaapi --enable-openal --enable-libgme --enable-libopenmpt --enable-libopencore-amrwb --enable-libmp3lame --enable-libtheora --enable-libvo-amrwbenc --enable-libgsm --enable-libopencore-amrnb --enable-libopus --enable-libspeex --enable-libvorbis --enable-librubberband
+  libavutil      60.  8.100 / 60.  8.100
+  libavcodec     62. 11.100 / 62. 11.100
+  libavformat    62.  3.100 / 62.  3.100
+  libavdevice    62.  1.100 / 62.  1.100
+  libavfilter    11.  4.100 / 11.  4.100
+  libswscale      9.  1.100 /  9.  1.100
+  libswresample   6.  1.100 /  6.  1.100
+Input #0, image2, from 'slice_%03d.png':
+  Duration: 00:00:04.00, start: 0.000000, bitrate: N/A
+  Stream #0:0: Video: png, rgb24(pc, gbr/unknown/unknown), 1000x1000, 24 fps, 24 tbr, 24 tbn
+Stream mapping:
+  Stream #0:0 -> #0:0 (png (native) -> gif (native))
+Press [q] to stop, [?] for help
+[Parsed_palettegen_1 @ 00000218a4601240] 255(+1) colors generated out of 32541 colors; ratio=0.007836
+Output #0, gif, to 'color.gif':
+  Metadata:
+    encoder         : Lavf62.3.100
+  Stream #0:0: Video: gif, pal8(pc, gbr/unknown/unknown, progressive), 1000x1000, q=2-31, 200 kb/s, 24 fps, 100 tbn
+    Metadata:
+      encoder         : Lavc62.11.100 gif
+[out#0/gif @ 00000218a45f1d80] video:410KiB audio:0KiB subtitle:0KiB other streams:0KiB global headers:0KiB muxing overhead: 0.004761%
+frame=   96 fps= 31 q=-0.0 Lsize=     410KiB time=00:00:04.00 bitrate= 840.3kbits/s speed=1.31x elapsed=0:00:03.06
+
+********************************************************************************************************************************************************************************************************
+
+ffmpeg version 8.0.1-essentials_build-www.gyan.dev Copyright (c) 2000-2025 the FFmpeg developers
+  built with gcc 15.2.0 (Rev8, Built by MSYS2 project)
+  configuration: --enable-gpl --enable-version3 --enable-static --disable-w32threads --disable-autodetect --enable-fontconfig --enable-iconv --enable-gnutls --enable-libxml2 --enable-gmp --enable-bzlib --enable-lzma --enable-zlib --enable-libsrt --enable-libssh --enable-libzmq --enable-avisynth --enable-sdl2 --enable-libwebp --enable-libx264 --enable-libx265 --enable-libxvid --enable-libaom --enable-libopenjpeg --enable-libvpx --enable-mediafoundation --enable-libass --enable-libfreetype --enable-libfribidi --enable-libharfbuzz --enable-libvidstab --enable-libvmaf --enable-libzimg --enable-amf --enable-cuda-llvm --enable-cuvid --enable-dxva2 --enable-d3d11va --enable-d3d12va --enable-ffnvcodec --enable-libvpl --enable-nvdec --enable-nvenc --enable-vaapi --enable-openal --enable-libgme --enable-libopenmpt --enable-libopencore-amrwb --enable-libmp3lame --enable-libtheora --enable-libvo-amrwbenc --enable-libgsm --enable-libopencore-amrnb --enable-libopus --enable-libspeex --enable-libvorbis --enable-librubberband
+  libavutil      60.  8.100 / 60.  8.100
+  libavcodec     62. 11.100 / 62. 11.100
+  libavformat    62.  3.100 / 62.  3.100
+  libavdevice    62.  1.100 / 62.  1.100
+  libavfilter    11.  4.100 / 11.  4.100
+  libswscale      9.  1.100 /  9.  1.100
+  libswresample   6.  1.100 /  6.  1.100
+Input #0, image2, from 'slice_%03d.png':
+  Duration: 00:00:04.00, start: 0.000000, bitrate: N/A
+  Stream #0:0: Video: png, rgb24(pc, gbr/unknown/unknown), 1000x1000, 24 fps, 24 tbr, 24 tbn
+Stream mapping:
+  Stream #0:0 -> #0:0 (png (native) -> gif (native))
+Press [q] to stop, [?] for help
+[Parsed_palettegen_1 @ 000002102d93e700] 255(+1) colors generated out of 32634 colors; ratio=0.007814
+Output #0, gif, to 'color.gif':
+  Metadata:
+    encoder         : Lavf62.3.100
+  Stream #0:0: Video: gif, pal8(pc, gbr/unknown/unknown, progressive), 1000x1000, q=2-31, 200 kb/s, 24 fps, 100 tbn
+    Metadata:
+      encoder         : Lavc62.11.100 gif
+[out#0/gif @ 000002102d035cc0] video:565KiB audio:0KiB subtitle:0KiB other streams:0KiB global headers:0KiB muxing overhead: 0.003459%
+frame=   96 fps= 35 q=-0.0 Lsize=     565KiB time=00:00:04.00 bitrate=1156.3kbits/s speed=1.45x elapsed=0:00:02.76
+
+********************************************************************************************************************************************************************************************************
+
+ffmpeg version 8.0.1-essentials_build-www.gyan.dev Copyright (c) 2000-2025 the FFmpeg developers
+  built with gcc 15.2.0 (Rev8, Built by MSYS2 project)
+  configuration: --enable-gpl --enable-version3 --enable-static --disable-w32threads --disable-autodetect --enable-fontconfig --enable-iconv --enable-gnutls --enable-libxml2 --enable-gmp --enable-bzlib --enable-lzma --enable-zlib --enable-libsrt --enable-libssh --enable-libzmq --enable-avisynth --enable-sdl2 --enable-libwebp --enable-libx264 --enable-libx265 --enable-libxvid --enable-libaom --enable-libopenjpeg --enable-libvpx --enable-mediafoundation --enable-libass --enable-libfreetype --enable-libfribidi --enable-libharfbuzz --enable-libvidstab --enable-libvmaf --enable-libzimg --enable-amf --enable-cuda-llvm --enable-cuvid --enable-dxva2 --enable-d3d11va --enable-d3d12va --enable-ffnvcodec --enable-libvpl --enable-nvdec --enable-nvenc --enable-vaapi --enable-openal --enable-libgme --enable-libopenmpt --enable-libopencore-amrwb --enable-libmp3lame --enable-libtheora --enable-libvo-amrwbenc --enable-libgsm --enable-libopencore-amrnb --enable-libopus --enable-libspeex --enable-libvorbis --enable-librubberband
+  libavutil      60.  8.100 / 60.  8.100
+  libavcodec     62. 11.100 / 62. 11.100
+  libavformat    62.  3.100 / 62.  3.100
+  libavdevice    62.  1.100 / 62.  1.100
+  libavfilter    11.  4.100 / 11.  4.100
+  libswscale      9.  1.100 /  9.  1.100
+  libswresample   6.  1.100 /  6.  1.100
+Input #0, image2, from 'slice_%03d.png':
+  Duration: 00:00:04.00, start: 0.000000, bitrate: N/A
+  Stream #0:0: Video: png, rgb24(pc, gbr/unknown/unknown), 1000x1000, 24 fps, 24 tbr, 24 tbn
+Stream mapping:
+  Stream #0:0 -> #0:0 (png (native) -> gif (native))
+Press [q] to stop, [?] for help
+[Parsed_palettegen_1 @ 000001aaff0f1500] 255(+1) colors generated out of 32804 colors; ratio=0.007773
+Output #0, gif, to 'color.gif':
+  Metadata:
+    encoder         : Lavf62.3.100
+  Stream #0:0: Video: gif, pal8(pc, gbr/unknown/unknown, progressive), 1000x1000, q=2-31, 200 kb/s, 24 fps, 100 tbn
+    Metadata:
+      encoder         : Lavc62.11.100 gif
+[out#0/gif @ 000001aaff0c9a00] video:923KiB audio:0KiB subtitle:0KiB other streams:0KiB global headers:0KiB muxing overhead: 0.002116%
+frame=   96 fps= 31 q=-0.0 Lsize=     923KiB time=00:00:04.00 bitrate=1890.8kbits/s speed=1.29x elapsed=0:00:03.09
